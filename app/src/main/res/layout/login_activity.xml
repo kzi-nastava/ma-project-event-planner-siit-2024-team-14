@@ -6,7 +6,7 @@
     tools:context=".LoginActivity"
     android:id="@+id/login">
 
-    <!-- Top Line with two colors -->
+<!-- Top Line with two colors -->
     <View
         android:id="@+id/topLine1"
         android:layout_width="match_parent"
