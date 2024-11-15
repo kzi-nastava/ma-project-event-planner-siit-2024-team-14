@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- FrameLayout to stack the image, overlay, icon, and text -->
+    <FrameLayout
+        android:id="@+id/top_image_container"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- ImageView for displaying the background picture -->
+        <ImageView
+            android:id="@+id/top_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/background"
+            android:scaleType="centerCrop"
+            android:contentDescription="Background" />
+
+        <!-- Semi-transparent overlay rectangle -->
+        <View
+            android:id="@+id/overlay_rectangle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/project_green_bottom_navbar" />
+
+        <!-- Navigation Icon at top-left -->
+        <ImageView
+            android:id="@+id/navigation_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/navigation"
+            android:contentDescription="Navigation Icon"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="start|top" />
+
+        <!-- Layout for icon and text -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center">
+
+            <!-- Calendar Icon at the top with a 10dp margin -->
+            <ImageView
+                android:id="@+id/calendar_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/logo"
+                android:contentDescription="Calendar Icon"
+                android:layout_marginTop="10dp" />
+
+            <!-- Text "Event Planner" below the icon -->
+            <TextView
+                android:id="@+id/event_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Planner"
+                android:textColor="#523D35"
+                android:textSize="20sp"
+                android:fontFamily="@font/petit_formal_script"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- FrameLayout for Fragment Transactions -->
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_image_container" />
+
+    <!-- Bottom Navigation View -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/project_green_bottom_navbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="#523D35"
+        app:itemTextColor="#523D35" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
