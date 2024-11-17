@@ -1124,7 +1124,7 @@
                     android:layout_gravity="center_horizontal" />
             </LinearLayout>
 
-
+            <!-- SERVICES AND PRODUCTS -->
             <TextView
                 android:id="@+id/hottest_services_label"
                 android:layout_width="wrap_content"
@@ -1137,7 +1137,7 @@
                 android:gravity="center"
                 android:layout_marginTop="5dp" />
 
-            <!-- Horizontal ScrollView for Hottest Events -->
+            <!-- Horizontal ScrollView for Hottest services and products -->
             <HorizontalScrollView
                 android:id="@+id/top5_services"
                 android:layout_width="match_parent"
@@ -1171,7 +1171,7 @@
                             android:orientation="vertical"
                             android:padding="8dp">
 
-                            <!-- Profilna Slika i Ime Prezime Organizatora -->
+                            <!-- Profilna Slika i Ime Prezime -->
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1183,26 +1183,25 @@
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_marginEnd="8dp"
-                                    android:src="@drawable/profilep2"
+                                    android:src="@drawable/profilep8"
                                     android:layout_gravity="center_vertical"
                                     />
 
-                                <!-- Ime i Prezime Organizatora -->
+                                <!-- Ime i Prezime -->
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="John Doe"
+                                    android:text="Noah Harrison"
                                     android:textSize="14sp"
                                     android:textStyle="bold"
                                     android:layout_gravity="center_vertical"
                                     android:paddingStart="8dp"/>
                             </LinearLayout>
 
-                            <!-- Text: Event Organizer -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Event Organizer"
+                                android:text="Service and product provider"
                                 android:textSize="12sp"
                                 android:textColor="#8A8A8A"
                                 android:layout_marginTop="4dp" />
@@ -1220,13 +1219,13 @@
                                 android:layout_height="100dp"
                                 android:layout_marginTop="8dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/card1" />
+                                android:src="@drawable/service1" />
 
                             <!-- Naziv Događaja -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Birthday Party"
+                                android:text="Champagne"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:paddingTop="8dp" />
@@ -1235,7 +1234,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Entry with presents and good attitude"
+                                android:text="Sparkling wine for every occasion to cheer you up"
                                 android:textSize="14sp"
                                 android:paddingTop="4dp" />
 
@@ -1269,7 +1268,7 @@
                             android:orientation="vertical"
                             android:padding="8dp">
 
-                            <!-- Profilna Slika i Ime Prezime Organizatora -->
+                            <!-- Profilna Slika i Ime Prezime -->
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1284,7 +1283,7 @@
                                     android:src="@drawable/profilep1"
                                     android:layout_gravity="center_vertical" />
 
-                                <!-- Ime i Prezime Organizatora -->
+                                <!-- Ime i Prezime -->
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1295,11 +1294,10 @@
                                     android:paddingStart="8dp"/>
                             </LinearLayout>
 
-                            <!-- Text: Event Organizer -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Event Organizer"
+                                android:text="Service and product provider"
                                 android:textSize="12sp"
                                 android:textColor="#8A8A8A"
                                 android:layout_marginTop="4dp" />
@@ -1317,13 +1315,13 @@
                                 android:layout_height="100dp"
                                 android:layout_marginTop="8dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/card2" />
+                                android:src="@drawable/service2" />
 
                             <!-- Naziv Događaja -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Horse Riding"
+                                android:text="Horse riding lessons"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:paddingTop="8dp" />
@@ -1332,7 +1330,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="For horse lovers, free entry"
+                                android:text="For horse lovers, learn easy with us"
                                 android:textSize="14sp"
                                 android:paddingTop="4dp" />
 
@@ -1366,7 +1364,7 @@
                             android:orientation="vertical"
                             android:padding="8dp">
 
-                            <!-- Profilna Slika i Ime Prezime Organizatora -->
+                            <!-- Profilna Slika i Ime Prezime -->
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1378,26 +1376,25 @@
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_marginEnd="8dp"
-                                    android:src="@drawable/profilep3"
+                                    android:src="@drawable/profilep9"
                                     android:layout_gravity="center_vertical"
                                     />
 
-                                <!-- Ime i Prezime Organizatora -->
+                                <!-- Ime i Prezime -->
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Michael Brown"
+                                    android:text="Emma Caldwell"
                                     android:textSize="14sp"
                                     android:textStyle="bold"
                                     android:layout_gravity="center_vertical"
                                     android:paddingStart="8dp"/>
                             </LinearLayout>
 
-                            <!-- Text: Event Organizer -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Event Organizer"
+                                android:text="Service and product provider"
                                 android:textSize="12sp"
                                 android:textColor="#8A8A8A"
                                 android:layout_marginTop="4dp" />
@@ -1415,13 +1412,13 @@
                                 android:layout_height="100dp"
                                 android:layout_marginTop="8dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/card3" />
+                                android:src="@drawable/service3" />
 
                             <!-- Naziv Događaja -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Rooftop Theatre"
+                                android:text="Rooftop theatre equipment"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:paddingTop="8dp" />
@@ -1430,7 +1427,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Free entry, bring popcorn and drinks"
+                                android:text="For the best movie night"
                                 android:textSize="14sp"
                                 android:paddingTop="4dp" />
 
@@ -1465,7 +1462,7 @@
                             android:orientation="vertical"
                             android:padding="8dp">
 
-                            <!-- Profilna Slika i Ime Prezime Organizatora -->
+                            <!-- Profilna Slika i Ime Prezime -->
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1477,25 +1474,24 @@
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_marginEnd="8dp"
-                                    android:src="@drawable/profilep4"
+                                    android:src="@drawable/profilep10"
                                     android:layout_gravity="center_vertical" />
 
-                                <!-- Ime i Prezime Organizatora -->
+                                <!-- Ime i Prezime -->
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Sarah Miller"
+                                    android:text="Emily Price"
                                     android:textSize="14sp"
                                     android:textStyle="bold"
                                     android:layout_gravity="center_vertical"
                                     android:paddingStart="8dp"/>
                             </LinearLayout>
 
-                            <!-- Text: Event Organizer -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Event Organizer"
+                                android:text="Service and product provider"
                                 android:textSize="12sp"
                                 android:textColor="#8A8A8A"
                                 android:layout_marginTop="4dp" />
@@ -1513,22 +1509,22 @@
                                 android:layout_height="100dp"
                                 android:layout_marginTop="8dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/card4" />
+                                android:src="@drawable/service4" />
 
-                            <!-- Naziv Događaja -->
+                            <!-- Naziv -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Music Festival"
+                                android:text="Catering service"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:paddingTop="8dp" />
 
-                            <!-- Opis Događaja -->
+                            <!-- Opis-->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Enjoy the music and atmosphere"
+                                android:text="The best food service in your town! :)"
                                 android:textSize="14sp"
                                 android:paddingTop="4dp" />
 
@@ -1563,7 +1559,7 @@
                             android:orientation="vertical"
                             android:padding="8dp">
 
-                            <!-- Profilna Slika i Ime Prezime Organizatora -->
+                            <!-- Profilna Slika i Ime Prezime -->
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1575,27 +1571,26 @@
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_marginEnd="8dp"
-                                    android:src="@drawable/profilep5"
+                                    android:src="@drawable/profilep11"
                                     android:layout_gravity="center_vertical"
                                     android:scaleType="centerCrop"
                                     android:background="@drawable/circle_photo_border" />
 
-                                <!-- Ime i Prezime Organizatora -->
+                                <!-- Ime i Prezime -->
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Anna Lee"
+                                    android:text="Alexander Monroe"
                                     android:textSize="14sp"
                                     android:textStyle="bold"
                                     android:layout_gravity="center_vertical"
                                     android:paddingStart="8dp"/>
                             </LinearLayout>
 
-                            <!-- Text: Event Organizer -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Event Organizer"
+                                android:text="Service and product provider"
                                 android:textSize="12sp"
                                 android:textColor="#8A8A8A"
                                 android:layout_marginTop="4dp" />
@@ -1613,13 +1608,13 @@
                                 android:layout_height="100dp"
                                 android:layout_marginTop="8dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/card5" />
+                                android:src="@drawable/service5" />
 
                             <!-- Naziv Događaja -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Black and White Party"
+                                android:text="Band"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:paddingTop="8dp" />
@@ -1628,10 +1623,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Wear black or white"
+                                android:text="High-energy band playing modern favorites."
                                 android:textSize="14sp"
                                 android:paddingTop="4dp" />
-
 
                             <!-- Dugme: View More -->
                             <Button
@@ -1738,7 +1732,7 @@
                         android:orientation="vertical"
                         android:padding="8dp">
 
-                        <!-- Profilna Slika i Ime Prezime Organizatora -->
+                        <!-- Profilna Slika i Ime Prezime -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1750,26 +1744,24 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_marginEnd="8dp"
-                                android:src="@drawable/profilep6"
-                                android:layout_gravity="center_vertical"
-                                />
+                                android:src="@drawable/profilep12"
+                                android:layout_gravity="center_vertical" />
 
-                            <!-- Ime i Prezime Organizatora -->
+                            <!-- Ime i Prezime-->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="John Smith"
+                                android:text="Grace Turner"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:layout_gravity="center_vertical"
                                 android:paddingStart="8dp"/>
                         </LinearLayout>
 
-                        <!-- Text: Event Organizer -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Event Organizer"
+                            android:text="Service and product provider"
                             android:textSize="12sp"
                             android:textColor="#8A8A8A"
                             android:layout_marginTop="4dp" />
@@ -1787,22 +1779,22 @@
                             android:layout_height="100dp"
                             android:layout_marginTop="8dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/card8" />
+                            android:src="@drawable/service6" />
 
                         <!-- Naziv Događaja -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="EXIT festival"
+                            android:text="Singer"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:paddingTop="8dp" />
 
-                        <!-- Opis Događaja -->
+                        <!-- Opis -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Together, always! Enjoy the music!"
+                            android:text="Music lover"
                             android:textSize="14sp"
                             android:paddingTop="4dp" />
 
@@ -1836,7 +1828,7 @@
                         android:orientation="vertical"
                         android:padding="8dp">
 
-                        <!-- Profilna Slika i Ime Prezime Organizatora -->
+                        <!-- Profilna Slika i Ime Prezime -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1852,7 +1844,7 @@
                                 android:layout_gravity="center_vertical"
                                 />
 
-                            <!-- Ime i Prezime Organizatora -->
+                            <!-- Ime i Prezime -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1863,11 +1855,10 @@
                                 android:paddingStart="8dp"/>
                         </LinearLayout>
 
-                        <!-- Text: Event Organizer -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Event Organizer"
+                            android:text="Service and product provider"
                             android:textSize="12sp"
                             android:textColor="#8A8A8A"
                             android:layout_marginTop="4dp" />
@@ -1885,22 +1876,22 @@
                             android:layout_height="100dp"
                             android:layout_marginTop="8dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/card7" />
+                            android:src="@drawable/service7" />
 
                         <!-- Naziv Događaja -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Bakery opening"
+                            android:text="Marketing team"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:paddingTop="8dp" />
 
-                        <!-- Opis Događaja -->
+                        <!-- Opis -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Come with an empty stomach!"
+                            android:text="Burn your social medias"
                             android:textSize="14sp"
                             android:paddingTop="4dp" />
 
@@ -1951,7 +1942,7 @@
                         android:orientation="vertical"
                         android:padding="8dp">
 
-                        <!-- Profilna Slika i Ime Prezime Organizatora -->
+                        <!-- Profilna Slika i Ime Prezime -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1963,26 +1954,25 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_marginEnd="8dp"
-                                android:src="@drawable/profilep2"
+                                android:src="@drawable/profilep13"
                                 android:layout_gravity="center_vertical"
                                 />
 
-                            <!-- Ime i Prezime Organizatora -->
+                            <!-- Ime i Prezime -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="John Doe"
+                                android:text="Lily Anderson"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:layout_gravity="center_vertical"
                                 android:paddingStart="8dp"/>
                         </LinearLayout>
 
-                        <!-- Text: Event Organizer -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Event Organizer"
+                            android:text="Service and product provider"
                             android:textSize="12sp"
                             android:textColor="#8A8A8A"
                             android:layout_marginTop="4dp" />
@@ -2000,13 +1990,13 @@
                             android:layout_height="100dp"
                             android:layout_marginTop="8dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/card6" />
+                            android:src="@drawable/service8" />
 
                         <!-- Naziv Događaja -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Graduation party"
+                            android:text="Photobooth Rentals"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:paddingTop="8dp" />
@@ -2015,7 +2005,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="All college gradueates wellcome ;)"
+                            android:text="Interactive photo booths with custom backdrops and props."
                             android:textSize="14sp"
                             android:paddingTop="4dp" />
 
@@ -2049,7 +2039,7 @@
                         android:orientation="vertical"
                         android:padding="8dp">
 
-                        <!-- Profilna Slika i Ime Prezime Organizatora -->
+                        <!-- Profilna Slika i Ime Prezime -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -2065,7 +2055,7 @@
                                 android:layout_gravity="center_vertical"
                                 />
 
-                            <!-- Ime i Prezime Organizatora -->
+                            <!-- Ime i Prezime -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -2076,11 +2066,10 @@
                                 android:paddingStart="8dp"/>
                         </LinearLayout>
 
-                        <!-- Text: Event Organizer -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Event Organizer"
+                            android:text="Service and product provider"
                             android:textSize="12sp"
                             android:textColor="#8A8A8A"
                             android:layout_marginTop="4dp" />
@@ -2098,13 +2087,13 @@
                             android:layout_height="100dp"
                             android:layout_marginTop="8dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/card9" />
+                            android:src="@drawable/service9" />
 
                         <!-- Naziv Događaja -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Garden party"
+                            android:text="Event Decor and Styling"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:paddingTop="8dp" />
@@ -2113,7 +2102,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Open air party for all!"
+                            android:text="Elegant decor packages to create the perfect ambiance."
                             android:textSize="14sp"
                             android:paddingTop="4dp" />
 
@@ -2160,15 +2149,8 @@
                     android:layout_marginBottom="8dp"
                     android:layout_gravity="center_horizontal" />
             </LinearLayout>
-
-
-
-
-
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 
     <!-- Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
