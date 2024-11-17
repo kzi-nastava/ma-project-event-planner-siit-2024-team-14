@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationSppActivity"
+    android:id="@+id/registration_spp">
+
+    <!-- Top Line with two colors -->
+    <View
+        android:id="@+id/topLine1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#D9D9D9"
+        android:layout_alignParentTop="true"/>
+
+    <View
+        android:id="@+id/topLine2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#959D90"
+        android:alpha="0.6"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp" />
+
+    <!-- Bottom Line with two colors -->
+    <View
+        android:id="@+id/bottomLine1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#D9D9D9"
+        android:layout_alignParentBottom="true" />
+
+    <View
+        android:id="@+id/bottomLine2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#959D90"
+        android:alpha="0.6"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp" />
+
+
+    <!-- Circles for background design -->
+    <!-- Top green circle -->
+    <ImageView
+        android:id="@+id/circle1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/green_circle"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:alpha="0.7"/>
+
+    <!-- Bottom green circle -->
+    <ImageView
+        android:id="@+id/circle2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/green_circle"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:alpha="0.7"/>
+
+    <!-- Top beige circle -->
+    <ImageView
+        android:id="@+id/circle3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/beige_circle"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="190dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:alpha="0.7"/>
+
+    <!-- Bottom beige circle -->
+    <ImageView
+        android:id="@+id/circle4"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/beige_circle"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="420dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:alpha="0.7"/>
+
+    <!-- Centered content container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Login Title -->
+        <TextView
+            android:id="@+id/registrationOdTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registration"
+            android:textColor="#523D35"
+            android:textSize="36sp"
+            android:fontFamily="@font/petrona"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Rounded container for inputs -->
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_background"
+            android:padding="16dp">
+
+            <!-- Email Input Field -->
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="E-mail address"
+                android:background="@drawable/border"
+                android:padding="8dp"
+                android:inputType="textEmailAddress"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Password Input Field -->
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Password"
+                android:background="@drawable/border"
+                android:padding="8dp"
+                android:inputType="textPassword"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Confirm Password Input Field -->
+            <EditText
+                android:id="@+id/confirmPasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Confirm password"
+                android:background="@drawable/border"
+                android:padding="8dp"
+                android:inputType="textPassword"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Company/organization Name Input Field -->
+            <EditText
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Company/organization name"
+                android:background="@drawable/border"
+                android:padding="8dp"
+                android:inputType="text"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Company/organization Description Input Field -->
+            <EditText
+                android:id="@+id/surnameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Company/organization description"
+                android:background="@drawable/border"
+                android:padding="8dp"
+                android:inputType="text"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Address Input Field -->
+            <EditText
+                android:id="@+id/addressEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Address"
+                android:background="@drawable/border"
+                android:padding="8dp"
+                android:inputType="textPostalAddress"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Phone Number Input Field -->
+            <EditText
+                android:id="@+id/phoneNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Phone number"
+                android:background="@drawable/border"
+                android:padding="8dp"
+                android:inputType="phone"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Photo Upload Button -->
+            <Button
+                android:id="@+id/uploadPhotoButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Upload Photo"
+                android:textColor="@color/white"
+                android:backgroundTint="#523D35"
+                android:padding="8dp"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Confirm Button -->
+            <Button
+                android:id="@+id/confirmButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:backgroundTint="#523D35"
+                android:text="Confirm"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <!-- Register Section -->
+        <TextView
+            android:id="@+id/haveAnAccountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You have an account? "
+            android:textColor="#523D35"
+            android:layout_marginTop="24dp"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/loginLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log in here"
+            android:textColor="#523D35"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+</RelativeLayout>
