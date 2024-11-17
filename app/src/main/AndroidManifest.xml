@@ -21,9 +21,18 @@
             </intent-filter>
         </activity>
 
-        <!-- Main Activity -->
+        <!-- Registration Activities -->
+        <activity
+            android:name=".RegistrationSppActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrationOdActivity"
+            android:exported="false" />
+
+        <!-- Main Activity (non-launcher) -->
         <activity
             android:name=".MainActivity"
             android:exported="false"/>
+
     </application>
 </manifest>
