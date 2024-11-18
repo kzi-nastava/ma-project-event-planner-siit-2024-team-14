@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">EventPlanner</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="service_image_sample">Service Image</string>
+    <string name="service_name_sample">Service Name</string>
+    <string name="service_description_sample">Service description...</string>
 </resources>
