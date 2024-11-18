@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:id="@+id/login">
+
+    <!-- Top Line with two colors -->
+    <View
+        android:id="@+id/topLine1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#D9D9D9"
+        android:layout_alignParentTop="true"/>
+
+    <View
+        android:id="@+id/topLine2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#959D90"
+        android:alpha="0.6"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp" />
+
+    <!-- Bottom Line with two colors -->
+    <View
+        android:id="@+id/bottomLine1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#D9D9D9"
+        android:layout_alignParentBottom="true" />
+
+    <View
+        android:id="@+id/bottomLine2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#959D90"
+        android:alpha="0.6"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp" />
+
+
+    <!-- Circles for background design -->
+    <!-- Top green circle -->
+    <ImageView
+        android:id="@+id/circle1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/green_circle"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="230dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:alpha="0.7"/>
+
+    <!-- Bottom green circle -->
+    <ImageView
+        android:id="@+id/circle2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/green_circle"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="250dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:alpha="0.7"/>
+
+    <!-- Top beige circle -->
+    <ImageView
+        android:id="@+id/circle3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/beige_circle"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="330dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:alpha="0.7"/>
+
+    <!-- Bottom beige circle -->
+    <ImageView
+        android:id="@+id/circle4"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/beige_circle"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="400dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:alpha="0.7"/>
+
+    <!-- Centered content container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Login Title -->
+        <TextView
+            android:id="@+id/loginTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textColor="#523D35"
+            android:textSize="36sp"
+            android:fontFamily="@font/petrona"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Rounded container for inputs -->
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_background"
+            android:padding="24dp">
+
+            <!-- Email Input Field -->
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="E-mail address"
+                android:background="@drawable/border"
+                android:padding="10dp"
+                android:inputType="textEmailAddress"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Password Input Field -->
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Password"
+                android:background="@drawable/border"
+                android:padding="10dp"
+                android:inputType="textPassword"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Confirm Button -->
+            <Button
+                android:id="@+id/confirmButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#523D35"
+                android:text="Confirm"
+                android:textColor="#FFFFFF"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:textSize="18sp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+
+        <!-- Register Section -->
+        <TextView
+            android:id="@+id/registerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You don’t have an account? "
+            android:textColor="#523D35"
+            android:layout_marginTop="24dp"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/registerLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register here"
+            android:textColor="#523D35"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+</RelativeLayout>

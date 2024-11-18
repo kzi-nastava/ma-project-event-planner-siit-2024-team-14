@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize NavigationView and NavigationIcon
         navigationView = findViewById(R.id.navigation_view);
         navigationIcon = findViewById(R.id.navigation_icon);
 
@@ -47,17 +49,44 @@ public class MainActivity extends AppCompatActivity {
             return true; // Return true to indicate the item selection was handled
         });
 
-        navigationIcon.setOnClickListener(new View.OnClickListener() {
+        // Set up the navigation drawer toggle (icon click to show/hide the navigation drawer)
+        navigationIcon.setOnClickListener(v -> {
+            if (isNavigationViewVisible) {
+                // Hide the NavigationView
+                navigationView.setVisibility(View.GONE);
+            } else {
+                // Show the NavigationView
+                navigationView.setVisibility(View.VISIBLE);
+            }
+            isNavigationViewVisible = !isNavigationViewVisible;
+        });
+
+        // Set the NavigationView item selection listener
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                if (isNavigationViewVisible) {
-                    // Hide the NavigationView
-                    navigationView.setVisibility(View.GONE);
-                } else {
-                    // Show the NavigationView
-                    navigationView.setVisibility(View.VISIBLE);
+            public boolean onNavigationItemSelected(MenuItem item) {
+                Fragment selectedFragment = null;
+
+                // Handle the navigation item selection
+                if (item.getItemId() == R.id.nav_home) {
+                    selectedFragment = new HomeFragment(); // Open HomeFragment
+                } else if (item.getItemId() == R.id.nav_profile) {
+                    selectedFragment = new ProfileFragment(); // Open ProfileFragment
                 }
-                isNavigationViewVisible = !isNavigationViewVisible;
+
+                // If a fragment was selected, replace the current fragment
+                if (selectedFragment != null) {
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.home_page_fragment, selectedFragment);
+                    transaction.addToBackStack(null); // Optionally add to back stack
+                    transaction.commit();
+                }
+
+                // Close the navigation drawer after selection
+                navigationView.setVisibility(View.GONE);
+                isNavigationViewVisible = false;
+
+                return true;
             }
         });
 

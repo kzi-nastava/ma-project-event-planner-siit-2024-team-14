@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationOdActivity"
-    android:id="@+id/registration_od">
+    tools:context=".RegistrationSppActivity"
+    android:id="@+id/registration_spp">
 
     <!-- Top Line with two colors -->
     <View
@@ -49,7 +49,7 @@
         android:layout_height="200dp"
         android:src="@drawable/green_circle"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="90dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="10dp"
         android:alpha="0.7"/>
@@ -61,7 +61,7 @@
         android:layout_height="150dp"
         android:src="@drawable/green_circle"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="120dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
         android:alpha="0.7"/>
@@ -85,7 +85,7 @@
         android:layout_height="150dp"
         android:src="@drawable/beige_circle"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="540dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
         android:alpha="0.7"/>
@@ -159,29 +159,29 @@
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp" />
 
-            <!-- Name Input Field -->
+            <!-- Company/organization Name Input Field -->
             <EditText
                 android:id="@+id/nameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:hint="Name"
+                android:hint="Company/organization name"
                 android:background="@drawable/border"
                 android:padding="8dp"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:textColor="#523D35"
                 android:textColorHint="#523D35"
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp" />
 
-            <!-- Surname Input Field -->
+            <!-- Company/organization Description Input Field -->
             <EditText
                 android:id="@+id/surnameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:hint="Surname"
+                android:hint="Company/organization description"
                 android:background="@drawable/border"
                 android:padding="8dp"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:textColor="#523D35"
                 android:textColorHint="#523D35"
                 android:textSize="16sp"
@@ -223,9 +223,8 @@
                 android:text="Upload Photo"
                 android:textColor="@color/white"
                 android:backgroundTint="#523D35"
-                android:padding="0dp"
-                android:textSize="16sp"
-                android:layout_marginBottom="10dp"/>
+                android:padding="8dp"
+                android:layout_marginBottom="20dp"/>
 
             <!-- Confirm Button -->
             <Button
@@ -240,8 +239,6 @@
                 android:paddingRight="20dp"
                 android:layout_gravity="center_horizontal"/>
         </LinearLayout>
-
-
 
         <!-- Register Section -->
         <TextView
