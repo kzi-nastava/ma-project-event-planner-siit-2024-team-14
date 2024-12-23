@@ -23,15 +23,15 @@
 
         <!-- Registration Activities -->
         <activity
-            android:name=".RegistrationSppActivity"
+            android:name=".ui.activity.RegistrationSppActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrationOdActivity"
+            android:name=".ui.activity.RegistrationOdActivity"
             android:exported="false" />
 
         <!-- Main Activity (non-launcher) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="false"/>
 
     </application>

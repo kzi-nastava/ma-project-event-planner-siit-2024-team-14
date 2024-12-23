@@ -1,9 +1,11 @@
-package com.example.eventplanner;
+package com.example.eventplanner.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.eventplanner.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
