@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationEoActivity"
+    tools:context=".ui.activity.RegistrationEoActivity"
     android:id="@+id/registration_eo">
 
     <!-- Top Line with two colors -->

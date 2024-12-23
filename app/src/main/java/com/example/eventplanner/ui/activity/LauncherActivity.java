@@ -1,9 +1,11 @@
-package com.example.eventplanner; // Replace with your actual package name
+package com.example.eventplanner.ui.activity; // Replace with your actual package name
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.eventplanner.R;
 
 public class LauncherActivity extends AppCompatActivity {
     @Override

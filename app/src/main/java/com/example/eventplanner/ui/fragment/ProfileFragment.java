@@ -1,4 +1,4 @@
-package com.example.eventplanner;
+package com.example.eventplanner.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.eventplanner.R;
+import com.example.eventplanner.ui.activity.RegistrationEoActivity;
+import com.example.eventplanner.ui.activity.RegistrationSppActivity;
+import com.example.eventplanner.ui.activity.LoginActivity;
 
 public class ProfileFragment extends Fragment {
 

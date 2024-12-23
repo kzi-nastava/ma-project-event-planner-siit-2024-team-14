@@ -1,4 +1,4 @@
-package com.example.eventplanner;
+package com.example.eventplanner.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,11 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.eventplanner.ui.fragment.ProfileFragment;
+import com.example.eventplanner.R;
+import com.example.eventplanner.ui.fragment.SettingsFragment;
+import com.example.eventplanner.ui.fragment.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import android.view.MenuItem;

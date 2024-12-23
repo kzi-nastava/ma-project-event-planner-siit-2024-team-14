@@ -1,10 +1,13 @@
-package com.example.eventplanner;
+package com.example.eventplanner.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.eventplanner.ui.fragment.ProfileFragment;
+import com.example.eventplanner.R;
 
 public class LoginActivity extends AppCompatActivity {
 

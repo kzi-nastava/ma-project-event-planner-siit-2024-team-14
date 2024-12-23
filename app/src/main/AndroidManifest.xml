@@ -12,7 +12,7 @@
 
         <!-- Launcher Activity that displays your custom screen -->
         <activity
-            android:name=".LauncherActivity"
+            android:name=".ui.activity.LauncherActivity"
             android:theme="@style/Theme.EventPlanner"
             android:exported="true">
             <intent-filter>
@@ -23,20 +23,20 @@
 
         <!-- Registration Activities -->
         <activity
-            android:name=".RegistrationSppActivity"
+            android:name=".ui.activity.RegistrationSppActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrationEoActivity"
+            android:name=".ui.activity.RegistrationEoActivity"
             android:exported="false" />
 
         <!-- Main Activity (non-launcher) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="false"/>
 
         <!-- Add LoginActivity -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:exported="false"/>
 
     </application>
