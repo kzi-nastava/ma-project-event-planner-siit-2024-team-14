@@ -1,4 +1,4 @@
-package com.example.eventplanner.data.network.api.offerings.categories;
+package com.example.eventplanner.data.network.services.offerings.categories;
 
 import com.example.eventplanner.data.model.Category;
 

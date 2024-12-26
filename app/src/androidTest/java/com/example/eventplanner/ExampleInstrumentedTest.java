@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 import com.example.eventplanner.data.model.Category;
-import com.example.eventplanner.data.network.RetrofitClient;
-import com.example.eventplanner.data.network.api.offerings.categories.CategoryService;
+import com.example.eventplanner.data.network.ClientUtils;
+import com.example.eventplanner.data.network.services.offerings.categories.CategoryService;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -34,8 +34,8 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void testRetrofit() throws InterruptedException, IOException {
-        CategoryService service = RetrofitClient.retrofit.create(CategoryService.class);
+    public void testRetrofit() throws IOException {
+        CategoryService service = ClientUtils.retrofit.create(CategoryService.class);
 
         Response<Collection<Category>> categories = service.getAllCategories().execute();
 
