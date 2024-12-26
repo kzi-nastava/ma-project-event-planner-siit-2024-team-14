@@ -35,6 +35,16 @@ android {
     }
     buildFeatures{
         buildConfig true
+
+        /* Konfiguracija koja omogućava korišćenje ViewBinding-a
+        * Omogućava generisanje klasa za vezivanje (binding) direktno
+        * za XML layout datoteke.
+        */
+        viewBinding true
+    }
+
+    buildFeatures {
+
     }
 }
 
