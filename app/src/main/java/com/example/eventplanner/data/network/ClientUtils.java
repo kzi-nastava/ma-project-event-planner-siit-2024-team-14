@@ -1,6 +1,7 @@
 package com.example.eventplanner.data.network;
 
 import com.example.eventplanner.BuildConfig;
+import com.example.eventplanner.data.network.services.offerings.categories.CategoryService;
 
 import androidx.annotation.NonNull;
 
@@ -17,7 +18,6 @@ public class ClientUtils {
     public static Retrofit retrofit;
 
 
-
     static {
         OkHttpClient client = testClient();
         // TODO: Add interceptor for jwt
@@ -27,6 +27,10 @@ public class ClientUtils {
                 .client(client)
                 .build();
     }
+
+
+    public static final CategoryService categoryService = retrofit.create(CategoryService.class);
+
 
 
     @NonNull

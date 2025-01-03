@@ -1,0 +1,51 @@
+package com.example.eventplanner.ui.viewmodel;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
+import com.example.eventplanner.data.model.Category;
+import com.example.eventplanner.data.network.ClientUtils;
+
+import java.util.Collection;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class CategoriesViewModel extends ViewModel {
+
+    private final MutableLiveData<Collection<Category>> categories = new MutableLiveData<>(List.of());
+    private final MutableLiveData<String> errorMessage = new MutableLiveData<>("");
+
+
+
+    public LiveData<Collection<Category>> getCategories() {
+        return categories;
+    }
+
+    public LiveData<String> getErrorMessage() {
+        return errorMessage;
+    }
+
+
+    public void loadCategories() {
+        ClientUtils.categoryService.getAllCategories().enqueue(new Callback<Collection<Category>>() {
+            @Override
+            public void onResponse(@NonNull Call<Collection<Category>> call, @NonNull Response<Collection<Category>> response) {
+                if (response.isSuccessful()) {
+                    categories.postValue(response.body());
+                } else {
+                    errorMessage.postValue("Failed to fetch categories. Code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Collection<Category>> call, @NonNull Throwable t) {
+                errorMessage.postValue(t.getMessage());
+            }
+        });
+    }
+}
