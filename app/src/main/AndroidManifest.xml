@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -9,35 +10,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EventPlanner"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.activity.ProfileEOActivity"
+            android:exported="false" />
         <!-- Launcher Activity that displays your custom screen -->
         <activity
             android:name=".ui.activity.LauncherActivity"
-            android:theme="@style/Theme.EventPlanner"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.EventPlanner">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Registration Activities -->
+        </activity> <!-- Registration Activities -->
         <activity
             android:name=".ui.activity.RegistrationSppActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.RegistrationEoActivity"
-            android:exported="false" />
-
-        <!-- Main Activity (non-launcher) -->
+            android:exported="false" /> <!-- Main Activity (non-launcher) -->
         <activity
             android:name=".ui.activity.MainActivity"
-            android:exported="false"/>
-
-        <!-- Add LoginActivity -->
+            android:exported="false" /> <!-- Add LoginActivity -->
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
     </application>
+
 </manifest>

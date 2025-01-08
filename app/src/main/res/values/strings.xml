@@ -5,4 +5,6 @@
     <string name="service_image_sample">Service Image</string>
     <string name="service_name_sample">Service Name</string>
     <string name="service_description_sample">Service description...</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>
