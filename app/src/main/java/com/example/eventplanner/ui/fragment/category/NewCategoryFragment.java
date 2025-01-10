@@ -33,7 +33,7 @@ public class NewCategoryFragment extends Fragment {
     private NewCategoryViewModel viewModel;
     private FragmentNewCategoryBinding binding;
 
-    private static final String ARG_ID = "id", ARG_NAME = "name", ARG_DESCRIPTION = "desc";
+    public static final String ARG_ID = "id", ARG_NAME = "name", ARG_DESCRIPTION = "desc";
 
 
     public static NewCategoryFragment newInstance() {
