@@ -105,8 +105,17 @@ public class NewCategoryFragment extends Fragment {
         binding.btnSubmit.setOnClickListener(v -> onSubmit());
 
         LifecycleOwner lifecycleOwner = getViewLifecycleOwner();
-        viewModel.getSuccess().observe(lifecycleOwner, this::onSuccessChange);
-        viewModel.getErrorMsg().observe(lifecycleOwner, this::onErrorChange);
+        viewModel.getSuccess().observe(lifecycleOwner, success -> {
+            if (Boolean.TRUE.equals(success)) {
+                Toast.makeText(requireContext(), "Successfully added a new category", Toast.LENGTH_SHORT).show();
+                requireActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+        viewModel.getErrorMsg().observe(lifecycleOwner, msg -> {
+            if (msg != null && !msg.isBlank()) {
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -124,20 +133,6 @@ public class NewCategoryFragment extends Fragment {
         viewModel.submitCategory();
     }
 
-
-    private void onSuccessChange(Boolean success) {
-        if (Boolean.TRUE.equals(success)) {
-            FragmentActivity hostActivity = requireActivity();
-            Toast.makeText(hostActivity, "TODO", Toast.LENGTH_SHORT).show();
-            hostActivity.getSupportFragmentManager().popBackStack();
-        }
-    }
-
-    private void onErrorChange(String msg) {
-        if (msg != null && !msg.isBlank()) {
-            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
     @Override
