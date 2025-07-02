@@ -18,6 +18,7 @@ import com.example.eventplanner.data.model.LoginResponseDTO;
 import com.example.eventplanner.data.network.services.user.UserService;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
 import com.example.eventplanner.R;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null) {
                     LoginResponseDTO loginResponse = response.body();
                     if(loginResponse.isSuccess()) {
+                        saveUserData(loginResponse);
                         Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                         // Sačuvaj token i korisnika u SharedPreferences ili globalno i nastavi dalje
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -113,4 +115,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void saveUserData(LoginResponseDTO loginResponse) {
+        if (loginResponse == null || loginResponse.getUser() == null) return;
+
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putString("token", loginResponse.getToken());
+        editor.putString("user", new Gson().toJson(loginResponse.getUser())); // pretvori UserDTO u JSON string
+        editor.putString("userCity", loginResponse.getUser().getCity());
+        editor.putInt("userId", loginResponse.getUser().getId()); // ako je Integer koristi putInt
+        editor.putString("userPassword", loginResponse.getUser().getPassword());
+        editor.putString("role", loginResponse.getUser().getRole());
+
+        editor.apply();
+    }
+
 }
