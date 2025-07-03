@@ -1,66 +1,96 @@
 package com.example.eventplanner.ui.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private LinearLayout cardContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        cardContainer = rootView.findViewById(R.id.card_container);
+        fetchEvents();
+        return rootView;
+    }
+
+    private void fetchEvents() {
+        String city = "Novi Sad"; // promeni po potrebi
+        String url = "http://10.0.2.2:8080/api/events/top5?city=" + city;
+
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                this::populateCards,
+                error -> error.printStackTrace()
+        );
+
+        queue.add(request);
+    }
+
+    private void populateCards(JSONArray events) {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+
+        for (int i = 0; i < events.length(); i++) {
+            try {
+                JSONObject obj = events.getJSONObject(i);
+                View card = inflater.inflate(R.layout.item_top_event_card, cardContainer, false);
+
+                TextView organizerName = card.findViewById(R.id.organizer_name);
+                TextView eventTitle = card.findViewById(R.id.event_title);
+                TextView eventDescription = card.findViewById(R.id.event_description);
+                ImageView organizerImage = card.findViewById(R.id.organizer_image);
+                ImageView eventImage = card.findViewById(R.id.event_image);
+                Button viewMore = card.findViewById(R.id.view_more_button);
+
+                organizerName.setText(obj.getString("organizerFirstName") + " " + obj.getString("organizerLastName"));
+                eventTitle.setText(obj.getString("name"));
+                eventDescription.setText(obj.getString("description"));
+
+                String baseUrl = "http://10.0.2.2:8080/";
+                String fullProfileImageUrl = baseUrl + obj.getString("organizerProfilePicture");
+                Glide.with(requireContext())
+                        .load(fullProfileImageUrl)
+                        .placeholder(R.drawable.profile_placeholder)
+                        .error(R.drawable.profile_placeholder)
+                        .into(organizerImage);
+
+
+                String fullImageUrl = baseUrl + obj.getString("imageUrl");
+
+                Glide.with(requireContext())
+                        .load(fullImageUrl)
+                        .placeholder(R.drawable.card_placeholder)
+                        .error(R.drawable.card_placeholder)
+                        .into(eventImage);
+
+                viewMore.setOnClickListener(v -> {
+                    // TODO: Otvori detalje događaja, koristi event ID ako ti treba
+                });
+
+                cardContainer.addView(card);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
