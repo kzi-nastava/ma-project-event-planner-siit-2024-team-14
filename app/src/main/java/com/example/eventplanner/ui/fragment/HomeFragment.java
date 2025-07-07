@@ -2,14 +2,21 @@ package com.example.eventplanner.ui.fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -28,7 +35,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -36,10 +45,22 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerViewOurEvents;
     private Button loadMoreButton;
 
-    private List<JSONObject> allEvents = new ArrayList<>();
+
+    private List<JSONObject> originalEvents = new ArrayList<>();
+    private List<JSONObject> filteredEvents = new ArrayList<>();
+
     private OurEventsAdapter adapter;
 
     private int itemsToShow = 4;
+
+    private EditText etSearch, etStartDate, etEndDate;
+    private Spinner spinnerCategory, spinnerLocation;
+    private Button btnApplyFilters;
+    private ImageButton btnToggleFilters;
+    private LinearLayout filterContainer;
+
+    private String selectedCategory = "";
+    private String selectedLocation = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +91,34 @@ public class HomeFragment extends Fragment {
             displayOurEvents();
         });
 
+        etSearch = rootView.findViewById(R.id.et_search);
+        etStartDate = rootView.findViewById(R.id.et_start_date);
+        etEndDate = rootView.findViewById(R.id.et_end_date);
+        etStartDate.setOnClickListener(v -> showDatePickerDialog(etStartDate));
+        etEndDate.setOnClickListener(v -> showDatePickerDialog(etEndDate));
+        spinnerCategory = rootView.findViewById(R.id.spinner_category);
+        spinnerLocation = rootView.findViewById(R.id.spinner_location);
+        btnApplyFilters = rootView.findViewById(R.id.btn_apply_filters);
+        btnToggleFilters = rootView.findViewById(R.id.btn_toggle_filters);
+        filterContainer = rootView.findViewById(R.id.filter_container);
+        btnToggleFilters.setOnClickListener(v -> {
+            filterContainer.setVisibility(
+                    filterContainer.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE
+            );
+        });
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterEvents();
+            }
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void afterTextChanged(Editable s) {}
+        });
+
+        btnApplyFilters.setOnClickListener(v -> filterEvents());
+
+        fetchCategories();
+        fetchLocations();
         return rootView;
     }
 
@@ -113,10 +162,12 @@ public class HomeFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(requireContext());
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
-                    allEvents.clear();
+                    originalEvents.clear();
                     for (int i = 0; i < response.length(); i++) {
-                        allEvents.add(response.optJSONObject(i));
+                        originalEvents.add(response.optJSONObject(i));
                     }
+                    filteredEvents = new ArrayList<>(originalEvents);
+                    itemsToShow = 4;
                     displayOurEvents();
                 },
                 Throwable::printStackTrace
@@ -125,12 +176,13 @@ public class HomeFragment extends Fragment {
         queue.add(request);
     }
 
+
     private void displayOurEvents() {
-        int count = Math.min(itemsToShow, allEvents.size());
-        List<JSONObject> sublist = allEvents.subList(0, count);
+        int count = Math.min(itemsToShow, filteredEvents.size());
+        List<JSONObject> sublist = filteredEvents.subList(0, count);
         adapter.updateData(sublist);
 
-        if (itemsToShow >= allEvents.size()) {
+        if (itemsToShow >= filteredEvents.size()) {
             loadMoreButton.setVisibility(View.GONE);
         } else {
             loadMoreButton.setVisibility(View.VISIBLE);
@@ -173,4 +225,111 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    private void filterEvents() {
+        String searchTerm = etSearch.getText().toString().toLowerCase().trim();
+        String startDate = etStartDate.getText().toString();
+        String endDate = etEndDate.getText().toString();
+        String selectedCategory = spinnerCategory.getSelectedItem().toString();
+        String selectedLocation = spinnerLocation.getSelectedItem().toString();
+
+        List<JSONObject> filtered = new ArrayList<>();
+        for (JSONObject event : originalEvents) {
+            try {
+                String name = event.getString("name").toLowerCase();
+                String desc = event.getString("description").toLowerCase();
+                String firstName = event.getString("organizerFirstName").toLowerCase();
+                String lastName = event.getString("organizerLastName").toLowerCase();
+                String eventLocation = event.optString("location", "");
+                String eventCategory = event.optString("category", "");
+                String eventStartDate = event.optString("startDate", "");
+                String eventEndDate = event.optString("endDate", "");
+
+                boolean matchesSearch = searchTerm.isEmpty() || name.contains(searchTerm)
+                        || desc.contains(searchTerm)
+                        || firstName.contains(searchTerm)
+                        || lastName.contains(searchTerm);
+
+                boolean matchesLocation = selectedLocation.equals("All Cities") || selectedLocation.equals(eventLocation);
+                boolean matchesCategory = selectedCategory.equals("All categories") || selectedCategory.equals(eventCategory);
+
+                boolean matchesDate = (startDate.isEmpty() || eventStartDate.compareTo(startDate) >= 0)
+                        && (endDate.isEmpty() || eventEndDate.compareTo(endDate) <= 0);
+
+                if (matchesSearch && matchesLocation && matchesCategory && matchesDate) {
+                    filtered.add(event);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        filteredEvents = filtered;
+        itemsToShow = 4;
+        displayOurEvents();
+    }
+
+    private void fetchLocations() {
+        String url = "http://10.0.2.2:8080/api/events/locations";
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                response -> {
+                    List<String> locations = new ArrayList<>();
+                    locations.add("All Cities");
+                    for (int i = 0; i < response.length(); i++) {
+                        locations.add(response.optString(i));
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, locations);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerLocation.setAdapter(adapter);
+                },
+                error -> error.printStackTrace()
+        );
+
+        queue.add(request);
+    }
+
+    private void fetchCategories() {
+        String url = "http://10.0.2.2:8080/api/events/categories";
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                response -> {
+                    List<String> categories = new ArrayList<>();
+                    categories.add("All categories");
+
+                    for (int i = 0; i < response.length(); i++) {
+                        categories.add(response.optString(i));
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, categories);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerCategory.setAdapter(adapter);
+                },
+                error -> error.printStackTrace()
+        );
+
+        queue.add(request);
+    }
+
+    private void showDatePickerDialog(EditText targetEditText) {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(),
+                (view, year1, month1, dayOfMonth) -> {
+                    String formatted = String.format(Locale.getDefault(), "%04d-%02d-%02d", year1, month1 + 1, dayOfMonth);
+                    targetEditText.setText(formatted);
+                },
+                year, month, day
+        );
+        datePickerDialog.show();
+    }
+
+
+
 }
