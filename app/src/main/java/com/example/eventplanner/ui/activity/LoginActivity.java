@@ -123,9 +123,9 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
 
         editor.putString("token", loginResponse.getToken());
-        editor.putString("user", new Gson().toJson(loginResponse.getUser())); // pretvori UserDTO u JSON string
+        editor.putString("user", new Gson().toJson(loginResponse.getUser()));
         editor.putString("userCity", loginResponse.getUser().getCity());
-        editor.putInt("userId", loginResponse.getUser().getId()); // ako je Integer koristi putInt
+        editor.putInt("userId", loginResponse.getUser().getId());
         editor.putString("userPassword", loginResponse.getUser().getPassword());
         editor.putString("role", loginResponse.getUser().getRole());
 
