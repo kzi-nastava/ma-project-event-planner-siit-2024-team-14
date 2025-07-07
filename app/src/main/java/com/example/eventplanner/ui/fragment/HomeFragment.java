@@ -45,14 +45,10 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerViewOurEvents;
     private Button loadMoreButton;
 
-
     private List<JSONObject> originalEvents = new ArrayList<>();
     private List<JSONObject> filteredEvents = new ArrayList<>();
-
     private OurEventsAdapter adapter;
-
     private int itemsToShow = 4;
-
     private EditText etSearch, etStartDate, etEndDate;
     private Spinner spinnerCategory, spinnerLocation;
     private Button btnApplyFilters;
@@ -61,6 +57,9 @@ public class HomeFragment extends Fragment {
 
     private String selectedCategory = "";
     private String selectedLocation = "";
+
+    private LinearLayout cardContainerServices;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,6 +118,11 @@ public class HomeFragment extends Fragment {
 
         fetchCategories();
         fetchLocations();
+
+        cardContainerServices = rootView.findViewById(R.id.card_container_services);
+        fetchTopSolutions();
+
+
         return rootView;
     }
 
@@ -328,6 +332,74 @@ public class HomeFragment extends Fragment {
                 year, month, day
         );
         datePickerDialog.show();
+    }
+
+    private void fetchTopSolutions() {
+        SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        String userCity = prefs.getString("userCity", "Novi Sad");
+
+        String url = "http://10.0.2.2:8080/api/solutions/top5?city=" + userCity;
+
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                this::populateSolutionCards,
+                Throwable::printStackTrace
+        );
+
+        queue.add(request);
+    }
+
+
+    private void populateSolutionCards(JSONArray solutions) {
+        cardContainerServices.removeAllViews();
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+
+        for (int i = 0; i < solutions.length(); i++) {
+            try {
+                JSONObject obj = solutions.getJSONObject(i);
+                View card = inflater.inflate(R.layout.item_solution_card, cardContainerServices, false);
+                fillSolutionCard(card, obj);
+                cardContainerServices.addView(card);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void fillSolutionCard(View card, JSONObject obj) {
+        try {
+            TextView providerName = card.findViewById(R.id.provider_name);
+            TextView providerRole = card.findViewById(R.id.provider_role);
+            ImageView providerImage = card.findViewById(R.id.provider_image);
+            ImageView solutionImage = card.findViewById(R.id.solution_image);
+            TextView solutionTitle = card.findViewById(R.id.solution_title);
+            TextView solutionDesc = card.findViewById(R.id.solution_description);
+            Button viewMoreBtn = card.findViewById(R.id.view_more_button);
+
+            providerName.setText(obj.optString("providerCompanyName", "Unknown"));
+            providerRole.setText("Service and product provider");
+            solutionTitle.setText(obj.optString("name", ""));
+            solutionDesc.setText(obj.optString("description", ""));
+
+            String baseUrl = "http://10.0.2.2:8080/";
+            String imageUrl = baseUrl + obj.optString("imageUrl", "");
+
+            Glide.with(requireContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.card_placeholder)
+                    .error(R.drawable.card_placeholder)
+                    .into(solutionImage);
+
+            // ako ima provider sliku - Glide za providerImage (opciono)
+
+            viewMoreBtn.setOnClickListener(v -> {
+                // TODO: detalji o usluzi
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
