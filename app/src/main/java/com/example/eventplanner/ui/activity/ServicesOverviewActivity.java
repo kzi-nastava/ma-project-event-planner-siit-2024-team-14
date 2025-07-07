@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.ServiceAdapter;
+import com.example.eventplanner.ui.adapter.ServiceAdapter;
 import com.example.eventplanner.ServiceBrief;
 
 import java.util.Arrays;

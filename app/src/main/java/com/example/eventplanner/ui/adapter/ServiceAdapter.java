@@ -1,4 +1,4 @@
-package com.example.eventplanner;
+package com.example.eventplanner.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.eventplanner.R;
+import com.example.eventplanner.ServiceBrief;
 
 import java.util.List;
 
