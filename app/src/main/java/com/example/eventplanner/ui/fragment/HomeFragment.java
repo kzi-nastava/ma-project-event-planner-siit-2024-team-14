@@ -181,7 +181,7 @@ public class HomeFragment extends Fragment {
         // Search bar
         etServiceSearch.addTextChangedListener(new TextWatcher() {
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                fetchFilteredSolutions();
+                filterSolutionsLocally();
             }
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void afterTextChanged(Editable s) {}
@@ -620,8 +620,26 @@ public class HomeFragment extends Fragment {
         spinnerSolutionType.setAdapter(adapter);
     }
 
+    private void filterSolutionsLocally() {
+        String query = etServiceSearch.getText().toString().trim().toLowerCase(Locale.ROOT);
+        filteredSolutions.clear();
 
+        if (query.isEmpty()) {
+            filteredSolutions.addAll(originalSolutions);
+        } else {
+            for (JSONObject obj : originalSolutions) {
+                String name = obj.optString("name", "").toLowerCase(Locale.ROOT);
+                String desc = obj.optString("description", "").toLowerCase(Locale.ROOT);
+                String provider = obj.optString("providerCompanyName", "").toLowerCase(Locale.ROOT);
 
+                if (name.contains(query) || desc.contains(query) || provider.contains(query)) {
+                    filteredSolutions.add(obj);
+                }
+            }
+        }
 
+        itemsToShow = 4;
+        displayOurSolutions();
+    }
 
 }
