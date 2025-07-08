@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -26,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
@@ -108,13 +111,13 @@ public class HomeFragment extends Fragment {
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterEvents();
+                fetchFilteredEvents();
             }
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void afterTextChanged(Editable s) {}
         });
 
-        btnApplyFilters.setOnClickListener(v -> filterEvents());
+        btnApplyFilters.setOnClickListener(v -> fetchFilteredEvents());
 
         fetchCategories();
         fetchLocations();
@@ -230,48 +233,56 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void filterEvents() {
-        String searchTerm = etSearch.getText().toString().toLowerCase().trim();
-        String startDate = etStartDate.getText().toString();
-        String endDate = etEndDate.getText().toString();
+    private void fetchFilteredEvents() {
+        String baseUrl = "http://10.0.2.2:8080/api/events/filter";
+
+        Uri.Builder builder = Uri.parse(baseUrl).buildUpon();
+        builder.appendQueryParameter("page", "0");
+        builder.appendQueryParameter("size", "100");
+
+        String startDate = etStartDate.getText().toString().trim();
+        String endDate = etEndDate.getText().toString().trim();
         String selectedCategory = spinnerCategory.getSelectedItem().toString();
         String selectedLocation = spinnerLocation.getSelectedItem().toString();
 
-        List<JSONObject> filtered = new ArrayList<>();
-        for (JSONObject event : originalEvents) {
-            try {
-                String name = event.getString("name").toLowerCase();
-                String desc = event.getString("description").toLowerCase();
-                String firstName = event.getString("organizerFirstName").toLowerCase();
-                String lastName = event.getString("organizerLastName").toLowerCase();
-                String eventLocation = event.optString("location", "");
-                String eventCategory = event.optString("category", "");
-                String eventStartDate = event.optString("startDate", "");
-                String eventEndDate = event.optString("endDate", "");
-
-                boolean matchesSearch = searchTerm.isEmpty() || name.contains(searchTerm)
-                        || desc.contains(searchTerm)
-                        || firstName.contains(searchTerm)
-                        || lastName.contains(searchTerm);
-
-                boolean matchesLocation = selectedLocation.equals("All Cities") || selectedLocation.equals(eventLocation);
-                boolean matchesCategory = selectedCategory.equals("All categories") || selectedCategory.equals(eventCategory);
-
-                boolean matchesDate = (startDate.isEmpty() || eventStartDate.compareTo(startDate) >= 0)
-                        && (endDate.isEmpty() || eventEndDate.compareTo(endDate) <= 0);
-
-                if (matchesSearch && matchesLocation && matchesCategory && matchesDate) {
-                    filtered.add(event);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (!startDate.isEmpty()) {
+            builder.appendQueryParameter("startDate", startDate);
+        }
+        if (!endDate.isEmpty()) {
+            builder.appendQueryParameter("endDate", endDate);
         }
 
-        filteredEvents = filtered;
-        itemsToShow = 4;
-        displayOurEvents();
+        if (!selectedCategory.equalsIgnoreCase("All categories")) {
+            builder.appendQueryParameter("category", selectedCategory);
+        }
+        if (!selectedLocation.equalsIgnoreCase("All Cities")) {
+            builder.appendQueryParameter("location", selectedLocation);
+        }
+
+        String finalUrl = builder.build().toString();
+
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, finalUrl, null,
+                response -> {
+                    JSONArray content = response.optJSONArray("content");
+                    originalEvents.clear();
+
+                    if (content != null) {
+                        for (int i = 0; i < content.length(); i++) {
+                            originalEvents.add(content.optJSONObject(i));
+                        }
+                    }
+                    filteredEvents = new ArrayList<>(originalEvents);
+                    itemsToShow = 4;
+                    displayOurEvents();
+                },
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(requireContext(), "Error fetching filtered events", Toast.LENGTH_SHORT).show();
+                }
+        );
+
+        queue.add(request);
     }
 
     private void fetchLocations() {
