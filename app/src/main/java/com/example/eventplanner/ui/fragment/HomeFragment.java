@@ -33,6 +33,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
 import com.example.eventplanner.ui.adapter.OurEventsAdapter;
+import com.example.eventplanner.ui.adapter.OurSolutionAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -46,22 +47,31 @@ public class HomeFragment extends Fragment {
 
     private LinearLayout cardContainer;  // za hottest events (horizontal scroll)
     private RecyclerView recyclerViewOurEvents;
+    private RecyclerView recyclerViewOurSolutions;
     private Button loadMoreButton;
-
+    private Button loadMoreButton2;
     private List<JSONObject> originalEvents = new ArrayList<>();
     private List<JSONObject> filteredEvents = new ArrayList<>();
+
+    private List<JSONObject> originalSolutions = new ArrayList<>();
+    private List<JSONObject> filteredSolutions = new ArrayList<>();
     private OurEventsAdapter adapter;
+
+    private OurSolutionAdapter adapterSolution;
     private int itemsToShow = 4;
     private EditText etSearch, etStartDate, etEndDate;
     private Spinner spinnerCategory, spinnerLocation;
     private Button btnApplyFilters;
     private ImageButton btnToggleFilters;
     private LinearLayout filterContainer;
-
-    private String selectedCategory = "";
-    private String selectedLocation = "";
-
     private LinearLayout cardContainerServices;
+
+    private Button btnApplyFilters2;
+    private ImageButton btnToggleFilters2;
+    private EditText etServiceSearch, etServiceStartDate, etServiceEndDate, etMinPrice, etMaxPrice;
+    private Spinner spinnerSolutionLocation, spinnerSolutionCategory, spinnerSolutionType;
+    private LinearLayout filterContainer2;
+
 
 
     @Override
@@ -125,6 +135,62 @@ public class HomeFragment extends Fragment {
         cardContainerServices = rootView.findViewById(R.id.card_container_services);
         fetchTopSolutions();
 
+        recyclerViewOurSolutions = rootView.findViewById(R.id.recycler_view_our_solutions);
+        loadMoreButton2 = rootView.findViewById(R.id.load_more_button2);
+
+        GridLayoutManager solutionLayoutManager = new GridLayoutManager(requireContext(), 2);
+        recyclerViewOurSolutions.setLayoutManager(solutionLayoutManager);
+        recyclerViewOurSolutions.setHasFixedSize(true);
+        adapterSolution = new OurSolutionAdapter(requireContext(), new ArrayList<>(), solution -> {
+            // TODO: akcija na klik
+        });
+        recyclerViewOurSolutions.setAdapter(adapterSolution);
+
+        loadMoreButton2.setOnClickListener(v -> {
+            itemsToShow += 4;
+            displayOurSolutions();
+        });
+
+        fetchAllSolutions();
+
+        etServiceSearch = rootView.findViewById(R.id.service_search);
+        etServiceStartDate = rootView.findViewById(R.id.service_start_date);
+        etServiceEndDate = rootView.findViewById(R.id.service_end_date);
+        etMinPrice = rootView.findViewById(R.id.min_price);
+        etMaxPrice = rootView.findViewById(R.id.max_price);
+        spinnerSolutionLocation = rootView.findViewById(R.id.spinner_solution_location);
+        spinnerSolutionCategory = rootView.findViewById(R.id.spinner_solution_category);
+        spinnerSolutionType = rootView.findViewById(R.id.spinner_solution_type);
+        btnApplyFilters2 = rootView.findViewById(R.id.btn_apply_filters2);
+        btnToggleFilters2 = rootView.findViewById(R.id.btn_toggle_filters2);
+        filterContainer2 = rootView.findViewById(R.id.filter_container2);
+
+        // Date pickeri
+        etServiceStartDate.setOnClickListener(v -> showDatePickerDialog(etServiceStartDate));
+        etServiceEndDate.setOnClickListener(v -> showDatePickerDialog(etServiceEndDate));
+
+        // Toggle filtera
+        btnToggleFilters2.setOnClickListener(v -> {
+            filterContainer2.setVisibility(
+                    filterContainer2.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE
+            );
+        });
+
+        btnApplyFilters2.setOnClickListener(v -> fetchFilteredSolutions());
+
+        // Search bar
+        etServiceSearch.addTextChangedListener(new TextWatcher() {
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                fetchFilteredSolutions();
+            }
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void afterTextChanged(Editable s) {}
+        });
+
+        // Fetch vrednosti za spinnere
+        fetchSolutionCategories();
+        fetchSolutionLocations();
+        fetchSolutionTypes();
 
         return rootView;
     }
@@ -412,6 +478,149 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    private void fetchAllSolutions() {
+        String url = "http://10.0.2.2:8080/api/solutions/all";
+
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                response -> {
+                    originalSolutions.clear();
+                    for (int i = 0; i < response.length(); i++) {
+                        originalSolutions.add(response.optJSONObject(i));
+                    }
+                    filteredSolutions = new ArrayList<>(originalSolutions);
+                    itemsToShow = 4;
+                    displayOurSolutions();
+                },
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(requireContext(), "Error fetching services", Toast.LENGTH_SHORT).show();
+                }
+        );
+
+        queue.add(request);
+    }
+
+    private void displayOurSolutions() {
+        int count = Math.min(itemsToShow, filteredSolutions.size());
+        List<JSONObject> sublist = filteredSolutions.subList(0, count);
+        adapterSolution.updateData(sublist);
+
+        if (itemsToShow >= filteredSolutions.size()) {
+            loadMoreButton2.setVisibility(View.GONE);
+        } else {
+            loadMoreButton2.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    private void fetchFilteredSolutions() {
+        String baseUrl = "http://10.0.2.2:8080/api/solutions/filter";
+
+        Uri.Builder builder = Uri.parse(baseUrl).buildUpon();
+        builder.appendQueryParameter("page", "0");
+        builder.appendQueryParameter("size", "100");
+
+        String search = etServiceSearch.getText().toString().trim();
+        String startDate = etServiceStartDate.getText().toString().trim();
+        String endDate = etServiceEndDate.getText().toString().trim();
+        String category = spinnerSolutionCategory.getSelectedItem().toString();
+        String location = spinnerSolutionLocation.getSelectedItem().toString();
+        String type = spinnerSolutionType.getSelectedItem().toString();
+        String minPrice = etMinPrice.getText().toString().trim();
+        String maxPrice = etMaxPrice.getText().toString().trim();
+
+        if (!startDate.isEmpty()) builder.appendQueryParameter("startDate", startDate);
+        if (!endDate.isEmpty()) builder.appendQueryParameter("endDate", endDate);
+        if (!category.equalsIgnoreCase("All categories")) builder.appendQueryParameter("category", category);
+        if (!location.equalsIgnoreCase("All Cities")) builder.appendQueryParameter("location", location);
+        if (!type.equalsIgnoreCase("All types")) builder.appendQueryParameter("type", type);
+        if (!minPrice.isEmpty()) builder.appendQueryParameter("minPrice", minPrice);
+        if (!maxPrice.isEmpty()) builder.appendQueryParameter("maxPrice", maxPrice);
+
+        String finalUrl = builder.build().toString();
+
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, finalUrl, null,
+                response -> {
+                    JSONArray content = response.optJSONArray("content");
+                    originalSolutions.clear();
+
+                    if (content != null) {
+                        for (int i = 0; i < content.length(); i++) {
+                            originalSolutions.add(content.optJSONObject(i));
+                        }
+                    }
+
+                    filteredSolutions = new ArrayList<>(originalSolutions);
+                    itemsToShow = 4;
+                    displayOurSolutions();
+                },
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(requireContext(), "Error fetching filtered solutions", Toast.LENGTH_SHORT).show();
+                });
+
+        queue.add(request);
+    }
+
+    private void fetchSolutionCategories() {
+        String url = "http://10.0.2.2:8080/api/solutions/categories";
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                response -> {
+                    List<String> categories = new ArrayList<>();
+                    categories.add("All categories");
+                    for (int i = 0; i < response.length(); i++) {
+                        categories.add(response.optString(i));
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, categories);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerSolutionCategory.setAdapter(adapter);
+                },
+                Throwable::printStackTrace
+        );
+
+        queue.add(request);
+    }
+
+    private void fetchSolutionLocations() {
+        String url = "http://10.0.2.2:8080/api/solutions/locations";
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                response -> {
+                    List<String> locations = new ArrayList<>();
+                    locations.add("All Cities");
+                    for (int i = 0; i < response.length(); i++) {
+                        locations.add(response.optString(i));
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, locations);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerSolutionLocation.setAdapter(adapter);
+                },
+                Throwable::printStackTrace
+        );
+
+        queue.add(request);
+    }
+
+    private void fetchSolutionTypes() {
+        List<String> types = new ArrayList<>();
+        types.add("All types");
+        types.add("Service");
+        types.add("Product");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, types);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerSolutionType.setAdapter(adapter);
+    }
+
+
 
 
 
