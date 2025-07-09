@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.CommentDTO;
 import com.example.eventplanner.data.model.CommentStatusUpdateDTO;
-import com.example.eventplanner.data.network.services.comments.AdminCommentsService;
 import com.example.eventplanner.data.network.services.comments.CommentApiClient;
 
 import java.util.List;
@@ -58,34 +57,47 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         holder.stars.setText(new String(new char[c.rating]).replace("\0", "★"));
         holder.approveBtn.setOnClickListener(v -> {
-            CommentStatusUpdateDTO update = new CommentStatusUpdateDTO(c.id, "accepted");
-            CommentApiClient.getInstance().approveComment(update).enqueue(new Callback<Void>() {
-                @Override public void onResponse(Call<Void> call, Response<Void> response) {
-                    Toast.makeText(context, "Comment approved", Toast.LENGTH_SHORT).show();
-                    comments.remove(position);
-                    notifyItemRemoved(position);
-                }
+            int pos = holder.getAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION) {
+                CommentDTO comment = comments.get(pos);
+                CommentStatusUpdateDTO update = new CommentStatusUpdateDTO(comment.id, "accepted");
+                CommentApiClient.getInstance().approveComment(update).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(context, "Comment approved", Toast.LENGTH_SHORT).show();
+                        comments.remove(pos);
+                        notifyItemRemoved(pos);
+                    }
 
-                @Override public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(context, "Error approving comment", Toast.LENGTH_SHORT).show();
-                }
-            });
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(context, "Error approving comment", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
 
         holder.deleteBtn.setOnClickListener(v -> {
-            CommentStatusUpdateDTO update = new CommentStatusUpdateDTO(c.id, "deleted");
-            CommentApiClient.getInstance().deleteComment(update).enqueue(new Callback<Void>() {
-                @Override public void onResponse(Call<Void> call, Response<Void> response) {
-                    Toast.makeText(context, "Comment deleted", Toast.LENGTH_SHORT).show();
-                    comments.remove(position);
-                    notifyItemRemoved(position);
-                }
+            int pos = holder.getAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION) {
+                CommentDTO comment = comments.get(pos);
+                CommentStatusUpdateDTO update = new CommentStatusUpdateDTO(comment.id, "deleted");
+                CommentApiClient.getInstance().deleteComment(update).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(context, "Comment deleted", Toast.LENGTH_SHORT).show();
+                        comments.remove(pos);
+                        notifyItemRemoved(pos);
+                    }
 
-                @Override public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(context, "Error deleting comment", Toast.LENGTH_SHORT).show();
-                }
-            });
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(context, "Error deleting comment", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
+
     }
 
     @Override
