@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.eventplanner.R;
+import com.example.eventplanner.ui.fragment.AdminCommentsFragment;
 import com.example.eventplanner.ui.fragment.HomeFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
 import com.example.eventplanner.ui.fragment.SettingsFragment;
@@ -64,83 +65,55 @@ public class MainActivity extends AppCompatActivity {
             isNavigationViewVisible = !isNavigationViewVisible;
         });
 
-        // Dinamičko punjenje menija na osnovu uloge
         setupNavigationMenuByRole();
 
         navigationView.setNavigationItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
             int id = item.getItemId();
-            /*
-            switch (id) {
-                case R.id.home:
-                    selectedFragment = new HomeFragment();
-                    break;
-                case R.id.profile:
-                    selectedFragment = new ProfileFragment();
-                    break;
 
-                // Admin opcije
-                case R.id.nav_user_management:
-                    // TODO: Otvori UserManagement fragment/activity
-                    break;
-                case R.id.nav_event_types:
-                    // TODO: Otvori EventTypes fragment/activity
-                    break;
-                case R.id.nav_comments:
-                    // TODO: Otvori Comments fragment/activity
-                    break;
-                case R.id.nav_reports:
-                    // TODO: Otvori Reports fragment/activity
-                    break;
-
-                // User opcije
-                case R.id.nav_become_organizer:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-                case R.id.nav_become_provider:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-
-                // EventOrganizer opcije
-                case R.id.nav_my_events:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-                case R.id.nav_calendar:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-                case R.id.nav_invitations:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-                case R.id.nav_budget_planning:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-                case R.id.nav_favourites:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-                case R.id.nav_messages:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-
-                // Provider opcije
-                case R.id.nav_my_services:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-                case R.id.nav_all_bookings:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-                case R.id.nav_booking_requests:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-                case R.id.nav_price_list:
-                    // TODO: Implementiraj funkcionalnost
-                    break;
-
-                case R.id.nav_logout:
-                    logoutUser();
-                    break;
+            if (id == R.id.home) {
+                selectedFragment = new HomeFragment();
+            } else if (id == R.id.profile) {
+                selectedFragment = new ProfileFragment();
+            } else if (id == R.id.nav_comments) {
+                selectedFragment = new AdminCommentsFragment();
+            } else if (id == R.id.nav_user_management) {
+                // TODO: Otvori UserManagement fragment/activity
+            } else if (id == R.id.nav_event_types) {
+                // TODO: Otvori EventTypes fragment/activity
+            } else if (id == R.id.nav_reports) {
+                // TODO: Otvori Reports fragment/activity
+            } else if (id == R.id.nav_logout) {
+                logoutUser();
+                return true;
+            } else if(id == R.id.nav_become_organizer){
+                return true;
+            } else if(id == R.id.nav_become_provider){
+                return true;
+            }else if(id == R.id.nav_my_events){
+                return true;
+            }else if(id == R.id.nav_calendar){
+                return true;
+            }else if(id == R.id.nav_invitations){
+                return true;
+            }else if(id == R.id.nav_budget_planning){
+                return true;
+            }else if(id == R.id.nav_favourites){
+                return true;
+            }else if(id == R.id.nav_messages){
+                return true;
+            }else if(id == R.id.nav_my_services){
+                return true;
+            }else if(id == R.id.nav_all_bookings){
+                return true;
+            }else if(id == R.id.nav_booking_requests){
+                return true;
+            }else if(id == R.id.nav_price_list){
+                return true;
+            }else if(id == R.id.nav_logout){
+                return true;
             }
-            */
 
             if (selectedFragment != null) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
