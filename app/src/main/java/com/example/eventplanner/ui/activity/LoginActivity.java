@@ -91,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                     if(loginResponse.isSuccess()) {
                         saveUserData(loginResponse);
                         Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        // Sačuvaj token i korisnika u SharedPreferences ili globalno i nastavi dalje
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
 

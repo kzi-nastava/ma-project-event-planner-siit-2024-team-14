@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.eventplanner.R;
 import com.example.eventplanner.ui.fragment.AdminCommentsFragment;
 import com.example.eventplanner.ui.fragment.HomeFragment;
+import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
 import com.example.eventplanner.ui.fragment.SettingsFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = new ProfileFragment();
             } else if (id == R.id.nav_comments) {
                 selectedFragment = new AdminCommentsFragment();
+            }else if(id == R.id.nav_notifications){
+                selectedFragment = new NotificationFragment();
             } else if (id == R.id.nav_user_management) {
                 // TODO: Otvori UserManagement fragment/activity
             } else if (id == R.id.nav_event_types) {
