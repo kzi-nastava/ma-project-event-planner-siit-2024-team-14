@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
 
-                        finish(); // završi LoginActivity
+                        finish();
 
                         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
                         prefs.edit().putString("auth_token", loginResponse.getToken()).apply();

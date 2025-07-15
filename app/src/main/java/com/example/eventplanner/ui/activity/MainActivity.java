@@ -1,16 +1,21 @@
 package com.example.eventplanner.ui.activity;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.eventplanner.R;
+import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.ui.fragment.AdminCommentsFragment;
 import com.example.eventplanner.ui.fragment.HomeFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
@@ -19,13 +24,13 @@ import com.example.eventplanner.ui.fragment.SettingsFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import android.Manifest;
 public class MainActivity extends AppCompatActivity {
 
     private NavigationView navigationView;
     private ImageView navigationIcon;
     private boolean isNavigationViewVisible = false;
 
-    // SharedPreferences key za ulogu
     private static final String PREFS_NAME = "MyAppPrefs";
     private static final String KEY_ROLE = "role";
 
@@ -33,6 +38,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1001);
+            }
+        }
+
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        int userId = prefs.getInt("userId", -1);
+
+        if (userId != -1) {
+            NotificationWebSocketManager.connect(getApplicationContext(), userId, notification -> {
+                Log.d("WS-NOTIF", "New notification: " + notification.getMessage());
+
+            });
+        }
 
         navigationView = findViewById(R.id.navigation_view);
         navigationIcon = findViewById(R.id.navigation_icon);
@@ -195,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logoutUser() {
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.apply();
@@ -206,4 +228,15 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.home_page_fragment, new HomeFragment())
                 .commit();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        NotificationWebSocketManager.disconnect();
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.apply();
+    }
+
 }
