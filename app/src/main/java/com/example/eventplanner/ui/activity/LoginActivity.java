@@ -91,11 +91,10 @@ public class LoginActivity extends AppCompatActivity {
                     if(loginResponse.isSuccess()) {
                         saveUserData(loginResponse);
                         Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        // Sačuvaj token i korisnika u SharedPreferences ili globalno i nastavi dalje
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
 
-                        finish(); // završi LoginActivity
+                        finish();
 
                         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
                         prefs.edit().putString("auth_token", loginResponse.getToken()).apply();
@@ -128,6 +127,8 @@ public class LoginActivity extends AppCompatActivity {
         editor.putInt("userId", loginResponse.getUser().getId());
         editor.putString("userPassword", loginResponse.getUser().getPassword());
         editor.putString("role", loginResponse.getUser().getRole());
+        editor.putBoolean("muted", loginResponse.getUser().getMuted());
+
 
         editor.apply();
     }

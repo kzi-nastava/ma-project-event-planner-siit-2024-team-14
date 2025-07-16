@@ -44,8 +44,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class HomeFragment extends Fragment {
-
-    private LinearLayout cardContainer;  // za hottest events (horizontal scroll)
+    private LinearLayout cardContainer;
     private RecyclerView recyclerViewOurEvents;
     private RecyclerView recyclerViewOurSolutions;
     private Button loadMoreButton;
@@ -56,7 +55,6 @@ public class HomeFragment extends Fragment {
     private List<JSONObject> originalSolutions = new ArrayList<>();
     private List<JSONObject> filteredSolutions = new ArrayList<>();
     private OurEventsAdapter adapter;
-
     private OurSolutionAdapter adapterSolution;
     private int itemsToShow = 4;
     private EditText etSearch, etStartDate, etEndDate;
@@ -65,13 +63,11 @@ public class HomeFragment extends Fragment {
     private ImageButton btnToggleFilters;
     private LinearLayout filterContainer;
     private LinearLayout cardContainerServices;
-
     private Button btnApplyFilters2;
     private ImageButton btnToggleFilters2;
     private EditText etServiceSearch, etServiceStartDate, etServiceEndDate, etMinPrice, etMaxPrice;
     private Spinner spinnerSolutionLocation, spinnerSolutionCategory, spinnerSolutionType;
     private LinearLayout filterContainer2;
-
 
 
     @Override
