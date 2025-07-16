@@ -127,6 +127,8 @@ public class LoginActivity extends AppCompatActivity {
         editor.putInt("userId", loginResponse.getUser().getId());
         editor.putString("userPassword", loginResponse.getUser().getPassword());
         editor.putString("role", loginResponse.getUser().getRole());
+        editor.putBoolean("muted", loginResponse.getUser().getMuted());
+
 
         editor.apply();
     }

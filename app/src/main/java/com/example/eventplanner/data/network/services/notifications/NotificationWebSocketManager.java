@@ -22,6 +22,11 @@ public class NotificationWebSocketManager {
     private static final String TAG = "NotificationWebSocket";
 
     public static void connect(Context context, int userId, Consumer<NotificationModel> onMessage) {
+        if (stompClient != null && stompClient.isConnected()) {
+            Log.d(TAG, "Already connected, skipping connect.");
+            return;
+        }
+
         stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, SOCKET_URL);
         stompClient.connect();
 
@@ -62,11 +67,25 @@ public class NotificationWebSocketManager {
     }
 
     public static void disconnect() {
-        if (lifecycleDisposable != null && !lifecycleDisposable.isDisposed())
-            lifecycleDisposable.dispose();
-        if (topicDisposable != null && !topicDisposable.isDisposed())
-            topicDisposable.dispose();
-        if (stompClient != null)
-            stompClient.disconnect();
-    }
+            Log.d(TAG, "Attempting to disconnect WebSocket...");
+
+            if (topicDisposable != null && !topicDisposable.isDisposed()) {
+                topicDisposable.dispose();
+                topicDisposable = null;
+                Log.d(TAG, "Unsubscribed from topic");
+            }
+
+            if (lifecycleDisposable != null && !lifecycleDisposable.isDisposed()) {
+                lifecycleDisposable.dispose();
+                lifecycleDisposable = null;
+                Log.d(TAG, "Lifecycle listener disposed");
+            }
+
+            if (stompClient != null && stompClient.isConnected()) {
+                stompClient.disconnect();
+                Log.d(TAG, "StompClient disconnected");
+            }
+
+            stompClient = null;
+        }
 }

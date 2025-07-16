@@ -7,6 +7,8 @@ public class UserDTO {
     private String role;
     private String city;
 
+    private boolean muted;
+
     public UserDTO() {
     }
 
@@ -49,4 +51,7 @@ public class UserDTO {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public boolean getMuted(){return muted;}
+    public void setMuted(boolean muted){ this.muted = muted; }
 }

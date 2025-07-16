@@ -32,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean isNavigationViewVisible = false;
 
     private static final String PREFS_NAME = "MyAppPrefs";
+
+    private SharedPreferences prefs;
+    private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener;
+
     private static final String KEY_ROLE = "role";
 
     @Override
@@ -46,12 +50,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         int userId = prefs.getInt("userId", -1);
+        boolean isMuted = prefs.getBoolean("muted", false);
 
-        if (userId != -1) {
+        if (userId != -1 && !isMuted) {
             NotificationWebSocketManager.connect(getApplicationContext(), userId, notification -> {
-                Log.d("WS-NOTIF", "New notification: " + notification.getMessage());
+                Log.d("WS-NOTIF", "New notification IZ MAINACTIVITY: " + notification.getMessage());
 
             });
         }

@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 
 public class NotificationPopUp {
@@ -27,7 +28,10 @@ public class NotificationPopUp {
                 .setContentTitle("New notification")
                 .setContentText(notification.getMessage())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setAutoCancel(true);
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(notification.getMessage()))
+                ;
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 
