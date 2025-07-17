@@ -79,7 +79,7 @@
             android:paddingTop="4dp" />
 
         <Button
-            android:id="@+id/view_more_button2"
+            android:id="@+id/view_more_button_solution"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View More"

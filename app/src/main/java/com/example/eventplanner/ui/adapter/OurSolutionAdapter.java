@@ -91,7 +91,7 @@ public class OurSolutionAdapter  extends RecyclerView.Adapter<OurSolutionAdapter
             solutionTitle = itemView.findViewById(R.id.solution_title);
             solutionDescription = itemView.findViewById(R.id.solution_description);
             solutionImage = itemView.findViewById(R.id.solution_image);
-            viewMore = itemView.findViewById(R.id.view_more_button2);
+            viewMore = itemView.findViewById(R.id.view_more_button_solution);
         }
     }
 }

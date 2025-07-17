@@ -3,6 +3,7 @@ package com.example.eventplanner.ui.fragment;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
+import com.example.eventplanner.ui.activity.ProductDetailsActivity;
 import com.example.eventplanner.ui.adapter.OurEventsAdapter;
 import com.example.eventplanner.ui.adapter.OurSolutionAdapter;
 
@@ -80,10 +82,8 @@ public class HomeFragment extends Fragment {
         recyclerViewOurEvents = rootView.findViewById(R.id.recycler_view_our_events);
         loadMoreButton = rootView.findViewById(R.id.load_more_button);
 
-        // Hottest events - isto kao pre
         fetchHottestEvents();
 
-        // Our events - RecyclerView setup
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
         recyclerViewOurEvents.setLayoutManager(gridLayoutManager);
         recyclerViewOurEvents.setHasFixedSize(true);
@@ -138,7 +138,29 @@ public class HomeFragment extends Fragment {
         recyclerViewOurSolutions.setLayoutManager(solutionLayoutManager);
         recyclerViewOurSolutions.setHasFixedSize(true);
         adapterSolution = new OurSolutionAdapter(requireContext(), new ArrayList<>(), solution -> {
-            // TODO: akcija na klik
+            try {
+                String solutionType = solution.optString("solutionType");
+                int solutionId = solution.optInt("id");
+
+                if ("Service".equalsIgnoreCase(solutionType)) {
+                    ServiceDetailsFragment fragment = new ServiceDetailsFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("solutionId", solutionId);
+                    fragment.setArguments(bundle);
+
+                    requireActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.home_page_fragment, fragment)
+                            .addToBackStack(null)
+                            .commit();
+                } else {
+                    // todo fragment for product
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(requireContext(), "Failed to open details", Toast.LENGTH_SHORT).show();
+            }
         });
         recyclerViewOurSolutions.setAdapter(adapterSolution);
 
@@ -448,7 +470,7 @@ public class HomeFragment extends Fragment {
             ImageView solutionImage = card.findViewById(R.id.solution_image);
             TextView solutionTitle = card.findViewById(R.id.solution_title);
             TextView solutionDesc = card.findViewById(R.id.solution_description);
-            Button viewMoreBtn = card.findViewById(R.id.view_more_button);
+            Button viewMoreBtn = card.findViewById(R.id.view_more_button_solution);
 
             providerName.setText(obj.optString("providerCompanyName", "Unknown"));
             providerRole.setText("Service and product provider");
@@ -465,10 +487,31 @@ public class HomeFragment extends Fragment {
                     .into(solutionImage);
 
             // ako ima provider sliku - Glide za providerImage (opciono)
-
             viewMoreBtn.setOnClickListener(v -> {
-                // TODO: detalji o usluzi
+                String solutionType = obj.optString("solutionType");
+                int solutionId = obj.optInt("id");
+
+                if ("Service".equalsIgnoreCase(solutionType)) {
+                    ServiceDetailsFragment fragment = new ServiceDetailsFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("solutionId", solutionId);
+                    fragment.setArguments(bundle);
+
+                    requireActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.home_page_fragment, fragment)
+                            .addToBackStack(null)
+                            .commit();
+
+                }else {
+                    Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                    intent.putExtra("solutionId", solutionId);
+                    startActivity(intent);
+                }
             });
+
 
         } catch (Exception e) {
             e.printStackTrace();

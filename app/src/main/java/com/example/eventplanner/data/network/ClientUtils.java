@@ -28,7 +28,6 @@ public class ClientUtils {
                 .build();
     }
 
-
     @NonNull
     public static OkHttpClient testClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -42,4 +41,5 @@ public class ClientUtils {
                 .build();
 
     }
+
 }
