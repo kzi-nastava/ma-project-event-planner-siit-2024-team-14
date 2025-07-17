@@ -1,5 +1,8 @@
 package com.example.eventplanner.data.network;
 
+import com.example.eventplanner.data.model.EventModel;
+import com.example.eventplanner.data.network.services.events.EventService;
+import com.example.eventplanner.data.network.services.solutions.BookingServiceService;
 import com.example.eventplanner.data.network.services.solutions.ServicesService;
 
 import retrofit2.Retrofit;
@@ -21,4 +24,14 @@ public class ApiClient {
     public static ServicesService getServiceApi() {
         return getClient().create(ServicesService.class);
     }
+
+    public static BookingServiceService getBookingServiceApi() {
+        return getClient().create(BookingServiceService.class);
+    }
+
+    public static EventService getEventService(){
+        return getClient().create(EventService.class);
+    }
+
+
 }

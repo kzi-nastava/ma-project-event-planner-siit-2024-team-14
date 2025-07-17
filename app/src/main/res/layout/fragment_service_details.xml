@@ -57,5 +57,17 @@
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/book_service_button"
+            android:text="Book Service"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#523D35"
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
     </LinearLayout>
+
 </ScrollView>

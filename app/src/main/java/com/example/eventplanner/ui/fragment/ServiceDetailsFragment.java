@@ -1,10 +1,13 @@
 package com.example.eventplanner.ui.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,8 +40,31 @@ public class ServiceDetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_service_details, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_service_details, container, false);
+
+        Button bookServiceButton = view.findViewById(R.id.book_service_button);
+        SharedPreferences prefs = requireActivity().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
+        String role = prefs.getString("role", null);
+
+        if ("EventOrganizer".equals(role)) {
+            bookServiceButton.setVisibility(View.VISIBLE);
+            bookServiceButton.setOnClickListener(v -> {
+                ServiceReservationFragment reservationFragment = ServiceReservationFragment.newInstance(serviceId);
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.home_page_fragment, reservationFragment)
+                        .addToBackStack(null)
+                        .commit();
+            });
+        } else {
+            bookServiceButton.setVisibility(View.GONE);
+        }
+
+        return view;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
