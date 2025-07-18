@@ -1,90 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/reservation_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="#FFFFFF">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="20dp"
+    <!-- Background circles -->
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/green_circle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="10dp"
+        android:alpha="0.7" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/beige_circle"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="500dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:alpha="0.7" />
+
+    <!-- Content -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
+        android:fillViewport="true">
 
-        <TextView
-            android:text="Reserve Service"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#523D35"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="24dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="Select Event:"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/event_spinner"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="20dp">
 
-        <TextView
-            android:text="Select Date:"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:text="Book Service"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#523D35"
+                android:fontFamily="@font/petrona"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp" />
 
-        <EditText
-            android:id="@+id/date_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:clickable="true"
-            android:hint="yyyy-MM-dd"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginBottom="16dp" />
+            <!-- Container for fields -->
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_background"
+                android:padding="16dp">
 
-        <TextView
-            android:text="Select Start Time:"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Select Event:"
+                    android:textStyle="bold"
+                    android:textColor="#523D35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp" />
+                <Spinner
+                    android:id="@+id/event_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp" />
 
-        <Spinner
-            android:id="@+id/start_time_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+                <TextView
+                    android:text="Select Date:"
+                    android:textStyle="bold"
+                    android:textColor="#523D35"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/date_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="yyyy-MM-dd"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:background="@drawable/border"
+                    android:padding="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColor="#523D35"
+                    android:textColorHint="#523D35"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:text="Select Duration:"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Start Time:"
+                    android:textStyle="bold"
+                    android:textColor="#523D35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp" />
+                <Spinner
+                    android:id="@+id/start_time_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp" />
 
-        <Spinner
-            android:id="@+id/duration_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+                <TextView
+                    android:text="Duration (min):"
+                    android:textStyle="bold"
+                    android:textColor="#523D35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp" />
+                <Spinner
+                    android:id="@+id/duration_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp" />
 
-        <Button
-            android:id="@+id/confirmBookingButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Confirm Booking"
-            android:backgroundTint="#523D35"
-            android:textColor="#FFFFFF"
-            android:padding="12dp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp" />
+                <!-- Confirm Booking Button -->
+                <Button
+                    android:id="@+id/confirmBookingButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm Booking"
+                    android:backgroundTint="#523D35"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:padding="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>
