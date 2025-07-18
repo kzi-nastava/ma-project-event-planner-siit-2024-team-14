@@ -1,5 +1,6 @@
 package com.example.eventplanner.data.network;
 
+import com.example.eventplanner.data.network.reports.ReportUserService;
 import com.example.eventplanner.data.network.services.events.EventService;
 import com.example.eventplanner.data.network.services.profiles.OrganizerService;
 import com.example.eventplanner.data.network.services.solutions.BookingServiceService;
@@ -35,6 +36,10 @@ public class ApiClient {
 
     public static OrganizerService getOrganizerService(){
         return getClient().create(OrganizerService.class);
+    }
+
+    public static ReportUserService getReportUserService(){
+        return getClient().create(ReportUserService.class);
     }
 
 }
