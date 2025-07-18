@@ -20,7 +20,7 @@
             android:textColor="#523D35"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:fontFamily="@font/petrona" />
+            android:fontFamily="sans-serif" />
 
         <ImageButton
             android:id="@+id/mute_button"
@@ -36,5 +36,11 @@
         android:id="@+id/notification_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:clipToPadding="false"
+        android:background="@android:color/white" />
 </LinearLayout>
