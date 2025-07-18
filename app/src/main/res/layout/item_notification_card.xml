@@ -1,17 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/notification_card"
+android:id="@+id/notification_card"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:background="@drawable/bg_notification_card"
+android:padding="16dp">
+
+<TextView
+    android:id="@+id/notification_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="12dp"
-    android:layout_margin="8dp"
-    android:elevation="2dp">
-
-    <TextView
-        android:id="@+id/notification_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#523D35"
-        android:textSize="14sp"
-        android:fontFamily="sans-serif" />
+    android:textColor="#523D35"
+    android:textSize="14sp"
+    android:fontFamily="sans-serif" />
 </LinearLayout>

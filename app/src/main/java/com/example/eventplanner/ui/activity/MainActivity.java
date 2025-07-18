@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.ui.fragment.AdminCommentsFragment;
+import com.example.eventplanner.ui.fragment.AllBookingsFragment;
+import com.example.eventplanner.ui.fragment.BookingServiceRequestFragment;
 import com.example.eventplanner.ui.fragment.HomeFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
@@ -136,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
             }else if(id == R.id.nav_my_services){
                 return true;
             }else if(id == R.id.nav_all_bookings){
-                return true;
+                selectedFragment = new AllBookingsFragment();
             }else if(id == R.id.nav_booking_requests){
-                return true;
+                selectedFragment = new BookingServiceRequestFragment();
             }else if(id == R.id.nav_price_list){
                 return true;
             }else if(id == R.id.nav_logout){
