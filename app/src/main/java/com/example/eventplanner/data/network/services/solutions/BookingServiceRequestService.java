@@ -18,4 +18,8 @@ public interface BookingServiceRequestService {
 
     @PUT("api/bookings/delete")
     Call<Void> deleteRequest(@Body Map<String, Object> body);
+
+    @GET("api/bookings/all")
+    Call<List<BookingServiceRequestModel>> getAllBookings();
+
 }
