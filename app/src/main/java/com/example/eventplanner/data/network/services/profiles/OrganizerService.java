@@ -1,0 +1,11 @@
+package com.example.eventplanner.data.network.services.profiles;
+import com.example.eventplanner.data.model.OrganizerModel;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+
+public interface OrganizerService {
+    @GET("api/organizers/{id}")
+    Call<OrganizerModel> getOrganizerById(@Path("id") int id);
+}

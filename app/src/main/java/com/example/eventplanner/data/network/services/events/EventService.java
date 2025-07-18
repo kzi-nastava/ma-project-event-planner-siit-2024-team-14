@@ -11,4 +11,7 @@ import retrofit2.http.Path;
 public interface EventService {
     @GET("api/events/by-organizer/{organizerId}")
     Call<List<EventModel>> getEventsByOrganizer(@Path("organizerId") int organizerId);
+
+    @GET("api/events/{id}")
+    Call<EventModel> getEventById(@Path("id") int id);
 }
