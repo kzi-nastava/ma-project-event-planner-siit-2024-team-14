@@ -88,7 +88,18 @@ public class HomeFragment extends Fragment {
         recyclerViewOurEvents.setLayoutManager(gridLayoutManager);
         recyclerViewOurEvents.setHasFixedSize(true);
         adapter = new OurEventsAdapter(requireContext(), new ArrayList<>(), event -> {
-            // TODO: Detalji događaja za klik na Our Events karticu
+            int eventId = event.optInt("id");
+                EventDetailsFragment fragment = new EventDetailsFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("eventId", eventId);
+                fragment.setArguments(bundle);
+
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.home_page_fragment, fragment)
+                        .addToBackStack(null)
+                        .commit();
         });
         recyclerViewOurEvents.setAdapter(adapter);
 
@@ -155,7 +166,17 @@ public class HomeFragment extends Fragment {
                             .addToBackStack(null)
                             .commit();
                 } else {
-                    // todo fragment for product
+                    ProductDetailsFragment fragment = new ProductDetailsFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("solutionId", solutionId);
+                    fragment.setArguments(bundle);
+
+                    requireActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.home_page_fragment, fragment)
+                            .addToBackStack(null)
+                            .commit();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -229,7 +250,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void populateHottestCards(JSONArray events) {
-        cardContainer.removeAllViews();  // obriši prethodne ako ih ima
+        cardContainer.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(getContext());
 
         for (int i = 0; i < events.length(); i++) {
@@ -310,7 +331,19 @@ public class HomeFragment extends Fragment {
                     .into(eventImage);
 
             viewMore.setOnClickListener(v -> {
-                // TODO: Otvori detalje događaja
+                int eventId = obj.optInt("id");
+                EventDetailsFragment fragment = new EventDetailsFragment();
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("eventId", eventId);
+                fragment.setArguments(bundle);
+
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.home_page_fragment, fragment)
+                        .addToBackStack(null)
+                        .commit();
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -506,9 +539,18 @@ public class HomeFragment extends Fragment {
                             .commit();
 
                 }else {
-                    Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
-                    intent.putExtra("solutionId", solutionId);
-                    startActivity(intent);
+                    ProductDetailsFragment fragment = new ProductDetailsFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("solutionId", solutionId);
+                    fragment.setArguments(bundle);
+
+                    requireActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.home_page_fragment, fragment)
+                            .addToBackStack(null)
+                            .commit();
                 }
             });
 
