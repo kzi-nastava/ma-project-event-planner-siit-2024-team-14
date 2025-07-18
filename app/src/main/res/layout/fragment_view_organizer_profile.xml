@@ -60,13 +60,15 @@
                 android:text="Report User"
                 android:layout_marginEnd="8dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:backgroundTint="#523D35"/>
 
             <Button
                 android:id="@+id/chat_button"
                 android:text="Chat"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:backgroundTint="#523D35"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
