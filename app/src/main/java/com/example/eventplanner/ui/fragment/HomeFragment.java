@@ -167,8 +167,10 @@ public class HomeFragment extends Fragment {
                             .commit();
                 } else {
                     ProductDetailsFragment fragment = new ProductDetailsFragment();
+                    int productId = solution.optInt("id");
+
                     Bundle bundle = new Bundle();
-                    bundle.putInt("solutionId", solutionId);
+                    bundle.putInt("productId", productId);
                     fragment.setArguments(bundle);
 
                     requireActivity()
@@ -540,9 +542,10 @@ public class HomeFragment extends Fragment {
 
                 }else {
                     ProductDetailsFragment fragment = new ProductDetailsFragment();
+                    int productId = obj.optInt("id");
 
                     Bundle bundle = new Bundle();
-                    bundle.putInt("solutionId", solutionId);
+                    bundle.putInt("productId", productId);
                     fragment.setArguments(bundle);
 
                     requireActivity()

@@ -1,36 +1,30 @@
 package com.example.eventplanner.ui.fragment;
-import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.*;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.example.eventplanner.data.model.ReportModel;
-import com.example.eventplanner.data.model.UserDTO;
-import com.example.eventplanner.data.network.ApiClient;
+import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.OrganizerModel;
-import com.example.eventplanner.data.network.services.profiles.OrganizerService;
-
+import com.example.eventplanner.data.model.ProviderModel;
+import com.example.eventplanner.data.model.ReportModel;
+import com.example.eventplanner.data.network.ApiClient;
+import com.example.eventplanner.data.network.services.profiles.ProviderService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewOrganizerProfileFragment extends Fragment {
+public class ViewProviderProfileFragment extends Fragment {
 
     private ImageView profileImage;
-    private TextView fullNameText, emailText, addressText, cityText, phoneText;
+    private TextView companyNameText, emailText, descriptionText, addressText, cityText, phoneText;
     private Button reportButton, chatButton;
-    private OrganizerModel profileUser;
-    private int organizerId;
+    private ProviderModel profileUser;
+    private int providerId;
     String baseUrl = "http://10.0.2.2:8080/";
 
     @Nullable
@@ -38,34 +32,35 @@ public class ViewOrganizerProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_view_organizer_profile, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_view_provider_profile, container, false);
 
         profileImage = view.findViewById(R.id.profile_image);
-        fullNameText = view.findViewById(R.id.full_name);
+        companyNameText = view.findViewById(R.id.company_name);
         emailText = view.findViewById(R.id.email);
+        descriptionText = view.findViewById(R.id.description);
         addressText = view.findViewById(R.id.address);
         cityText = view.findViewById(R.id.city);
         phoneText = view.findViewById(R.id.phone_number);
         reportButton = view.findViewById(R.id.report_button);
         chatButton = view.findViewById(R.id.chat_button);
 
+        // Sakrij dugme ako nije ulogovan korisnik
         SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", 0);
         int loggedUserId = prefs.getInt("userId", -1);
-
         if (loggedUserId == -1) {
             reportButton.setVisibility(View.GONE);
         } else {
             reportButton.setVisibility(View.VISIBLE);
         }
 
-
         Bundle args = getArguments();
         if (args != null) {
-            organizerId = args.getInt("organizerId", -1);
+            providerId = args.getInt("providerId", -1);
         }
 
-        if (organizerId != -1) {
-            fetchOrganizerData();
+        if (providerId != -1) {
+            fetchProviderData();
         }
 
         reportButton.setOnClickListener(v -> {
@@ -80,29 +75,28 @@ public class ViewOrganizerProfileFragment extends Fragment {
         return view;
     }
 
-    private void fetchOrganizerData() {
-
-
-        OrganizerService service = ApiClient.getOrganizerService();
-        service.getOrganizerById(organizerId).enqueue(new Callback<OrganizerModel>() {
+    private void fetchProviderData() {
+        ProviderService service = ApiClient.getProviderService();
+        service.getProviderById(providerId).enqueue(new Callback<ProviderModel>() {
             @Override
-            public void onResponse(Call<OrganizerModel> call, Response<OrganizerModel> response) {
+            public void onResponse(Call<ProviderModel> call, Response<ProviderModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    OrganizerModel user = response.body();
+                    ProviderModel user = response.body();
                     bindData(user);
                 }
             }
 
             @Override
-            public void onFailure(Call<OrganizerModel> call, Throwable t) {
-                Toast.makeText(requireContext(), "Failed to load organizer", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<ProviderModel> call, Throwable t) {
+                Toast.makeText(requireContext(), "Failed to load provider", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void bindData(OrganizerModel user) {
-        fullNameText.setText(user.getName() + " " + user.getSurname());
+    private void bindData(ProviderModel user) {
+        companyNameText.setText(user.getCompanyName());
         emailText.setText("Email: " + (user.getEmail() != null ? user.getEmail() : "No email"));
+        descriptionText.setText("Description: " + (user.getDescription() != null ? user.getDescription() : "No description"));
         addressText.setText("Address: " + (user.getAddress() != null ? user.getAddress() : "No address"));
         cityText.setText("City: " + (user.getCity() != null ? user.getCity() : "No city"));
         phoneText.setText("Phone: " + (user.getPhoneNumber() != null ? user.getPhoneNumber() : "No phone"));
@@ -114,18 +108,10 @@ public class ViewOrganizerProfileFragment extends Fragment {
                     .into(profileImage);
         }
 
-        profileUser = new OrganizerModel();
-        profileUser.setId(user.getId());
-        profileUser.setName(user.getName());
-        profileUser.setSurname(user.getSurname());
-        profileUser.setEmail(user.getEmail());
-        profileUser.setAddress(user.getAddress());
-        profileUser.setCity(user.getCity());
-        profileUser.setPhoneNumber(user.getPhoneNumber());
-
+        profileUser = user;
     }
 
-    private void showReportUserDialog(OrganizerModel reportedUser) {
+    private void showReportUserDialog(ProviderModel reportedUser) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_report_user, null);
         builder.setView(dialogView);
@@ -134,14 +120,12 @@ public class ViewOrganizerProfileFragment extends Fragment {
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.show();
 
-        TextView title = dialogView.findViewById(R.id.report_title);
         TextView reportingUser = dialogView.findViewById(R.id.reporting_user);
         EditText reasonEditText = dialogView.findViewById(R.id.report_reason);
         Button submitButton = dialogView.findViewById(R.id.submit_report);
         Button cancelButton = dialogView.findViewById(R.id.cancel_report);
 
-        String fullName = reportedUser.getName() + " " + reportedUser.getSurname();
-        reportingUser.setText("Reporting: " + fullName);
+        reportingUser.setText("Reporting: " + reportedUser.getCompanyName());
 
         submitButton.setOnClickListener(v -> {
             String reason = reasonEditText.getText().toString().trim();
@@ -151,8 +135,8 @@ public class ViewOrganizerProfileFragment extends Fragment {
             }
 
             SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", 0);
-            Integer senderId = prefs.getInt("userId", -1);
-            Integer reportedId = reportedUser.getId();
+            int senderId = prefs.getInt("userId", -1);
+            int reportedId = reportedUser.getId();
 
             ReportModel report = new ReportModel(senderId, reportedId, reason);
             submitReport(report);
@@ -179,6 +163,4 @@ public class ViewOrganizerProfileFragment extends Fragment {
             }
         });
     }
-
-
 }

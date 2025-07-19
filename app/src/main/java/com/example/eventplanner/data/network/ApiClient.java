@@ -1,8 +1,11 @@
 package com.example.eventplanner.data.network;
 
+import com.example.eventplanner.data.network.reports.ReportUserService;
 import com.example.eventplanner.data.network.services.events.EventService;
 import com.example.eventplanner.data.network.services.profiles.OrganizerService;
+import com.example.eventplanner.data.network.services.profiles.ProviderService;
 import com.example.eventplanner.data.network.services.solutions.BookingServiceService;
+import com.example.eventplanner.data.network.services.solutions.ProductService;
 import com.example.eventplanner.data.network.services.solutions.ServicesService;
 
 import retrofit2.Retrofit;
@@ -25,6 +28,10 @@ public class ApiClient {
         return getClient().create(ServicesService.class);
     }
 
+    public static ProductService getProductApi() {
+        return getClient().create(ProductService.class);
+    }
+
     public static BookingServiceService getBookingServiceApi() {
         return getClient().create(BookingServiceService.class);
     }
@@ -35,6 +42,14 @@ public class ApiClient {
 
     public static OrganizerService getOrganizerService(){
         return getClient().create(OrganizerService.class);
+    }
+
+    public static ProviderService getProviderService(){
+        return getClient().create(ProviderService.class);
+    }
+
+    public static ReportUserService getReportUserService(){
+        return getClient().create(ReportUserService.class);
     }
 
 }

@@ -26,7 +26,7 @@ public class ServiceModel extends OfferingModel {
     private int reservationPeriodInDays;
     private int cancellationPeriodInDays;
 
-    private Object provider;
+    private ProviderModel provider;
     private int providerId;
 
     public int getId() {
@@ -181,11 +181,11 @@ public class ServiceModel extends OfferingModel {
         this.cancellationPeriodInDays = cancellationPeriodInDays;
     }
 
-    public Object getProvider() {
+    public ProviderModel getProvider() {
         return provider;
     }
 
-    public void setProvider(Object provider) {
+    public void setProvider(ProviderModel provider) {
         this.provider = provider;
     }
 
