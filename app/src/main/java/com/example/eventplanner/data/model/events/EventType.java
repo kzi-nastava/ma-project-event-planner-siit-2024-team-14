@@ -1,13 +1,15 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.events;
 
-public class Category extends BaseEntityModel {
-    private String name, description;
+import com.example.eventplanner.data.model.BaseEntityModel;
+
+public class EventType extends BaseEntityModel {
+    String name, description;
 
     //region Constructors
 
-    public Category() { super(); }
+    public EventType() { super(); }
 
-    public Category(int id, String name, String description) {
+    public EventType(int id, String name, String description) {
         super(id);
         this.name = name;
         this.description = description;
