@@ -58,6 +58,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/provider_company_name"
+            android:text="Provider Company"
+            android:textSize="16sp"
+            android:textColor="#523D35"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true" />
+
+
         <Button
             android:id="@+id/book_service_button"
             android:text="Book Service"
