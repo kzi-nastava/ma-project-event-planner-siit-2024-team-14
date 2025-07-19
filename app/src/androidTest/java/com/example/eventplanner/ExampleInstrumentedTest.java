@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 import com.example.eventplanner.data.model.Category;
 import com.example.eventplanner.data.network.ClientUtils;
-import com.example.eventplanner.data.network.services.offerings.categories.CategoryService;
+import com.example.eventplanner.data.network.services.solutions.CategoryService;
 
 import java.io.IOException;
 import java.util.Collection;

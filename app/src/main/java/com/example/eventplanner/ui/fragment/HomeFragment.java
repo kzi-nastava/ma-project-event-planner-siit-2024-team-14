@@ -3,7 +3,6 @@ package com.example.eventplanner.ui.fragment;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,9 +32,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
-import com.example.eventplanner.ui.activity.ProductDetailsActivity;
 import com.example.eventplanner.ui.adapter.OurEventsAdapter;
 import com.example.eventplanner.ui.adapter.OurSolutionAdapter;
+import com.example.eventplanner.ui.fragment.solutions.SolutionDetailsFragment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -152,32 +151,8 @@ public class HomeFragment extends Fragment {
             try {
                 String solutionType = solution.optString("solutionType");
                 int solutionId = solution.optInt("id");
-
-                if ("Service".equalsIgnoreCase(solutionType)) {
-                    ServiceDetailsFragment fragment = new ServiceDetailsFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("solutionId", solutionId);
-                    fragment.setArguments(bundle);
-
-                    requireActivity()
-                            .getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.home_page_fragment, fragment)
-                            .addToBackStack(null)
-                            .commit();
-                } else {
-                    ProductDetailsFragment fragment = new ProductDetailsFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("solutionId", solutionId);
-                    fragment.setArguments(bundle);
-
-                    requireActivity()
-                            .getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.home_page_fragment, fragment)
-                            .addToBackStack(null)
-                            .commit();
-                }
+                Fragment detailsFragment = SolutionDetailsFragment.newInstance(solutionId, solutionType);
+                FragmentTransition.to(detailsFragment, requireActivity(), R.id.home_page_fragment, true);
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(requireContext(), "Failed to open details", Toast.LENGTH_SHORT).show();
@@ -524,34 +499,8 @@ public class HomeFragment extends Fragment {
                 String solutionType = obj.optString("solutionType");
                 int solutionId = obj.optInt("id");
 
-                if ("Service".equalsIgnoreCase(solutionType)) {
-                    ServiceDetailsFragment fragment = new ServiceDetailsFragment();
-
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("solutionId", solutionId);
-                    fragment.setArguments(bundle);
-
-                    requireActivity()
-                            .getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.home_page_fragment, fragment)
-                            .addToBackStack(null)
-                            .commit();
-
-                }else {
-                    ProductDetailsFragment fragment = new ProductDetailsFragment();
-
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("solutionId", solutionId);
-                    fragment.setArguments(bundle);
-
-                    requireActivity()
-                            .getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.home_page_fragment, fragment)
-                            .addToBackStack(null)
-                            .commit();
-                }
+                Fragment detailsFragment = SolutionDetailsFragment.newInstance(solutionId, solutionType);
+                FragmentTransition.to(detailsFragment, requireActivity(), R.id.home_page_fragment, true);
             });
 
 

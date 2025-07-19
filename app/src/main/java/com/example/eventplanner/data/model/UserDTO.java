@@ -1,6 +1,8 @@
 package com.example.eventplanner.data.model;
 
 public class UserDTO {
+    public static final String ROLE_ORGANIZER = "EventOrganizer", ROLE_PROVIDER = "ServiceAndProductProvider", ROLE_ADMIN = "ADMIN", ROLE_USER = "User";
+
     private Integer id;
     private String email;
     private String password;

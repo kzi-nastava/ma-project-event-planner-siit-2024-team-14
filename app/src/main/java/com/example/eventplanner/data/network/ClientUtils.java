@@ -6,7 +6,6 @@ import com.example.eventplanner.data.network.auth.AuthInterceptor;
 import com.example.eventplanner.data.network.auth.AuthService;
 import com.example.eventplanner.data.network.auth.TokenStore;
 import com.example.eventplanner.data.network.services.events.*;
-import com.example.eventplanner.data.network.services.offerings.categories.*;
 import com.example.eventplanner.data.network.services.solutions.*;
 import com.example.eventplanner.data.network.services.user.*;
 
@@ -63,6 +62,7 @@ public class ClientUtils {
     public static CategoryService categoryService = retrofit.create(CategoryService.class);
     public static BookingServiceService bookingServiceService = retrofit.create(BookingServiceService.class);
     public static ServiceService serviceService = retrofit.create(ServiceService.class);
+    public static ProductService productService = retrofit.create(ProductService.class);
     // ...
 
 }
