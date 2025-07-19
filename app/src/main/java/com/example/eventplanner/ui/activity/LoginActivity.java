@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.eventplanner.data.model.LoginDTO;
 import com.example.eventplanner.data.model.LoginResponseDTO;
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.user.UserService;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
 import com.example.eventplanner.R;
@@ -81,38 +82,37 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String email, String password) {
         LoginDTO loginDTO = new LoginDTO(email, password);
-        Call<LoginResponseDTO> call = apiService.login(loginDTO);
+        ClientUtils.authService.login(loginDTO,
+                new Callback<LoginResponseDTO>() {
+                    @Override
+                    public void onResponse(Call<LoginResponseDTO> call, Response<LoginResponseDTO> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            LoginResponseDTO loginResponse = response.body();
+                            if (loginResponse.isSuccess()) {
+                                saveUserData(loginResponse);
+                                Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
 
-        call.enqueue(new Callback<LoginResponseDTO>() {
-            @Override
-            public void onResponse(Call<LoginResponseDTO> call, Response<LoginResponseDTO> response) {
-                if(response.isSuccessful() && response.body() != null) {
-                    LoginResponseDTO loginResponse = response.body();
-                    if(loginResponse.isSuccess()) {
-                        saveUserData(loginResponse);
-                        Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
+                                finish();
 
-                        finish();
-
-                        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-                        prefs.edit().putString("auth_token", loginResponse.getToken()).apply();
+                                SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                                prefs.edit().putString("auth_token", loginResponse.getToken()).apply();
 
 
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Login failed: " + loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Login failed: " + loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Login error: " + response.message(), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login error: " + response.message(), Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<LoginResponseDTO> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onFailure(Call<LoginResponseDTO> call, Throwable t) {
+                        Toast.makeText(LoginActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void saveUserData(LoginResponseDTO loginResponse) {
