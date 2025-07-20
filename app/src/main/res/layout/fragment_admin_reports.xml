@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="User Reports"
+        android:fontFamily="@font/petrona"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
@@ -35,13 +36,13 @@
         android:paddingBottom="8dp"
         android:scrollbars="vertical" />
 
-    <!-- Tekst koji se prikazuje ako nema prijava -->
     <TextView
         android:id="@+id/emptyTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="There are currently no user reports."
         android:textColor="#FFFFFF"
+        android:fontFamily="@font/petrona"
         android:textSize="16sp"
         android:gravity="center"
         android:visibility="gone"
