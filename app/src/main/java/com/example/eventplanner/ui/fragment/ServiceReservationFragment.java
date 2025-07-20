@@ -22,10 +22,10 @@ import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.solutions.services.BookingServiceModel;
 import com.example.eventplanner.data.model.events.EventModel;
 import com.example.eventplanner.data.model.solutions.services.ServiceModel;
-import com.example.eventplanner.data.network.ApiClient;
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.events.EventService;
 import com.example.eventplanner.data.network.services.solutions.BookingServiceService;
-import com.example.eventplanner.data.network.services.solutions.ServicesService;
+import com.example.eventplanner.data.network.services.solutions.ServiceService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -109,7 +109,7 @@ public class ServiceReservationFragment extends Fragment {
     }
 
     private void loadServiceDetails(int serviceId) {
-        ServicesService serviceApi = ApiClient.getServiceApi();
+        ServiceService serviceApi = ClientUtils.serviceService;
         serviceApi.getServiceById(serviceId).enqueue(new Callback<ServiceModel>() {
             @Override
             public void onResponse(Call<ServiceModel> call, Response<ServiceModel> response) {
@@ -131,7 +131,7 @@ public class ServiceReservationFragment extends Fragment {
     private void loadUserEvents() {
         int userId = requireActivity().getSharedPreferences("MyAppPrefs", 0).getInt("userId", -1);
 
-        EventService eventApi = ApiClient.getEventService();
+        EventService eventApi = ClientUtils.eventService;
         eventApi.getEventsByOrganizer(userId).enqueue(new Callback<List<EventModel>>() {
             @Override
             public void onResponse(Call<List<EventModel>> call, Response<List<EventModel>> response) {
@@ -310,7 +310,7 @@ public class ServiceReservationFragment extends Fragment {
             return;
         }
 
-        BookingServiceService bookingApi = ApiClient.getBookingServiceApi();
+        BookingServiceService bookingApi = ClientUtils.bookingServiceService;
         bookingApi.getAvailableStartTimes(serviceId, date, duration).enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -364,7 +364,7 @@ public class ServiceReservationFragment extends Fragment {
                 serviceDetails != null ? serviceDetails.getReservationType() : ""
         );
 
-        ApiClient.getBookingServiceApi()
+        ClientUtils.bookingServiceService
                 .reserveService(request)
                 .enqueue(new Callback<Void>() {
                     @Override

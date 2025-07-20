@@ -2,6 +2,7 @@ package com.example.eventplanner.data.network.services.solutions;
 
 import com.example.eventplanner.data.model.solutions.services.CreateService;
 import com.example.eventplanner.data.model.solutions.services.Service;
+import com.example.eventplanner.data.model.solutions.services.ServiceModel;
 import com.example.eventplanner.data.model.solutions.services.UpdateService;
 
 import java.util.List;
@@ -22,8 +23,8 @@ public interface ServiceService {
     @GET(BASE_URL)
     Call<List<Service>> getAll();
 
-    @GET(BASE_URL + "/{id}")
-    Call<Service> getById(@Path("id") int id);
+    @GET("api/services/{id}")
+    Call<ServiceModel> getServiceById(@Path("id") int id);
 
     @POST(BASE_URL)
     Call<Service> create(@Body CreateService service);

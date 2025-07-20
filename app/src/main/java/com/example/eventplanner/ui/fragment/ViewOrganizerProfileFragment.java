@@ -13,10 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.eventplanner.data.model.reports.ReportModel;
-import com.example.eventplanner.data.network.ApiClient;
 import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.users.OrganizerModel;
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.profiles.OrganizerService;
 
 import retrofit2.Call;
@@ -82,7 +82,7 @@ public class ViewOrganizerProfileFragment extends Fragment {
     private void fetchOrganizerData() {
 
 
-        OrganizerService service = ApiClient.getOrganizerService();
+        OrganizerService service = ClientUtils.organizerService;
         service.getOrganizerById(organizerId).enqueue(new Callback<OrganizerModel>() {
             @Override
             public void onResponse(Call<OrganizerModel> call, Response<OrganizerModel> response) {
@@ -162,7 +162,7 @@ public class ViewOrganizerProfileFragment extends Fragment {
     }
 
     private void submitReport(ReportModel report) {
-        ApiClient.getReportUserService().reportUser(report).enqueue(new Callback<Void>() {
+        ClientUtils.reportUserService.reportUser(report).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {

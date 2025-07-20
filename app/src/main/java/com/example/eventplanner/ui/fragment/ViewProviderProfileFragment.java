@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.users.ProviderModel;
 import com.example.eventplanner.data.model.reports.ReportModel;
-import com.example.eventplanner.data.network.ApiClient;
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.profiles.ProviderService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,7 +76,7 @@ public class ViewProviderProfileFragment extends Fragment {
     }
 
     private void fetchProviderData() {
-        ProviderService service = ApiClient.getProviderService();
+        ProviderService service = ClientUtils.providerService;
         service.getProviderById(providerId).enqueue(new Callback<ProviderModel>() {
             @Override
             public void onResponse(Call<ProviderModel> call, Response<ProviderModel> response) {
@@ -147,7 +147,7 @@ public class ViewProviderProfileFragment extends Fragment {
     }
 
     private void submitReport(ReportModel report) {
-        ApiClient.getReportUserService().reportUser(report).enqueue(new Callback<Void>() {
+        ClientUtils.reportUserService.reportUser(report).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {

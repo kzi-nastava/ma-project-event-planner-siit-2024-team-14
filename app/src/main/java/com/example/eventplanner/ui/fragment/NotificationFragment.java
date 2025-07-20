@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import com.example.eventplanner.data.network.ClientUtils;
 
 import androidx.annotation.*;
 import androidx.fragment.app.Fragment;
@@ -14,8 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.notifications.NotificationModel;
-import com.example.eventplanner.data.network.ApiClient;
-import com.example.eventplanner.data.network.services.notifications.NotificationApiClient;
 import com.example.eventplanner.data.network.services.notifications.NotificationService;
 import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.ui.adapter.NotificationAdapter;
@@ -51,7 +50,7 @@ public class NotificationFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        service = new NotificationService(ApiClient.getClient().create(NotificationApiClient.class));
+        service = ClientUtils.notificationService;
 
         loadMuteStatus();
         loadNotifications();

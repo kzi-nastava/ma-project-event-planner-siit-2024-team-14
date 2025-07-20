@@ -21,7 +21,7 @@ import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.events.EventTypeModel;
 import com.example.eventplanner.data.model.solutions.products.ProductModel;
 import com.example.eventplanner.data.model.users.ProviderModel;
-import com.example.eventplanner.data.network.ApiClient;
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.profiles.ProviderService;
 import com.example.eventplanner.data.network.services.solutions.ProductService;
 
@@ -88,7 +88,7 @@ public class ProductDetailsFragment extends Fragment {
     }
 
     private void loadProductDetails(int id) {
-        ProductService api = ApiClient.getClient().create(ProductService.class);
+        ProductService api = ClientUtils.productService;
         Call<ProductModel> call = api.getProductById(id);
 
         call.enqueue(new Callback<ProductModel>() {
@@ -180,7 +180,7 @@ public class ProductDetailsFragment extends Fragment {
     }
 
     private void fetchProvider(int providerId) {
-        ProviderService apiService = ApiClient.getProviderService();
+        ProviderService apiService = ClientUtils.providerService;
         Call<ProviderModel> call = apiService.getProviderById(providerId);
 
         call.enqueue(new Callback<ProviderModel>() {
