@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.ui.fragment.AdminCommentsFragment;
+import com.example.eventplanner.ui.fragment.AdminReportsFragment;
 import com.example.eventplanner.ui.fragment.AllBookingsFragment;
 import com.example.eventplanner.ui.fragment.BookingServiceRequestFragment;
 import com.example.eventplanner.ui.fragment.HomeFragment;
@@ -27,6 +28,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.Manifest;
+import android.widget.Toast;
+
 public class MainActivity extends AppCompatActivity {
 
     private NavigationView navigationView;
@@ -53,16 +56,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        int userId = prefs.getInt("userId", -1);
-        boolean isMuted = prefs.getBoolean("muted", false);
-
-        if (userId != -1 && !isMuted) {
-            NotificationWebSocketManager.connect(getApplicationContext(), userId, notification -> {
-                Log.d("WS-NOTIF", "New notification IZ MAINACTIVITY: " + notification.getMessage());
-
-            });
-        }
-
         navigationView = findViewById(R.id.navigation_view);
         navigationIcon = findViewById(R.id.navigation_icon);
 
@@ -77,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.settings) {
                 selectedFragment = new SettingsFragment();
             }
-
             if (selectedFragment != null) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.home_page_fragment, selectedFragment);
@@ -115,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.nav_event_types) {
                 // TODO: Otvori EventTypes fragment/activity
             } else if (id == R.id.nav_reports) {
-                // TODO: Otvori Reports fragment/activity
+                selectedFragment = new AdminReportsFragment();
             } else if (id == R.id.nav_logout) {
                 logoutUser();
                 return true;
@@ -142,8 +134,6 @@ public class MainActivity extends AppCompatActivity {
             }else if(id == R.id.nav_booking_requests){
                 selectedFragment = new BookingServiceRequestFragment();
             }else if(id == R.id.nav_price_list){
-                return true;
-            }else if(id == R.id.nav_logout){
                 return true;
             }
 
@@ -175,7 +165,14 @@ public class MainActivity extends AppCompatActivity {
         menu.clear();
 
         if (role == null) {
-            // Neulogovani korisnik - nema opcija ili možeš dodati samo login ako želiš
+            menu.add(Menu.NONE, R.id.home, Menu.NONE, "Home").setIcon(R.drawable.home);
+            menu.add(Menu.NONE, R.id.nav_login, Menu.NONE, "Log in");
+            menu.add(Menu.NONE, R.id.nav_register_organizer, Menu.NONE, "Register as event organizer");
+            menu.add(Menu.NONE, R.id.nav_register_provider, Menu.NONE, "Register as event product and service provider");
+
+
+
+
             return;
         }
 
@@ -224,14 +221,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logoutUser() {
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.clear();
-        editor.apply();
+        if (prefs != null) {
+            prefs.edit().clear().apply();
+        }
+        Toast.makeText(this, "Logged out!", Toast.LENGTH_SHORT).show();
+
+        NotificationWebSocketManager.disconnect();
 
         setupNavigationMenuByRole();
 
-        getSupportFragmentManager().beginTransaction()
+        getSupportFragmentManager()
+                .beginTransaction()
                 .replace(R.id.home_page_fragment, new HomeFragment())
                 .commit();
     }

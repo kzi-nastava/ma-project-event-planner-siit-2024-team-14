@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.eventplanner.data.model.LoginDTO;
 import com.example.eventplanner.data.model.LoginResponseDTO;
+import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.user.UserService;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
@@ -24,16 +25,12 @@ import com.google.gson.Gson;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
     private Button confirmButton;
     private TextView registerLink;
-
-    private UserService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +42,11 @@ public class LoginActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
         registerLink = findViewById(R.id.registerLink);
 
-        // Retrofit inicijalizacija
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080")  // localhost za emulator, promeni na pravi URL ako treba
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        apiService = retrofit.create(UserService.class);
-
         confirmButton.setOnClickListener(v -> {
             String email = emailEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
 
-            if(email.isEmpty() || password.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(LoginActivity.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -65,54 +54,70 @@ public class LoginActivity extends AppCompatActivity {
             loginUser(email, password);
         });
 
-        // Set an OnClickListener for the "Register here" text view
         registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Open the ProfileFragment
                 ProfileFragment profileFragment = new ProfileFragment();
-                // Begin the fragment transaction
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(android.R.id.content, profileFragment);  // Replace the current activity content with the fragment
-                transaction.addToBackStack(null);  // Add the transaction to the back stack
-                transaction.commit();  // Commit the transaction
+                transaction.replace(android.R.id.content, profileFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
     }
 
     private void loginUser(String email, String password) {
         LoginDTO loginDTO = new LoginDTO(email, password);
-        ClientUtils.authService.login(loginDTO,
-                new Callback<LoginResponseDTO>() {
-                    @Override
-                    public void onResponse(Call<LoginResponseDTO> call, Response<LoginResponseDTO> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            LoginResponseDTO loginResponse = response.body();
-                            if (loginResponse.isSuccess()) {
-                                saveUserData(loginResponse);
-                                Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
 
-                                finish();
+        ClientUtils.authService.login(loginDTO, new Callback<LoginResponseDTO>() {
+            @Override
+            public void onResponse(Call<LoginResponseDTO> call, Response<LoginResponseDTO> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    LoginResponseDTO loginResponse = response.body();
+                    if (loginResponse.isSuccess()) {
+                        saveUserData(loginResponse);
+                        Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
 
-                                SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-                                prefs.edit().putString("auth_token", loginResponse.getToken()).apply();
+                        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
 
+                        int userId = prefs.getInt("userId", -1);
+                        boolean isMuted = prefs.getBoolean("muted", false);
 
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Login failed: " + loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Login error: " + response.message(), Toast.LENGTH_SHORT).show();
+                        if (userId != -1 && !isMuted) {
+                            NotificationWebSocketManager.connect(getApplicationContext(), userId, notification -> {
+                                // Handle notification here if needed
+                            });
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<LoginResponseDTO> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        prefs.edit().putString("auth_token", loginResponse.getToken()).apply();
+
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Login failed: " + loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });
+                } else {
+                    try {
+                        if (response.errorBody() != null) {
+                            Gson gson = new Gson();
+                            LoginResponseDTO errorResponse = gson.fromJson(response.errorBody().charStream(), LoginResponseDTO.class);
+                            Toast.makeText(LoginActivity.this, "Login failed: " + errorResponse.getMessage(), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Login failed. Unknown error.", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(LoginActivity.this, "Login failed: Unexpected error", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponseDTO> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void saveUserData(LoginResponseDTO loginResponse) {
@@ -129,8 +134,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("role", loginResponse.getUser().getRole());
         editor.putBoolean("muted", loginResponse.getUser().getMuted());
 
-
         editor.apply();
     }
-
 }
