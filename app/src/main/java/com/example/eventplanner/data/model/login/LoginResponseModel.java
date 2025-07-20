@@ -1,15 +1,17 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.login;
 
-public class LoginResponseDTO {
+import com.example.eventplanner.data.model.users.UserModel;
+
+public class LoginResponseModel {
     private String token;
-    private UserDTO user;
+    private UserModel user;
     private String message;
     private boolean success;
 
-    public LoginResponseDTO() {
+    public LoginResponseModel() {
     }
 
-    public LoginResponseDTO(String token, UserDTO user, String message, boolean success) {
+    public LoginResponseModel(String token, UserModel user, String message, boolean success) {
         this.token = token;
         this.user = user;
         this.message = message;
@@ -24,11 +26,11 @@ public class LoginResponseDTO {
         this.token = token;
     }
 
-    public UserDTO getUser() {
+    public UserModel getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
 

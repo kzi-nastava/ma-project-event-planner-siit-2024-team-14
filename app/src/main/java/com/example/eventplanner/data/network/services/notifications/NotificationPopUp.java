@@ -9,12 +9,11 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.NotificationModel;
+import com.example.eventplanner.data.model.notifications.NotificationModel;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 
 public class NotificationPopUp {

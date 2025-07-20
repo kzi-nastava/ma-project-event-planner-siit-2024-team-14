@@ -1,4 +1,9 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.solutions.services;
+
+import com.example.eventplanner.data.model.Category;
+import com.example.eventplanner.data.model.events.EventTypeModel;
+import com.example.eventplanner.data.model.solutions.OfferingModel;
+import com.example.eventplanner.data.model.users.ProviderModel;
 
 import java.util.List;
 

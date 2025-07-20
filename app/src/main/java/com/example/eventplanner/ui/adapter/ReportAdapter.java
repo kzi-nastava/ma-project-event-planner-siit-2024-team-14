@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.ReportUserModel;
+import com.example.eventplanner.data.model.reports.ReportUserModel;
 import java.util.List;
 import java.util.function.Consumer;
 

@@ -1,6 +1,6 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.comments;
 
-public class CommentDTO {
+public class CommentModel {
     public Long id;
     public String commenterFirstName;
     public String commenterLastName;

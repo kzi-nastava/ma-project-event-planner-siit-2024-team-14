@@ -1,4 +1,4 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.notifications;
 
 public class NotificationModel {
     private Integer id;

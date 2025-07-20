@@ -1,6 +1,8 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.events;
 
-public class EventTypeModel extends BaseEntityModel{
+import com.example.eventplanner.data.model.BaseEntityModel;
+
+public class EventTypeModel extends BaseEntityModel {
     private String name;
     private String description;
 

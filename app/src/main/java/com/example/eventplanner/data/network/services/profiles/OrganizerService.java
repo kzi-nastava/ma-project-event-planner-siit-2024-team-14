@@ -1,5 +1,5 @@
 package com.example.eventplanner.data.network.services.profiles;
-import com.example.eventplanner.data.model.OrganizerModel;
+import com.example.eventplanner.data.model.users.OrganizerModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -1,13 +1,13 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.login;
 
-public class LoginDTO {
+public class LoginModel {
     private String email;
     private String password;
 
-    public LoginDTO() {
+    public LoginModel() {
     }
 
-    public LoginDTO(String email, String password) {
+    public LoginModel(String email, String password) {
         this.email = email;
         this.password = password;
     }

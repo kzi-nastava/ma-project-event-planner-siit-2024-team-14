@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.BookingServiceRequestModel;
+import com.example.eventplanner.data.model.solutions.services.BookingServiceRequestModel;
 import com.example.eventplanner.data.network.ApiClient;
 import com.example.eventplanner.data.network.services.solutions.BookingServiceRequestService;
 import com.example.eventplanner.ui.adapter.BookingServiceRequestAdapter;

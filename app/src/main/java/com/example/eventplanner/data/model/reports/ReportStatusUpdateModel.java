@@ -1,4 +1,4 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.reports;
 
 public class ReportStatusUpdateModel {
     private Integer reportId;

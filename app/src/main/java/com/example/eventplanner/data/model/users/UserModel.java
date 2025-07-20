@@ -1,6 +1,6 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.users;
 
-public class UserDTO {
+public class UserModel {
     private Integer id;
     private String email;
     private String password;
@@ -9,7 +9,7 @@ public class UserDTO {
 
     private boolean muted;
 
-    public UserDTO() {
+    public UserModel() {
     }
 
     public Integer getId() {

@@ -1,4 +1,4 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.users;
 
 public class ProviderModel {
     private int id;

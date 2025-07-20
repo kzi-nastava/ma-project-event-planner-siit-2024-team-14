@@ -1,12 +1,11 @@
 package com.example.eventplanner.ui.adapter;
 
-import android.util.Log;
 import android.view.*;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.NotificationModel;
+import com.example.eventplanner.data.model.notifications.NotificationModel;
 import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {

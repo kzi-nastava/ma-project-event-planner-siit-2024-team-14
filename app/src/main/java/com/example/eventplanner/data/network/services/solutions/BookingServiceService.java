@@ -1,6 +1,6 @@
 package com.example.eventplanner.data.network.services.solutions;
 
-import com.example.eventplanner.data.model.BookingServiceModel;
+import com.example.eventplanner.data.model.solutions.services.BookingServiceModel;
 
 import java.util.List;
 

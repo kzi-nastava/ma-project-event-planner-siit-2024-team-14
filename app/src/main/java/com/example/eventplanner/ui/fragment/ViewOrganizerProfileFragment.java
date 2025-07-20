@@ -12,12 +12,11 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.eventplanner.data.model.ReportModel;
-import com.example.eventplanner.data.model.UserDTO;
+import com.example.eventplanner.data.model.reports.ReportModel;
 import com.example.eventplanner.data.network.ApiClient;
 import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.OrganizerModel;
+import com.example.eventplanner.data.model.users.OrganizerModel;
 import com.example.eventplanner.data.network.services.profiles.OrganizerService;
 
 import retrofit2.Call;

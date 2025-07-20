@@ -1,7 +1,7 @@
 package com.example.eventplanner.data.network.reports;
 
-import com.example.eventplanner.data.model.ReportModel;
-import com.example.eventplanner.data.model.ReportUserModel;
+import com.example.eventplanner.data.model.reports.ReportModel;
+import com.example.eventplanner.data.model.reports.ReportUserModel;
 
 import java.util.List;
 

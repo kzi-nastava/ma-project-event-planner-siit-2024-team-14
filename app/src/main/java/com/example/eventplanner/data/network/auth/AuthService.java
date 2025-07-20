@@ -8,9 +8,9 @@ import androidx.annotation.Nullable;
 
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.eventplanner.data.model.LoginDTO;
-import com.example.eventplanner.data.model.LoginResponseDTO;
-import com.example.eventplanner.data.model.UserDTO;
+import com.example.eventplanner.data.model.login.LoginModel;
+import com.example.eventplanner.data.model.login.LoginResponseModel;
+import com.example.eventplanner.data.model.users.UserModel;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -41,10 +41,10 @@ public class AuthService {
 
 
     @Nullable
-    public UserDTO getUser() {
+    public UserModel getUser() {
         return Optional.ofNullable(getDecodedToken())
                 .map(jwt -> {
-                    UserDTO user = new UserDTO();
+                    UserModel user = new UserModel();
                     user.setId(jwt.getClaim(CLAIM_ID).asInt());
                     user.setEmail(jwt.getSubject());
                     user.setRole(jwt.getClaim(CLAIM_ROLE).asString());
@@ -55,12 +55,12 @@ public class AuthService {
     }
 
 
-    public void login(LoginDTO loginDTO, @Nullable Callback<LoginResponseDTO> callback) {
-        authApi.login(loginDTO).enqueue(new Callback<LoginResponseDTO>() {
+    public void login(LoginModel loginModel, @Nullable Callback<LoginResponseModel> callback) {
+        authApi.login(loginModel).enqueue(new Callback<LoginResponseModel>() {
             @Override
-            public void onResponse(@NonNull Call<LoginResponseDTO> call, @NonNull Response<LoginResponseDTO> response) {
+            public void onResponse(@NonNull Call<LoginResponseModel> call, @NonNull Response<LoginResponseModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    LoginResponseDTO responseDTO = response.body();
+                    LoginResponseModel responseDTO = response.body();
                     tokenStore.setToken(responseDTO.getToken());
                     Log.i(TAG, "Logged in as " + responseDTO.getUser().getEmail());
                 } else {
@@ -72,7 +72,7 @@ public class AuthService {
             }
 
             @Override
-            public void onFailure(@NonNull Call<LoginResponseDTO> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<LoginResponseModel> call, @NonNull Throwable t) {
                 Log.w(TAG, "Login failed: " + t.getMessage());
 
                 if (callback != null)
@@ -81,8 +81,8 @@ public class AuthService {
         });
     }
 
-    public void login(String email, String password, @Nullable Callback<LoginResponseDTO> callback) {
-        login(new LoginDTO(email, password), callback);
+    public void login(String email, String password, @Nullable Callback<LoginResponseModel> callback) {
+        login(new LoginModel(email, password), callback);
     }
 
     public void logout() {

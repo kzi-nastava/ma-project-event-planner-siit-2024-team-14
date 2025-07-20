@@ -1,10 +1,10 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.comments;
 
-public class CommentStatusUpdateDTO {
+public class CommentStatusUpdateModel {
     private Long commentId;
     private String status;
 
-    public CommentStatusUpdateDTO(Long commentId, String status) {
+    public CommentStatusUpdateModel(Long commentId, String status) {
         this.commentId = commentId;
         this.status = status;
     }

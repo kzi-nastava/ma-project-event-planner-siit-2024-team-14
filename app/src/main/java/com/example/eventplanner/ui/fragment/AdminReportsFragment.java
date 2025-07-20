@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.ReportUserModel;
+import com.example.eventplanner.data.model.reports.ReportUserModel;
 import com.example.eventplanner.data.network.ApiClient;
 import com.example.eventplanner.data.network.reports.ReportUserService;
 import com.example.eventplanner.ui.adapter.ReportAdapter;

@@ -1,6 +1,6 @@
 package com.example.eventplanner.data.network.services.solutions;
 
-import com.example.eventplanner.data.model.ProductModel;
+import com.example.eventplanner.data.model.solutions.products.ProductModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

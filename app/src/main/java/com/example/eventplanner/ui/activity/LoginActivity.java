@@ -3,7 +3,6 @@ package com.example.eventplanner.ui.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,11 +12,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.eventplanner.data.model.LoginDTO;
-import com.example.eventplanner.data.model.LoginResponseDTO;
+import com.example.eventplanner.data.model.login.LoginModel;
+import com.example.eventplanner.data.model.login.LoginResponseModel;
 import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.data.network.ClientUtils;
-import com.example.eventplanner.data.network.services.user.UserService;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
 import com.example.eventplanner.R;
 import com.google.gson.Gson;
@@ -67,13 +65,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
-        LoginDTO loginDTO = new LoginDTO(email, password);
+        LoginModel loginModel = new LoginModel(email, password);
 
-        ClientUtils.authService.login(loginDTO, new Callback<LoginResponseDTO>() {
+        ClientUtils.authService.login(loginModel, new Callback<LoginResponseModel>() {
             @Override
-            public void onResponse(Call<LoginResponseDTO> call, Response<LoginResponseDTO> response) {
+            public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    LoginResponseDTO loginResponse = response.body();
+                    LoginResponseModel loginResponse = response.body();
                     if (loginResponse.isSuccess()) {
                         saveUserData(loginResponse);
                         Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
@@ -101,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         if (response.errorBody() != null) {
                             Gson gson = new Gson();
-                            LoginResponseDTO errorResponse = gson.fromJson(response.errorBody().charStream(), LoginResponseDTO.class);
+                            LoginResponseModel errorResponse = gson.fromJson(response.errorBody().charStream(), LoginResponseModel.class);
                             Toast.makeText(LoginActivity.this, "Login failed: " + errorResponse.getMessage(), Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "Login failed. Unknown error.", Toast.LENGTH_LONG).show();
@@ -114,13 +112,13 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<LoginResponseDTO> call, Throwable t) {
+            public void onFailure(Call<LoginResponseModel> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void saveUserData(LoginResponseDTO loginResponse) {
+    private void saveUserData(LoginResponseModel loginResponse) {
         if (loginResponse == null || loginResponse.getUser() == null) return;
 
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);

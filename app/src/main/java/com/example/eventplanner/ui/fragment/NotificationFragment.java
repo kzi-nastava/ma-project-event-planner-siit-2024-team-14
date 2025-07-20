@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.NotificationModel;
+import com.example.eventplanner.data.model.notifications.NotificationModel;
 import com.example.eventplanner.data.network.ApiClient;
 import com.example.eventplanner.data.network.services.notifications.NotificationApiClient;
 import com.example.eventplanner.data.network.services.notifications.NotificationService;

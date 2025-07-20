@@ -1,6 +1,6 @@
 package com.example.eventplanner.data.network.services.notifications;
 
-import com.example.eventplanner.data.model.NotificationModel;
+import com.example.eventplanner.data.model.notifications.NotificationModel;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.*;

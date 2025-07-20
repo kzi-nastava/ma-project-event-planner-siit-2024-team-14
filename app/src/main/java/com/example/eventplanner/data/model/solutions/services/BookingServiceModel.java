@@ -1,4 +1,4 @@
-package com.example.eventplanner.data.model;
+package com.example.eventplanner.data.model.solutions.services;
 
 public class BookingServiceModel {
     private int serviceId;

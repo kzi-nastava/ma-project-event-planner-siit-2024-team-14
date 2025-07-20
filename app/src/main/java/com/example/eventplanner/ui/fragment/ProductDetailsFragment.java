@@ -18,9 +18,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.EventTypeModel;
-import com.example.eventplanner.data.model.ProductModel;
-import com.example.eventplanner.data.model.ProviderModel;
+import com.example.eventplanner.data.model.events.EventTypeModel;
+import com.example.eventplanner.data.model.solutions.products.ProductModel;
+import com.example.eventplanner.data.model.users.ProviderModel;
 import com.example.eventplanner.data.network.ApiClient;
 import com.example.eventplanner.data.network.services.profiles.ProviderService;
 import com.example.eventplanner.data.network.services.solutions.ProductService;
