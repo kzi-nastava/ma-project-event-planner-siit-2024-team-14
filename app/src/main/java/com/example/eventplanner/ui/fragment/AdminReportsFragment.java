@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.reports.ReportUserModel;
-import com.example.eventplanner.data.network.ApiClient;
-import com.example.eventplanner.data.network.reports.ReportUserService;
+import com.example.eventplanner.data.network.ClientUtils;
+import com.example.eventplanner.data.network.services.reports.ReportUserService;
 import com.example.eventplanner.ui.adapter.ReportAdapter;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class AdminReportsFragment extends Fragment {
         adapter = new ReportAdapter(new ArrayList<>(), this::approveReport, this::deleteReport);
         recyclerView.setAdapter(adapter);
 
-        reportService = ApiClient.getClient().create(ReportUserService.class);
+        reportService = ClientUtils.reportUserService;
         loadReports();
         return view;
     }

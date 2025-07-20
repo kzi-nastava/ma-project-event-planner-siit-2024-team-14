@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.solutions.services.BookingServiceRequestModel;
-import com.example.eventplanner.data.network.ApiClient;
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.solutions.BookingServiceRequestService;
 import com.example.eventplanner.ui.adapter.BookingServiceRequestAdapter;
 
@@ -38,7 +38,7 @@ public class BookingServiceRequestFragment extends Fragment {
         recyclerView = view.findViewById(R.id.booking_requests_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        api = ApiClient.getClient().create(BookingServiceRequestService.class);
+        api = ClientUtils.bookingServiceRequestService;
 
         adapter = new BookingServiceRequestAdapter(requestList, new BookingServiceRequestAdapter.OnActionClickListener() {
             @Override

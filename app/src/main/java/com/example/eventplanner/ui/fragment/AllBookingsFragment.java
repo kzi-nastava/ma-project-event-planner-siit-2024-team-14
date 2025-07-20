@@ -9,10 +9,9 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.solutions.services.BookingServiceRequestModel;
-import com.example.eventplanner.data.network.ApiClient;
 import com.example.eventplanner.data.network.services.solutions.BookingServiceRequestService;
 import com.example.eventplanner.ui.adapter.AllBookingsAdapter;
 
@@ -38,7 +37,7 @@ public class AllBookingsFragment extends Fragment {
         adapter = new AllBookingsAdapter(bookings);
         recyclerView.setAdapter(adapter);
 
-        api = ApiClient.getClient().create(BookingServiceRequestService.class);
+        api = ClientUtils.bookingServiceRequestService;
         loadAllBookings();
 
         return view;

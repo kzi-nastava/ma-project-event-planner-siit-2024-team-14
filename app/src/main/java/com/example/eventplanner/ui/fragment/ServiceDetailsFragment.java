@@ -19,8 +19,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.eventplanner.data.model.users.ProviderModel;
 import com.example.eventplanner.data.model.solutions.services.ServiceModel;
-import com.example.eventplanner.data.network.ApiClient;
 import com.example.eventplanner.R;
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.profiles.ProviderService;
 
 import retrofit2.Call;
@@ -96,7 +96,7 @@ public class ServiceDetailsFragment extends Fragment {
     private void fetchServiceDetails(int id) {
         progressBar.setVisibility(View.VISIBLE);
 
-        ApiClient.getServiceApi().getServiceById(id).enqueue(new Callback<ServiceModel>() {
+        ClientUtils.serviceService.getServiceById(id).enqueue(new Callback<ServiceModel>() {
             @Override
             public void onResponse(Call<ServiceModel> call, Response<ServiceModel> response) {
                 progressBar.setVisibility(View.GONE);
@@ -124,7 +124,7 @@ public class ServiceDetailsFragment extends Fragment {
         durationTextView.setText("Duration: " + service.getDurationInMinutes() + " min");
 
         // Pozivamo API da dobavimo providera po ID-ju
-        ProviderService apiService = ApiClient.getProviderService();
+        ProviderService apiService = ClientUtils.providerService;
         Call<ProviderModel> call = apiService.getProviderById(service.getProviderId());
 
         call.enqueue(new Callback<ProviderModel>() {

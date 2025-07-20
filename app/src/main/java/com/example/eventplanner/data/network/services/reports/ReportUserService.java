@@ -1,4 +1,4 @@
-package com.example.eventplanner.data.network.reports;
+package com.example.eventplanner.data.network.services.reports;
 
 import com.example.eventplanner.data.model.reports.ReportModel;
 import com.example.eventplanner.data.model.reports.ReportUserModel;

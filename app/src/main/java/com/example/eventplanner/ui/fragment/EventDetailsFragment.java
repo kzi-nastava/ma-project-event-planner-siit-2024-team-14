@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.events.EventModel;
-import com.example.eventplanner.data.network.ApiClient;
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.events.EventService;
 
 import retrofit2.Call;
@@ -57,7 +57,7 @@ public class EventDetailsFragment extends Fragment {
     }
 
     private void fetchEventDetails(int id) {
-        EventService eventApi = ApiClient.getEventService();
+        EventService eventApi = ClientUtils.eventService;
         eventApi.getEventById(id).enqueue(new Callback<EventModel>() {
             @Override
             public void onResponse(Call<EventModel> call, Response<EventModel> response) {
