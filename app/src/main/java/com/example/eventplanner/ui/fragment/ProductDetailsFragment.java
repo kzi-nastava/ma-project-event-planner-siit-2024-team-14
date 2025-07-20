@@ -148,7 +148,6 @@ public class ProductDetailsFragment extends Fragment {
             discountedPriceTextView.setVisibility(View.GONE);
         }
 
-        // Ovde pozivamo API da dobijemo providera po ID-ju
         fetchProvider(product.getProviderId());
 
         // Buttons visibility and listeners

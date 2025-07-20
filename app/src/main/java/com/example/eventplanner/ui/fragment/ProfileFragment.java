@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 
 import com.example.eventplanner.R;
+import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.ui.activity.RegistrationEoActivity;
 import com.example.eventplanner.ui.activity.RegistrationSppActivity;
 import com.example.eventplanner.ui.activity.LoginActivity;
@@ -56,6 +57,7 @@ public class ProfileFragment extends Fragment {
                 prefs.edit().remove("auth_token").apply();
                 Toast.makeText(getActivity(), "Logged out!", Toast.LENGTH_SHORT).show();
 
+                NotificationWebSocketManager.disconnect();
                 // Osveži fragment da se prikažu dugmad za login/registraciju
                 getParentFragmentManager()
                         .beginTransaction()

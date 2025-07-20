@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.eventplanner.data.model.LoginDTO;
 import com.example.eventplanner.data.model.LoginResponseDTO;
+import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.data.network.services.user.UserService;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
 import com.example.eventplanner.R;
@@ -91,22 +92,44 @@ public class LoginActivity extends AppCompatActivity {
                     if(loginResponse.isSuccess()) {
                         saveUserData(loginResponse);
                         Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+
+                        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+
+                        prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                        int userId = prefs.getInt("userId", -1);
+                        boolean isMuted = prefs.getBoolean("muted", false);
+
+                        if (userId != -1 && !isMuted) {
+                            NotificationWebSocketManager.connect(getApplicationContext(), userId, notification -> {
+                            });
+                        }
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
 
                         finish();
 
-                        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
                         prefs.edit().putString("auth_token", loginResponse.getToken()).apply();
 
 
                     } else {
-                        Toast.makeText(LoginActivity.this, "Login failed: " + loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login error: " + response.message(), Toast.LENGTH_SHORT).show();
-                }
+                        Toast.makeText(LoginActivity.this, "Login failed: " + loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    }}
+                    else {
+                        try {
+                            if (response.errorBody() != null) {
+                                Gson gson = new Gson();
+                                LoginResponseDTO errorResponse = gson.fromJson(response.errorBody().charStream(), LoginResponseDTO.class);
+                                Toast.makeText(LoginActivity.this, "Login failed: " + errorResponse.getMessage(), Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Login failed. Unknown error.", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(LoginActivity.this, "Login failed: Unexpected error", Toast.LENGTH_LONG).show();
+                        }
             }
+
+        }
 
             @Override
             public void onFailure(Call<LoginResponseDTO> call, Throwable t) {
