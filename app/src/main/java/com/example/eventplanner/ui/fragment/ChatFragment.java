@@ -1,5 +1,6 @@
 package com.example.eventplanner.ui.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -35,10 +36,27 @@ public class ChatFragment extends Fragment {
     private MessageAdapter messageAdapter;
     private ChatService messagingService;
 
-    private int currentUserId = 1; // ovo zameni stvarnim ulogovanim korisnikom
-    private int receiverId = 2; // zameni pravim primalcem
+    private int currentUserId;
+    private int receiverId;
 
     public ChatFragment() {}
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            receiverId = getArguments().getInt("receiverId", -1);
+        }
+    }
+
+    public static ChatFragment newInstance(int receiverId) {
+        ChatFragment fragment = new ChatFragment();
+        Bundle args = new Bundle();
+        args.putInt("receiverId", receiverId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Nullable
     @Override
@@ -49,6 +67,8 @@ public class ChatFragment extends Fragment {
     ) {
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
 
+        SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", 0);
+        currentUserId = prefs.getInt("userId", -1);
         recyclerView = view.findViewById(R.id.recyclerViewMessages);
         messageInput = view.findViewById(R.id.editTextMessage);
         sendButton = view.findViewById(R.id.buttonSend);

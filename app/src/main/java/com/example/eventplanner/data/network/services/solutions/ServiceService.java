@@ -23,7 +23,7 @@ public interface ServiceService {
     @GET(BASE_URL)
     Call<List<Service>> getAll();
 
-    @GET("api/services/{id}")
+    @GET("services/{id}")
     Call<ServiceModel> getServiceById(@Path("id") int id);
 
     @POST(BASE_URL)

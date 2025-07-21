@@ -10,16 +10,16 @@ import java.util.Map;
 
 public interface BookingServiceRequestService {
 
-    @GET("api/bookings/requests")
+    @GET("bookings/requests")
     Call<List<BookingServiceRequestModel>> getAllRequests();
 
-    @PUT("api/bookings/approve")
+    @PUT("bookings/approve")
     Call<Void> approveRequest(@Body Map<String, Object> body);
 
-    @PUT("api/bookings/delete")
+    @PUT("bookings/delete")
     Call<Void> deleteRequest(@Body Map<String, Object> body);
 
-    @GET("api/bookings/all")
+    @GET("bookings/all")
     Call<List<BookingServiceRequestModel>> getAllBookings();
 
 }
