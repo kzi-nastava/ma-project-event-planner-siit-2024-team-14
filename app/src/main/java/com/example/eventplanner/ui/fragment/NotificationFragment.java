@@ -7,20 +7,25 @@ import android.util.Log;
 import android.view.*;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import com.example.eventplanner.data.network.ClientUtils;
 
 import androidx.annotation.*;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.notifications.NotificationModel;
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.notifications.NotificationService;
 import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.ui.adapter.NotificationAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
-import retrofit2.*;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NotificationFragment extends Fragment {
 
@@ -42,9 +47,8 @@ public class NotificationFragment extends Fragment {
         recyclerView = view.findViewById(R.id.notification_list);
         muteButton = view.findViewById(R.id.mute_button);
 
-        SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", 0);
+        SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
         userId = prefs.getInt("userId", -1);
-
 
         adapter = new NotificationAdapter(new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -54,11 +58,13 @@ public class NotificationFragment extends Fragment {
 
         loadMuteStatus();
         loadNotifications();
+
         muteButton.setOnClickListener(v -> toggleMuteStatus());
     }
 
     private void loadNotifications() {
-        service.getNotifications(userId, new Callback<List<NotificationModel>>() {
+        Call<List<NotificationModel>> call = service.getNotifications(userId);
+        call.enqueue(new Callback<List<NotificationModel>>() {
             @Override
             public void onResponse(Call<List<NotificationModel>> call, Response<List<NotificationModel>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -74,7 +80,8 @@ public class NotificationFragment extends Fragment {
     }
 
     private void loadMuteStatus() {
-        service.getMuteStatus(userId, new Callback<Boolean>() {
+        Call<Boolean> call = service.getMuteStatus(userId);
+        call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -92,16 +99,18 @@ public class NotificationFragment extends Fragment {
 
     private void toggleMuteStatus() {
         boolean newState = !isMuted;
-        service.toggleMuteNotifications(userId, newState, new Callback<Void>() {
+        Call<Void> call = service.toggleMuteNotifications(userId, newState);
+        call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     isMuted = newState;
                     updateMuteIcon();
+
                     SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
                     prefs.edit().putBoolean("muted", newState).apply();
-                    Toast.makeText(getContext(), "Mute status changed", Toast.LENGTH_SHORT).show();
 
+                    Toast.makeText(getContext(), "Mute status changed", Toast.LENGTH_SHORT).show();
 
                     if (newState) {
                         NotificationWebSocketManager.disconnect();
@@ -111,10 +120,9 @@ public class NotificationFragment extends Fragment {
                             Log.d("MUTE_CHANGE", "Mute status changed to: false → CONNECT WebSocket");
                         });
                     }
-
                 } else {
-                Toast.makeText(getContext(), "Mute failed first: " + response.code(), Toast.LENGTH_SHORT).show();
-            }
+                    Toast.makeText(getContext(), "Mute failed first: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -122,12 +130,12 @@ public class NotificationFragment extends Fragment {
                 t.printStackTrace();
                 Toast.makeText(getContext(), "Mute failed second: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
-
         });
     }
 
     private void markAllAsRead() {
-        service.markAllAsRead(userId, new Callback<Void>() {
+        Call<Void> call = service.markAllAsRead(userId);
+        call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
@@ -136,7 +144,9 @@ public class NotificationFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {}
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
         });
     }
 
@@ -149,5 +159,4 @@ public class NotificationFragment extends Fragment {
         super.onStop();
         markAllAsRead();
     }
-
 }
