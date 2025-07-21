@@ -72,16 +72,18 @@ public class ViewOrganizerProfileFragment extends Fragment {
         });
 
         chatButton.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Chat clicked", Toast.LENGTH_SHORT).show();
-            // TODO: implement chat logic
+            ChatFragment chatFragment = ChatFragment.newInstance(organizerId);
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.home_page_fragment, chatFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
         return view;
     }
 
     private void fetchOrganizerData() {
-
-
         OrganizerService service = ClientUtils.organizerService;
         service.getOrganizerById(organizerId).enqueue(new Callback<OrganizerModel>() {
             @Override
