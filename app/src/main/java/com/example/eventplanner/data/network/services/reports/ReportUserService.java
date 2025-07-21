@@ -12,15 +12,15 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface ReportUserService {
-    @POST("api/reports")
+    @POST("reports")
     Call<Void> reportUser(@Body ReportModel report);
-    @GET("api/reports/pending")
+    @GET("reports/pending")
     Call<List<ReportUserModel>> getAllReports();
 
-    @PUT("api/reports/approve")
+    @PUT("reports/approve")
     Call<Void> approveReportStatus(@Body ReportActionBody body);
 
-    @PUT("api/reports/delete")
+    @PUT("reports/delete")
     Call<Void> deleteReportStatus(@Body ReportActionBody body);
 
     class ReportActionBody {

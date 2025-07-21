@@ -11,12 +11,12 @@ import retrofit2.http.GET;
 import retrofit2.http.PUT;
 
 public interface AdminCommentsService {
-    @GET("api/comments/pending")
+    @GET("comments/pending")
     Call<List<CommentModel>> getPendingComments();
 
-    @PUT("api/comments/approve")
+    @PUT("comments/approve")
     Call<Void> approveComment(@Body CommentStatusUpdateModel update);
 
-    @PUT("api/comments/delete")
+    @PUT("comments/delete")
     Call<Void> deleteComment(@Body CommentStatusUpdateModel update);
 }

@@ -6,6 +6,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface OrganizerService {
-    @GET("api/organizers/{id}")
+    @GET("organizers/{id}")
     Call<OrganizerModel> getOrganizerById(@Path("id") int id);
 }

@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface ProviderService {
-    @GET("api/providers/{id}")
+    @GET("providers/{id}")
     Call<ProviderModel> getProviderById(@Path("id") int id);
 }
