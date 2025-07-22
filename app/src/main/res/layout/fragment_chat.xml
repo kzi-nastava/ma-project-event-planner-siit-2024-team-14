@@ -3,30 +3,95 @@
     android:id="@+id/chat_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F9EDE9">
 
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/chat_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#E5C5B2"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/profile_placeholder"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_bg"
+            android:layout_marginEnd="12dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textName"
+                android:text="User Name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#523D35" />
+
+            <TextView
+                android:id="@+id/textRole"
+                android:text="Role"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#523D35" />
+
+            <TextView
+                android:id="@+id/textEmail"
+                android:text="user@email.com"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#523D35" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/buttonOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_more_vert"
+            android:background="@android:color/transparent" />
+    </LinearLayout>
+
+    <!-- Poruke -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMessages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:clipToPadding="false" />
 
+    <!-- Input -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="#F9EDE9">
 
         <EditText
             android:id="@+id/editTextMessage"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:hint="Type a message"
-            android:padding="8dp"
+            android:padding="10dp"
             android:background="@drawable/edittext_background"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:backgroundTint="#D4A89C"/>
 
         <ImageButton
             android:id="@+id/buttonSend"
