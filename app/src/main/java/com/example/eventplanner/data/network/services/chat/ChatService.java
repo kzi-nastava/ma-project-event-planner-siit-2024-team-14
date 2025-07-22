@@ -4,6 +4,7 @@ import com.example.eventplanner.data.model.chat.MessageModel;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -19,4 +20,12 @@ public interface ChatService {
 
     @POST("messages/send")
     Call<MessageModel> sendMessage(@Body MessageModel message);
+
+    @POST("chat/{senderId}/block/{receiverId}")
+    Call<ResponseBody> blockUser(
+            @Path("senderId") int senderId,
+            @Path("receiverId") int receiverId
+    );
+
+
 }

@@ -242,6 +242,10 @@ public class HomeFragment extends Fragment {
         String userCity = prefs.getString("userCity", "Novi Sad");
         String url = "http://10.0.2.2:8080/api/events/top5?city=" + userCity;
 
+        int userIdInt = prefs.getInt("userId", -1);
+        if (userIdInt != -1) {
+            url += "&userId=" + userIdInt;
+        }
         RequestQueue queue = Volley.newRequestQueue(requireContext());
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 this::populateHottestCards,
@@ -273,6 +277,11 @@ public class HomeFragment extends Fragment {
     private void fetchOurEvents() {
         String url = "http://10.0.2.2:8080/api/events/all";
 
+        SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        int userIdInt = prefs.getInt("userId", -1);
+        if (userIdInt != -1) {
+            url += "?userId=" + userIdInt;
+        }
         RequestQueue queue = Volley.newRequestQueue(requireContext());
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
@@ -378,6 +387,12 @@ public class HomeFragment extends Fragment {
             builder.appendQueryParameter("location", selectedLocation);
         }
 
+        SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        int userId = prefs.getInt("userId", -1);
+        if (userId != -1) {
+            builder.appendQueryParameter("userId", String.valueOf(userId));
+        }
+
         String finalUrl = builder.build().toString();
 
         RequestQueue queue = Volley.newRequestQueue(requireContext());
@@ -469,6 +484,11 @@ public class HomeFragment extends Fragment {
         String userCity = prefs.getString("userCity", "Novi Sad");
 
         String url = "http://10.0.2.2:8080/api/solutions/top5?city=" + userCity;
+
+        int userIdInt = prefs.getInt("userId", -1);
+        if (userIdInt != -1) {
+            url += "&userId=" + userIdInt;
+        }
 
         RequestQueue queue = Volley.newRequestQueue(requireContext());
 
@@ -566,6 +586,12 @@ public class HomeFragment extends Fragment {
     private void fetchAllSolutions() {
         String url = "http://10.0.2.2:8080/api/solutions/all";
 
+        SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        int userIdInt = prefs.getInt("userId", -1);
+        if (userIdInt != -1) {
+            url += "?userId=" + userIdInt;
+        }
+
         RequestQueue queue = Volley.newRequestQueue(requireContext());
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -623,6 +649,12 @@ public class HomeFragment extends Fragment {
         if (!type.equalsIgnoreCase("All types")) builder.appendQueryParameter("type", type);
         if (!minPrice.isEmpty()) builder.appendQueryParameter("minPrice", minPrice);
         if (!maxPrice.isEmpty()) builder.appendQueryParameter("maxPrice", maxPrice);
+
+        SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        int userId = prefs.getInt("userId", -1);
+        if (userId != -1) {
+            builder.appendQueryParameter("userId", String.valueOf(userId));
+        }
 
         String finalUrl = builder.build().toString();
 

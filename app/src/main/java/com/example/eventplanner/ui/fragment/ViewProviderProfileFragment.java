@@ -68,8 +68,12 @@ public class ViewProviderProfileFragment extends Fragment {
         });
 
         chatButton.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Chat clicked", Toast.LENGTH_SHORT).show();
-            // TODO: implement chat logic
+            ChatFragment chatFragment = ChatFragment.newInstance(providerId);
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.home_page_fragment, chatFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
         return view;
