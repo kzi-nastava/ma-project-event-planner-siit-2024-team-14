@@ -101,13 +101,13 @@ public class ChatFragment extends Fragment {
                             messageAdapter.setMessages(response.body());
                             recyclerView.scrollToPosition(messageAdapter.getItemCount() - 1);
                         } else {
-                            Toast.makeText(getContext(), "Neuspešno učitavanje poruka", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Failed to load messages", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<MessageModel>> call, Throwable t) {
-                        Toast.makeText(getContext(), "Greška: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -128,14 +128,14 @@ public class ChatFragment extends Fragment {
                     recyclerView.scrollToPosition(messageAdapter.getItemCount() - 1);
                     messageInput.setText("");
                 } else {
-                    Toast.makeText(getContext(), "Slanje poruke nije uspelo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Sending message failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<MessageModel> call, Throwable t) {
                 sendButton.setEnabled(true);
-                Toast.makeText(getContext(), "Greška: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -169,10 +169,8 @@ public class ChatFragment extends Fragment {
                     try {
                         String body = response.body().string().trim();
                         if ("Success".equals(body)) {
-                            Toast.makeText(requireActivity().getApplicationContext(), "Korisnik je uspešno blokiran", Toast.LENGTH_LONG).show();
+                            Toast.makeText(requireActivity().getApplicationContext(), "User has been successfully blocked", Toast.LENGTH_LONG).show();
 
-
-                            // Nakon kratkog čekanja promeni fragment
                             recyclerView.postDelayed(() -> {
                                 requireActivity()
                                         .getSupportFragmentManager()
@@ -182,20 +180,20 @@ public class ChatFragment extends Fragment {
                             }, 1200);
 
                         } else {
-                            Toast.makeText(requireContext(), "Blokiranje nije uspelo: " + body, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "Blocking failed: " + body, Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Toast.makeText(requireContext(), "Greška pri čitanju odgovora", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Error reading response", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Neuspešan odgovor servera", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Unsuccessful server response", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(requireContext(), "Greška pri blokiranju: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Blocking error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -203,12 +201,12 @@ public class ChatFragment extends Fragment {
 
 
     private void viewProfile() {
-        Toast.makeText(getContext(), "Kliknuto: View profile", Toast.LENGTH_SHORT).show();
-        // TODO: Dodaj navigaciju ka profilu
+        Toast.makeText(getContext(), "Clicked: View profile", Toast.LENGTH_SHORT).show();
+        // TODO: add profile page
     }
 
     private void deleteMessages() {
         messageAdapter.clearMessages();
-        Toast.makeText(getContext(), "Poruke su uklonjene (samo iz prikaza)", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Messages have been removed (only from the view)", Toast.LENGTH_SHORT).show();
     }
 }
