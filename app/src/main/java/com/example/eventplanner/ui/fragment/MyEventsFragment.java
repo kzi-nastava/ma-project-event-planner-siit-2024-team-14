@@ -52,7 +52,14 @@ public class MyEventsFragment extends Fragment {
 
         createEventButton = view.findViewById(R.id.btnCreateEvent);
         createEventButton.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Show Create Event popup (to be implemented)", Toast.LENGTH_SHORT).show();
+            CreateEventFragment createEventFragment = new CreateEventFragment();
+
+            // Ako si u Activity:
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.home_page_fragment, createEventFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
         eventService = ClientUtils.eventService;
@@ -85,4 +92,3 @@ public class MyEventsFragment extends Fragment {
         });
     }
 }
-
