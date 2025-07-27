@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -352,6 +353,29 @@ public class CreateEventFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Toast.makeText(requireContext(), "Event created successfully!", Toast.LENGTH_LONG).show();
                     clearForm();
+
+                    if ("CLOSED".equalsIgnoreCase(privacyType) && response.body() != null) {
+                        int eventId = response.body().getId();
+
+                        String guestNumberStr = etGuestNumber.getText().toString().trim();
+                        int maxGuests = 0;
+                        if (!guestNumberStr.isEmpty()) {
+                            try {
+                                maxGuests = Integer.parseInt(guestNumberStr);
+                            } catch (NumberFormatException e) {
+                                maxGuests = 0;
+                            }
+                        }
+
+                        InvitationFragment fragment = InvitationFragment.newInstance(eventId, maxGuests, null);
+
+                        getParentFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.home_page_fragment, fragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+
                 } else if (response.code() == 409) {
                     tvErrorMessage.setText("Event already exists.");
                 } else {
@@ -359,10 +383,15 @@ public class CreateEventFragment extends Fragment {
                 }
             }
 
+
             @Override
             public void onFailure(Call<CreateEventModel> call, Throwable t) {
                 tvErrorMessage.setText("Network error: " + t.getMessage());
+                Toast.makeText(requireContext(), "Failed to create event: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e("CreateEvent", "Error: ", t);
             }
+
+
         });
     }
 
