@@ -1,6 +1,7 @@
 package com.example.eventplanner.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,41 +86,54 @@ public class InvitationFragment extends Fragment {
 
     private void populateEmailFields() {
         emailListContainer.removeAllViews();
-
         LayoutInflater inflater = LayoutInflater.from(getContext());
 
-        // existing emails
+        // Prikaz existing mejlova kao readonly
         for (String email : existingEmails) {
             View item = inflater.inflate(R.layout.item_existing_email, emailListContainer, false);
             EditText input = item.findViewById(R.id.email_input);
             input.setText(email);
+            input.setEnabled(false); // make readonly
             emailListContainer.addView(item);
         }
 
-        // editable emails
+        // Editable mejlovi sa + i 🗑
         for (int i = 0; i < emails.size(); i++) {
             final int index = i;
             View item = inflater.inflate(R.layout.item_editable_email, emailListContainer, false);
+
             EditText input = item.findViewById(R.id.email_input);
             input.setText(emails.get(i));
 
             input.addTextChangedListener(new SimpleTextWatcher(s -> emails.set(index, s.toString())));
 
+            // Validate dugme
             item.findViewById(R.id.validate_btn).setOnClickListener(v -> validateEmail(index));
+
+            // Remove dugme
             item.findViewById(R.id.remove_btn).setOnClickListener(v -> {
                 emails.remove(index);
                 populateEmailFields();
             });
 
+            // Add dugme prikazi samo na poslednjem unosu i ako nismo premasili maxGuests
             if (i == emails.size() - 1 && totalCount() < maxGuests) {
                 item.findViewById(R.id.add_btn).setVisibility(View.VISIBLE);
                 item.findViewById(R.id.add_btn).setOnClickListener(v -> {
                     emails.add("");
                     populateEmailFields();
                 });
+            } else {
+                item.findViewById(R.id.add_btn).setVisibility(View.GONE);
             }
 
             emailListContainer.addView(item);
+        }
+
+        // Ako nema nijedno novo polje, a može da se doda, automatski dodaj prazno
+        if (emails.isEmpty() && totalCount() < maxGuests) {
+            emails.add("");
+            populateEmailFields();
         }
     }
 
@@ -160,7 +174,12 @@ public class InvitationFragment extends Fragment {
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Invitations sent successfully!", Toast.LENGTH_SHORT).show();
-                    requireActivity().onBackPressed();
+
+                    getParentFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.home_page_fragment, new HomeFragment())
+                            .commit();
+
                 } else {
                     Toast.makeText(getContext(), "Failed to send invitations: " + response.message(), Toast.LENGTH_SHORT).show();
                 }

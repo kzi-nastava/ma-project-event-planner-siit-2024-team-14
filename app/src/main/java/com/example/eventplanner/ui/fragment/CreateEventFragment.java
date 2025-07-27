@@ -352,7 +352,6 @@ public class CreateEventFragment extends Fragment {
             public void onResponse(Call<CreateEventModel> call, Response<CreateEventModel> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(requireContext(), "Event created successfully!", Toast.LENGTH_LONG).show();
-                    clearForm();
 
                     if ("CLOSED".equalsIgnoreCase(privacyType) && response.body() != null) {
                         int eventId = response.body().getId();
@@ -374,6 +373,8 @@ public class CreateEventFragment extends Fragment {
                                 .replace(R.id.home_page_fragment, fragment)
                                 .addToBackStack(null)
                                 .commit();
+
+                        clearForm();
                     }
 
                 } else if (response.code() == 409) {
