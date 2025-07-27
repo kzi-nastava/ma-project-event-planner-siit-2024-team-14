@@ -2,6 +2,7 @@ package com.example.eventplanner.ui.activity;
 
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import com.example.eventplanner.ui.fragment.AllInvitationsFragment;
 import com.example.eventplanner.ui.fragment.BookingServiceRequestFragment;
 import com.example.eventplanner.ui.fragment.HomeFragment;
 import com.example.eventplanner.ui.fragment.InvitationFragment;
+import com.example.eventplanner.ui.fragment.InvitationRegisterFragment;
 import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
@@ -32,6 +34,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.Manifest;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (getIntent() != null && getIntent().getData() != null) {
+            handleDeepLink(getIntent().getData());
+        }else if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.home_page_fragment, new HomeFragment())
+                    .commit();
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
@@ -153,11 +165,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.home_page_fragment, new HomeFragment())
-                    .commit();
-        }
+
     }
 
     private void setupNavigationMenuByRole() {
@@ -238,6 +246,40 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.home_page_fragment, new HomeFragment())
                 .commit();
     }
+
+    private void handleDeepLink(Uri data) {
+        String path = data.getPath(); // npr. "/invitation/login" ili "/invitation/register"
+        String email = data.getQueryParameter("email");
+        String eventIdStr = data.getQueryParameter("eventId");
+        long eventId = -1;
+        if (eventIdStr != null) {
+            try {
+                eventId = Long.parseLong(eventIdStr);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (path != null && email != null && eventId != -1) {
+            switch (path) {
+                case "/invitation/login":
+                    break;
+
+                case "/invitation/register":
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.home_page_fragment, InvitationRegisterFragment.newInstance(email, eventId))
+                            .addToBackStack(null)
+                            .commit();
+                    break;
+
+                default:
+                    // Nije relevantan deep link, možeš ignorisati ili pokazati home
+                    break;
+            }
+        }
+    }
+
 
     @Override
     protected void onDestroy() {
