@@ -1,5 +1,8 @@
 package com.example.eventplanner.ui.activity;
 
+import static android.app.PendingIntent.getActivity;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -17,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
+import com.example.eventplanner.ui.fragment.ActivationFragment;
 import com.example.eventplanner.ui.fragment.AdminCommentsFragment;
 import com.example.eventplanner.ui.fragment.AdminReportsFragment;
 import com.example.eventplanner.ui.fragment.AllBookingsFragment;
@@ -248,9 +252,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleDeepLink(Uri data) {
-        String path = data.getPath(); // npr. "/invitation/login" ili "/invitation/register"
+        String path = data.getPath(); // npr. "/invitation/login", "/invitation/register", "/activate"
         String email = data.getQueryParameter("email");
         String eventIdStr = data.getQueryParameter("eventId");
+        String token = data.getQueryParameter("token");
+        String role = data.getQueryParameter("role");
+
         long eventId = -1;
         if (eventIdStr != null) {
             try {
@@ -260,25 +267,38 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (path != null && email != null && eventId != -1) {
+        if (path != null) {
             switch (path) {
                 case "/invitation/login":
+                    startActivity(new Intent(this, LoginActivity.class));
                     break;
 
                 case "/invitation/register":
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.home_page_fragment, InvitationRegisterFragment.newInstance(email, eventId))
-                            .addToBackStack(null)
-                            .commit();
+                    if (email != null && eventId != -1) {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.home_page_fragment, InvitationRegisterFragment.newInstance(email, eventId))
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                    break;
+
+                case "/activate":
+                    if (token != null && role != null) {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.home_page_fragment, ActivationFragment.newInstance(token, role))
+                                .addToBackStack(null)
+                                .commit();
+                    }
                     break;
 
                 default:
-                    // Nije relevantan deep link, možeš ignorisati ili pokazati home
                     break;
             }
         }
     }
+
 
 
     @Override
