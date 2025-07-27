@@ -19,8 +19,10 @@ import com.example.eventplanner.data.network.services.notifications.Notification
 import com.example.eventplanner.ui.fragment.AdminCommentsFragment;
 import com.example.eventplanner.ui.fragment.AdminReportsFragment;
 import com.example.eventplanner.ui.fragment.AllBookingsFragment;
+import com.example.eventplanner.ui.fragment.AllInvitationsFragment;
 import com.example.eventplanner.ui.fragment.BookingServiceRequestFragment;
 import com.example.eventplanner.ui.fragment.HomeFragment;
+import com.example.eventplanner.ui.fragment.InvitationFragment;
 import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }else if(id == R.id.nav_calendar){
                 return true;
             }else if(id == R.id.nav_invitations){
-                return true;
+                selectedFragment = new AllInvitationsFragment();
             }else if(id == R.id.nav_budget_planning){
                 return true;
             }else if(id == R.id.nav_favourites){
