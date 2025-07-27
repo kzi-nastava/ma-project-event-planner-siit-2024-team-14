@@ -21,6 +21,7 @@ import com.example.eventplanner.ui.fragment.AdminReportsFragment;
 import com.example.eventplanner.ui.fragment.AllBookingsFragment;
 import com.example.eventplanner.ui.fragment.BookingServiceRequestFragment;
 import com.example.eventplanner.ui.fragment.HomeFragment;
+import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
 import com.example.eventplanner.ui.fragment.SettingsFragment;
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             } else if(id == R.id.nav_become_provider){
                 return true;
             }else if(id == R.id.nav_my_events){
-                return true;
+                selectedFragment = new MyEventsFragment();
             }else if(id == R.id.nav_calendar){
                 return true;
             }else if(id == R.id.nav_invitations){
