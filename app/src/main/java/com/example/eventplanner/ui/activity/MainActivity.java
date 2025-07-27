@@ -184,10 +184,6 @@ public class MainActivity extends AppCompatActivity {
             menu.add(Menu.NONE, R.id.nav_login, Menu.NONE, "Log in");
             menu.add(Menu.NONE, R.id.nav_register_organizer, Menu.NONE, "Register as event organizer");
             menu.add(Menu.NONE, R.id.nav_register_provider, Menu.NONE, "Register as event product and service provider");
-
-
-
-
             return;
         }
 
@@ -207,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
             case "user":
                 menu.add(Menu.NONE, R.id.nav_become_organizer, Menu.NONE, "Become an event organizer");
                 menu.add(Menu.NONE, R.id.nav_become_provider, Menu.NONE, "Become a product and service provider");
+                menu.add(Menu.NONE, R.id.nav_logout, Menu.NONE, "Log out").setIcon(R.drawable.logout);
                 break;
 
             case "eventorganizer":
