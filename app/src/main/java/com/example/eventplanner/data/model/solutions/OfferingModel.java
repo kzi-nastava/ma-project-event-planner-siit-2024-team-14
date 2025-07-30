@@ -1,6 +1,5 @@
 package com.example.eventplanner.data.model.solutions;
 
-import com.example.eventplanner.data.model.Category;
 import com.example.eventplanner.data.model.users.ProviderModel;
 import com.example.eventplanner.data.model.events.EventTypeModel;
 
@@ -20,6 +19,8 @@ public class OfferingModel {
 
     private ProviderModel provider;
     private int providerId;
+
+    private String solutionType;
 
     public int getId() {
         return id;
@@ -100,4 +101,16 @@ public class OfferingModel {
     public void setProviderId(int providerId) {
         this.providerId = providerId;
     }
+
+    public String getSolutionType() {
+        if (solutionType == null)
+            solutionType = getClass().getSimpleName();
+
+        return solutionType;
+    }
+
+    public void setSolutionType(String solutionType) {
+        this.solutionType = solutionType;
+    }
+
 }

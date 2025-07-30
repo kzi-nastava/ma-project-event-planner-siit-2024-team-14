@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.eventplanner.data.model.solutions.products.Product;
+import com.example.eventplanner.data.model.solutions.products.ProductModel;
 import com.example.eventplanner.data.network.ClientUtils;
 
 import retrofit2.Call;
@@ -13,16 +13,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductViewModel extends ViewModel {
-    private final MutableLiveData<Product> _product = new MutableLiveData<>();
+    private final MutableLiveData<ProductModel> _product = new MutableLiveData<>();
     private final MutableLiveData<String> _errorMessage = new MutableLiveData<>();
     private final MutableLiveData<Void> _deleteSuccess = new MutableLiveData<>();
 
 
     public void fetchProduct(int id) {
         ClientUtils.productService.getById(id)
-                .enqueue(new Callback<Product>() {
+                .enqueue(new Callback<ProductModel>() {
                     @Override
-                    public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
+                    public void onResponse(@NonNull Call<ProductModel> call, @NonNull Response<ProductModel> response) {
                         if (response.isSuccessful()) {
                             _product.postValue(response.body());
                         } else {
@@ -31,7 +31,7 @@ public class ProductViewModel extends ViewModel {
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
+                    public void onFailure(@NonNull Call<ProductModel> call, @NonNull Throwable t) {
                         _errorMessage.postValue(t.getMessage());
                     }
                 });
@@ -56,7 +56,7 @@ public class ProductViewModel extends ViewModel {
                 });
     }
 
-    public LiveData<Product> product() {
+    public LiveData<ProductModel> product() {
         return _product;
     }
 

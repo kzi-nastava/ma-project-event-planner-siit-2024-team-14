@@ -1,13 +1,8 @@
 package com.example.eventplanner.data.network.services.solutions;
 
 import com.example.eventplanner.data.model.Page;
-import com.example.eventplanner.data.model.solutions.FilterParams;
-import com.example.eventplanner.data.model.solutions.services.CreateService;
-import com.example.eventplanner.data.model.solutions.services.Service;
-import com.example.eventplanner.data.model.solutions.services.ServiceModel;
-import com.example.eventplanner.data.model.solutions.services.UpdateService;
+import com.example.eventplanner.data.model.solutions.services.*;
 
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -25,22 +20,22 @@ public interface ServiceService {
 
 
     @GET(BASE_URL)
-    Call<Page<Service>> getAll();
+    Call<Page<ServiceModel>> getAll();
 
     @GET(BASE_URL)
-    Call<Page<Service>> getAll(@QueryMap Map<String, String> params);
+    Call<Page<ServiceModel>> getAll(@QueryMap Map<String, String> params);
 
     @GET("services/{id}")
     Call<ServiceModel> getServiceById(@Path("id") int id);
 
     @GET(BASE_URL + "/{id}")
-    Call<Service> getById(@Path("id") int id);
+    Call<ServiceModel> getById(@Path("id") int id);
 
     @POST(BASE_URL)
-    Call<Service> create(@Body CreateService service);
+    Call<ServiceModel> create(@Body CreateService service);
 
     @PUT(BASE_URL + "/{id}")
-    Call<Service> update(@Path("id") int id, @Body UpdateService service);
+    Call<ServiceModel> update(@Path("id") int id, @Body UpdateService service);
 
     @DELETE(BASE_URL + "/{id}")
     Call<Void> deleteById(@Path("id") int id);

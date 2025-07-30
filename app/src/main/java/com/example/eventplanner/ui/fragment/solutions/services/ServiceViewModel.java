@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.eventplanner.data.model.solutions.services.Service;
+import com.example.eventplanner.data.model.solutions.services.*;
 import com.example.eventplanner.data.network.ClientUtils;
 
 import retrofit2.Call;
@@ -13,7 +13,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ServiceViewModel extends ViewModel {
-    private final MutableLiveData<Service> _service = new MutableLiveData<>();
+    private final MutableLiveData<ServiceModel> _service = new MutableLiveData<>();
     private final MutableLiveData<String> _errorMessage = new MutableLiveData<>();
     private final MutableLiveData<Void> _deleteSuccess = new MutableLiveData<>();
 
@@ -21,9 +21,9 @@ public class ServiceViewModel extends ViewModel {
 
     public void fetchService(int id) {
         ClientUtils.serviceService.getById(id)
-                .enqueue(new Callback<Service>() {
+                .enqueue(new Callback<ServiceModel>() {
                     @Override
-                    public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
+                    public void onResponse(@NonNull Call<ServiceModel> call, @NonNull Response<ServiceModel> response) {
                         if (response.isSuccessful()) {
                             _service.postValue(response.body());
                         } else {
@@ -32,7 +32,7 @@ public class ServiceViewModel extends ViewModel {
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
+                    public void onFailure(@NonNull Call<ServiceModel> call, @NonNull Throwable t) {
                         _errorMessage.postValue(t.getMessage());
                     }
                 });
@@ -59,7 +59,7 @@ public class ServiceViewModel extends ViewModel {
     }
 
 
-    public LiveData<Service> service() {
+    public LiveData<ServiceModel> service() {
         return _service;
     }
 

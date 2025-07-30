@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.solutions.Solution;
+import com.example.eventplanner.data.model.solutions.OfferingModel;
 import com.example.eventplanner.ui.fragment.FragmentTransition;
 import com.example.eventplanner.ui.fragment.solutions.products.ProductDetailsFragment;
 import com.example.eventplanner.ui.fragment.solutions.services.ServiceDetailsFragment;
@@ -32,7 +32,7 @@ public class SolutionDetailsFragment extends Fragment {
     }
 
 
-    public static SolutionDetailsFragment newInstance(Solution solution) {
+    public static SolutionDetailsFragment newInstance(OfferingModel solution) {
         return newInstance(solution.getId(), solution.getSolutionType());
     }
 

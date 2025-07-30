@@ -1,9 +1,6 @@
 package com.example.eventplanner.data.model.solutions.services;
 
-import com.example.eventplanner.data.model.Category;
-import com.example.eventplanner.data.model.events.EventTypeModel;
 import com.example.eventplanner.data.model.solutions.OfferingModel;
-import com.example.eventplanner.data.model.users.ProviderModel;
 
 import java.util.List;
 
@@ -22,11 +19,11 @@ public class ServiceModel extends OfferingModel {
     private String reservationPeriod;
     private String cancellationPeriod;
 
-    private int durationInMinutes;
-    private int minDurationInMinutes;
-    private int maxDurationInMinutes;
-    private int reservationPeriodInDays;
-    private int cancellationPeriodInDays;
+    private int durationMinutes;
+    private int minDurationMinutes;
+    private int maxDurationMinutes;
+    private int reservationPeriodDays;
+    private int cancellationPeriodDays;
 
     public List<String> getImageURLs() {
         return imageURLs;
@@ -100,44 +97,44 @@ public class ServiceModel extends OfferingModel {
         this.cancellationPeriod = cancellationPeriod;
     }
 
-    public int getDurationInMinutes() {
-        return durationInMinutes;
+    public int getDurationMinutes() {
+        return durationMinutes;
     }
 
-    public void setDurationInMinutes(int durationInMinutes) {
-        this.durationInMinutes = durationInMinutes;
+    public void setDurationMinutes(int durationMinutes) {
+        this.durationMinutes = durationMinutes;
     }
 
-    public int getMinDurationInMinutes() {
-        return minDurationInMinutes;
+    public int getMinDurationMinutes() {
+        return minDurationMinutes;
     }
 
-    public void setMinDurationInMinutes(int minDurationInMinutes) {
-        this.minDurationInMinutes = minDurationInMinutes;
+    public void setMinDurationMinutes(int minDurationMinutes) {
+        this.minDurationMinutes = minDurationMinutes;
     }
 
-    public int getMaxDurationInMinutes() {
-        return maxDurationInMinutes;
+    public int getMaxDurationMinutes() {
+        return maxDurationMinutes;
     }
 
-    public void setMaxDurationInMinutes(int maxDurationInMinutes) {
-        this.maxDurationInMinutes = maxDurationInMinutes;
+    public void setMaxDurationMinutes(int maxDurationMinutes) {
+        this.maxDurationMinutes = maxDurationMinutes;
     }
 
-    public int getReservationPeriodInDays() {
-        return reservationPeriodInDays;
+    public int getReservationPeriodDays() {
+        return reservationPeriodDays;
     }
 
-    public void setReservationPeriodInDays(int reservationPeriodInDays) {
-        this.reservationPeriodInDays = reservationPeriodInDays;
+    public void setReservationPeriodDays(int reservationPeriodDays) {
+        this.reservationPeriodDays = reservationPeriodDays;
     }
 
-    public int getCancellationPeriodInDays() {
-        return cancellationPeriodInDays;
+    public int getCancellationPeriodDays() {
+        return cancellationPeriodDays;
     }
 
-    public void setCancellationPeriodInDays(int cancellationPeriodInDays) {
-        this.cancellationPeriodInDays = cancellationPeriodInDays;
+    public void setCancellationPeriodDays(int cancellationPeriodDays) {
+        this.cancellationPeriodDays = cancellationPeriodDays;
     }
 
 }

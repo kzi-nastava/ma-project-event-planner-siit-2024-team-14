@@ -18,14 +18,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.Category;
-import com.example.eventplanner.data.model.solutions.products.Product;
-import com.example.eventplanner.data.model.solutions.products.ProductModel;
+import com.example.eventplanner.data.model.solutions.products.*;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.auth.AuthService;
 import com.example.eventplanner.databinding.FragmentProductDetailsBinding;
 import com.example.eventplanner.ui.fragment.FragmentTransition;
-import com.example.eventplanner.ui.fragment.ServiceReservationFragment;
 import com.example.eventplanner.ui.fragment.ViewProviderProfileFragment;
 
 import java.text.NumberFormat;
@@ -88,7 +85,7 @@ public class ProductDetailsFragment extends Fragment {
     }
 
 
-    private void showProductDetails(Product product) {
+    private void showProductDetails(ProductModel product) {
         binding.productName.setText(product.getName());
         binding.productDescription.setText(product.getDescription());
 
@@ -133,7 +130,7 @@ public class ProductDetailsFragment extends Fragment {
     }
 
 
-    private void adjustActions(Product product) {
+    private void adjustActions(ProductModel product) {
         Optional.ofNullable(auth.getUser())
                 .filter(user -> ROLE_PROVIDER.equalsIgnoreCase(user.getRole()))
                 .filter(provider -> Objects.equals(provider.getId(), product.getProviderId()))

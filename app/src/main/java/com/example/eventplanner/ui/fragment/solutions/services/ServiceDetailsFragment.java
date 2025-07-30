@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.eventplanner.data.model.solutions.services.Service;
+import com.example.eventplanner.data.model.solutions.services.*;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.auth.AuthService;
@@ -87,7 +87,7 @@ public class ServiceDetailsFragment extends Fragment {
         viewModel.fetchService(serviceId);
     }
 
-    private void showServiceDetails(Service service) {
+    private void showServiceDetails(ServiceModel service) {
         binding.serviceName.setText(service.getName());
         binding.serviceDescription.setText(service.getDescription());
         binding.categoryName.setText(service.getCategory().getName());
@@ -117,7 +117,7 @@ public class ServiceDetailsFragment extends Fragment {
     }
 
 
-    private void adjustActions(Service service) {
+    private void adjustActions(ServiceModel service) {
         Optional.ofNullable(auth.getUser())
                 .filter(user -> ROLE_PROVIDER.equalsIgnoreCase(user.getRole()))
                 .filter(provider -> Objects.equals(provider.getId(), service.getProvider().getId()))

@@ -1,15 +1,23 @@
-package com.example.eventplanner;
+package com.example.eventplanner.data.model.solutions;
 
-public class ServiceBrief {
+import com.example.eventplanner.data.model.BaseEntityModel;
+
+public class Category extends BaseEntityModel {
     private String name, description;
-    private int imageResId;
 
-    public ServiceBrief(String name, String description, int imageResId) {
+    //region Constructors
+
+    public Category() { super(); }
+
+    public Category(int id, String name, String description) {
+        super(id);
         this.name = name;
         this.description = description;
-        this.imageResId = imageResId;
     }
 
+    //endregion
+
+    //region Getters and Setters
 
     public String getName() {
         return name;
@@ -27,11 +35,6 @@ public class ServiceBrief {
         this.description = description;
     }
 
-    public int getImageResId() {
-        return imageResId;
-    }
+    //endregion
 
-    public void setImageResId(int imageResId) {
-        this.imageResId = imageResId;
-    }
 }

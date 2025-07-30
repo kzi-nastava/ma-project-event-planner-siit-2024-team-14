@@ -1,9 +1,6 @@
 package com.example.eventplanner.data.network.services.solutions;
 
-import com.example.eventplanner.data.model.Category;
-import com.example.eventplanner.data.model.solutions.services.CreateService;
-import com.example.eventplanner.data.model.solutions.services.Service;
-import com.example.eventplanner.data.model.solutions.services.UpdateService;
+import com.example.eventplanner.data.model.solutions.Category;
 
 import java.util.Collection;
 import java.util.List;

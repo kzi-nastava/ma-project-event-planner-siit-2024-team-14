@@ -1,8 +1,7 @@
 package com.example.eventplanner.data.network.services.solutions;
 
-<<<<<<< HEAD
 import com.example.eventplanner.data.model.Page;
-import com.example.eventplanner.data.model.solutions.products.Product;
+import com.example.eventplanner.data.model.solutions.products.ProductModel;
 
 import java.util.Map;
 
@@ -17,26 +16,15 @@ public interface ProductService {
 
 
     @GET(BASE_URL)
-    Call<Page<Product>> getAll();
+    Call<Page<ProductModel>> getAll();
 
     @GET(BASE_URL)
-    Call<Page<Product>> getAll(@QueryMap Map<String, String> params);
+    Call<Page<ProductModel>> getAll(@QueryMap Map<String, String> params);
 
     @GET(BASE_URL + "/{id}")
-    Call<Product> getById(@Path("id") int id);
+    Call<ProductModel> getById(@Path("id") int id);
 
     @DELETE(BASE_URL + "/{id}")
     Call<Void> deleteById(@Path("id") int id);
 
-=======
-import com.example.eventplanner.data.model.solutions.products.ProductModel;
-
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-
-public interface ProductService {
-    @GET("products/{id}")
-    Call<ProductModel> getProductById(@Path("id") int id);
->>>>>>> develop
 }
