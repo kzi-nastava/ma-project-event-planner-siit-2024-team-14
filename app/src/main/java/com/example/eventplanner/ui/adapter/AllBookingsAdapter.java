@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.BookingServiceRequestModel;
+import com.example.eventplanner.data.model.solutions.services.BookingServiceRequestModel;
 
 import java.util.List;
 

@@ -45,7 +45,7 @@ public class ProductViewModel extends ViewModel {
                         if (response.isSuccessful()) {
                             _deleteSuccess.postValue(null);
                         } else {
-                            _errorMessage.postValue("Failed to delete service. Code: " + response.code());
+                            _errorMessage.postValue("Failed to delete product. Code: " + response.code());
                         }
                     }
 

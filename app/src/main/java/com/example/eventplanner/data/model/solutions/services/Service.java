@@ -2,7 +2,7 @@ package com.example.eventplanner.data.model.solutions.services;
 
 import com.example.eventplanner.data.model.BaseEntityModel;
 import com.example.eventplanner.data.model.Category;
-import com.example.eventplanner.data.model.UserDTO;
+import com.example.eventplanner.data.model.users.UserModel;
 import com.example.eventplanner.data.model.events.EventType;
 import com.example.eventplanner.data.model.solutions.Visibility;
 
@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class Service extends BaseEntityModel {
-    UserDTO provider;
+    UserModel provider;
 
     String
             name, description, specificities, imageUrl;
@@ -38,11 +38,11 @@ public class Service extends BaseEntityModel {
 
     //region Getters and Setters
 
-    public UserDTO getProvider() {
+    public UserModel getProvider() {
         return provider;
     }
 
-    public void setProvider(UserDTO provider) {
+    public void setProvider(UserModel provider) {
         this.provider = provider;
     }
 

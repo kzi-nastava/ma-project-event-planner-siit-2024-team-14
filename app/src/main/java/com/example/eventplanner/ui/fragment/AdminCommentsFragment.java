@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.CommentDTO;
-import com.example.eventplanner.data.network.services.comments.AdminCommentsService;
+import com.example.eventplanner.data.model.comments.CommentModel;
 import com.example.eventplanner.data.network.services.comments.CommentApiClient;
 import com.example.eventplanner.ui.adapter.CommentAdapter;
 
@@ -45,9 +44,9 @@ public class AdminCommentsFragment extends Fragment {
     }
 
     private void loadComments() {
-        CommentApiClient.getInstance().getPendingComments().enqueue(new Callback<List<CommentDTO>>() {
+        CommentApiClient.getInstance().getPendingComments().enqueue(new Callback<List<CommentModel>>() {
             @Override
-            public void onResponse(Call<List<CommentDTO>> call, Response<List<CommentDTO>> response) {
+            public void onResponse(Call<List<CommentModel>> call, Response<List<CommentModel>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     adapter = new CommentAdapter(response.body(), getContext());
                     recyclerView.setAdapter(adapter);
@@ -55,7 +54,7 @@ public class AdminCommentsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<CommentDTO>> call, Throwable t) {
+            public void onFailure(Call<List<CommentModel>> call, Throwable t) {
                 // Handle failure
             }
         });

@@ -2,8 +2,10 @@ package com.example.eventplanner.data.model.solutions.products;
 
 import com.example.eventplanner.data.model.BaseEntityModel;
 import com.example.eventplanner.data.model.Category;
+import com.example.eventplanner.data.model.users.ProviderModel;
 
 public class Product extends BaseEntityModel {
+    ProviderModel provider;
     Category category;
     String name, description, imageUrl;
     Double price, discount;
@@ -66,6 +68,18 @@ public class Product extends BaseEntityModel {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public ProviderModel getProvider() {
+        return provider;
+    }
+
+    public void setProvider(ProviderModel provider) {
+        this.provider = provider;
+    }
+
+    public int getProviderId() {
+        return provider == null ? -1 : provider.getId();
     }
 
     //endregion

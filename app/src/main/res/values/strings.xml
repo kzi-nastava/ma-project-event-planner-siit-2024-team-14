@@ -5,4 +5,13 @@
     <string name="service_image_sample">Service Image</string>
     <string name="service_name_sample">Service Name</string>
     <string name="service_description_sample">Service description...</string>
+    <string name="chat_with_provider">Chat With Provider</string>
+    <string name="edit">Edit</string>
+    <string name="purchase">Purchase</string>
+    <string name="reserve">Reserve</string>
+
+    <string-array name="privacy_types">
+        <item>OPEN</item>
+        <item>CLOSED</item>
+    </string-array>
 </resources>

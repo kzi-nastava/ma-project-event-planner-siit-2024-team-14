@@ -1,7 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context="ui.fragment.solutions.services.ServiceDetailsFragment">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,15 +20,18 @@
         <!-- Service Name -->
         <TextView
             android:id="@+id/service_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:text="@string/service_name_sample"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:paddingBottom="8dp" />
+            android:textColor="#523D35"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <!-- Service Description -->
         <TextView
             android:id="@+id/service_description"
+            android:text="@string/service_description_sample"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp" />
@@ -113,38 +119,41 @@
             android:layout_width="match_parent"/>
 
         <TextView
-            android:id="@+id/provider_email"
+            android:id="@+id/provider_company_name"
             android:textColor="?attr/colorPrimary"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:textStyle="bold|italic"
-            android:clickable="true"
-            android:focusable="true"/>
+            android:paddingLeft="16dp" />
 
         <!-- Footer buttons container -->
         <LinearLayout
             android:id="@+id/footer_buttons_container"
+            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="end"
             android:layout_marginTop="16dp"
             android:weightSum="3"
-            android:paddingTop="12dp">
+            android:paddingTop="12dp"
+            android:divider="?android:attr/dividerVertical"
+            android:showDividers="middle"
+            android:dividerPadding="8dp">
 
             <Button
                 android:id="@+id/chat_with_provider_button"
-                android:text="Chat with provider"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/chat_with_provider"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#523D35"
                 android:textColor="#FFFFFF"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/book_service_button"
-                android:text="Book Service"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/reserve"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#523D35"
@@ -153,7 +162,8 @@
 
             <Button
                 android:id="@+id/edit_service_button"
-                android:text="Edit"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#523D35"

@@ -1,32 +1,22 @@
 package com.example.eventplanner.data.network.services.notifications;
-
-import android.util.Log;
-
-import com.example.eventplanner.data.model.NotificationModel;
+import com.example.eventplanner.data.model.notifications.NotificationModel;
 import java.util.List;
-import retrofit2.*;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
-public class NotificationService {
+public interface NotificationService {
 
-    private final NotificationApiClient api;
+    @GET("notifications")
+    Call<List<NotificationModel>> getNotifications(@Query("userId") int userId);
 
-    public NotificationService(NotificationApiClient api) {
-        this.api = api;
-    }
+    @PUT("notifications/mark-all-as-read")
+    Call<Void> markAllAsRead(@Query("userId") int userId);
 
-    public void getNotifications(int userId, Callback<List<NotificationModel>> callback) {
-        api.getNotifications(userId).enqueue(callback);
-    }
+    @PUT("notifications/mute-notifications")
+    Call<Void> toggleMuteNotifications(@Query("userId") int userId, @Query("muted") boolean muted);
 
-    public void markAllAsRead(int userId, Callback<Void> callback) {
-        api.markAllAsRead(userId).enqueue(callback);
-    }
-
-    public void toggleMuteNotifications(int userId, boolean muted, Callback<Void> callback) {
-        api.toggleMuteNotifications(userId, muted).enqueue(callback);
-    }
-
-    public void getMuteStatus(int userId, Callback<Boolean> callback) {
-        api.getMuteStatus(userId).enqueue(callback);
-    }
+    @GET("notifications/mute-notifications/status")
+    Call<Boolean> getMuteStatus(@Query("userId") int userId);
 }

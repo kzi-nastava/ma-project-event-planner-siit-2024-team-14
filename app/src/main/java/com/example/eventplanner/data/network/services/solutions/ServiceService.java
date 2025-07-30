@@ -4,6 +4,7 @@ import com.example.eventplanner.data.model.Page;
 import com.example.eventplanner.data.model.solutions.FilterParams;
 import com.example.eventplanner.data.model.solutions.services.CreateService;
 import com.example.eventplanner.data.model.solutions.services.Service;
+import com.example.eventplanner.data.model.solutions.services.ServiceModel;
 import com.example.eventplanner.data.model.solutions.services.UpdateService;
 
 import java.util.List;
@@ -28,6 +29,9 @@ public interface ServiceService {
 
     @GET(BASE_URL)
     Call<Page<Service>> getAll(@QueryMap Map<String, String> params);
+
+    @GET("services/{id}")
+    Call<ServiceModel> getServiceById(@Path("id") int id);
 
     @GET(BASE_URL + "/{id}")
     Call<Service> getById(@Path("id") int id);

@@ -1,6 +1,6 @@
 package com.example.eventplanner.data.network.services.solutions;
 
-import com.example.eventplanner.data.model.BookingServiceModel;
+import com.example.eventplanner.data.model.solutions.services.BookingServiceModel;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface BookingServiceService {
-    @POST("api/bookings/reserve")
+    @POST("bookings/reserve")
     Call<Void> reserveService(@Body BookingServiceModel request);
 
-    @GET("api/bookings/available-start-times")
+    @GET("bookings/available-start-times")
     Call<List<String>> getAvailableStartTimes(
             @Query("serviceId") int serviceId,
             @Query("date") String date,

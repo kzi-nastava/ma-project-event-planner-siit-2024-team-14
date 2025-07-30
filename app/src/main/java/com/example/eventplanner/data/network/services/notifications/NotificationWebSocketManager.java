@@ -3,7 +3,7 @@ package com.example.eventplanner.data.network.services.notifications;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.eventplanner.data.model.NotificationModel;
+import com.example.eventplanner.data.model.notifications.NotificationModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;

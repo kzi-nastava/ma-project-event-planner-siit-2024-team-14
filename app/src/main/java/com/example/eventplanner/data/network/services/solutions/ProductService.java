@@ -1,5 +1,6 @@
 package com.example.eventplanner.data.network.services.solutions;
 
+<<<<<<< HEAD
 import com.example.eventplanner.data.model.Page;
 import com.example.eventplanner.data.model.solutions.products.Product;
 
@@ -27,4 +28,15 @@ public interface ProductService {
     @DELETE(BASE_URL + "/{id}")
     Call<Void> deleteById(@Path("id") int id);
 
+=======
+import com.example.eventplanner.data.model.solutions.products.ProductModel;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+
+public interface ProductService {
+    @GET("products/{id}")
+    Call<ProductModel> getProductById(@Path("id") int id);
+>>>>>>> develop
 }

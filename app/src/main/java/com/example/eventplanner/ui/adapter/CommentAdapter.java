@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.CommentDTO;
-import com.example.eventplanner.data.model.CommentStatusUpdateDTO;
+import com.example.eventplanner.data.model.comments.CommentModel;
+import com.example.eventplanner.data.model.comments.CommentStatusUpdateModel;
 import com.example.eventplanner.data.network.services.comments.CommentApiClient;
 
 import java.util.List;
@@ -24,10 +24,10 @@ import retrofit2.Response;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
 
-    private List<CommentDTO> comments;
+    private List<CommentModel> comments;
     private Context context;
 
-    public CommentAdapter(List<CommentDTO> comments, Context context) {
+    public CommentAdapter(List<CommentModel> comments, Context context) {
         this.comments = comments;
         this.context = context;
     }
@@ -41,7 +41,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        CommentDTO c = comments.get(position);
+        CommentModel c = comments.get(position);
 
         holder.name.setText((c.commenterFirstName != null ? c.commenterFirstName : "Anonymous") +
                 (c.commenterLastName != null ? " " + c.commenterLastName : ""));
@@ -59,8 +59,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.approveBtn.setOnClickListener(v -> {
             int pos = holder.getAdapterPosition();
             if (pos != RecyclerView.NO_POSITION) {
-                CommentDTO comment = comments.get(pos);
-                CommentStatusUpdateDTO update = new CommentStatusUpdateDTO(comment.id, "accepted");
+                CommentModel comment = comments.get(pos);
+                CommentStatusUpdateModel update = new CommentStatusUpdateModel(comment.id, "accepted");
                 CommentApiClient.getInstance().approveComment(update).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
@@ -80,8 +80,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.deleteBtn.setOnClickListener(v -> {
             int pos = holder.getAdapterPosition();
             if (pos != RecyclerView.NO_POSITION) {
-                CommentDTO comment = comments.get(pos);
-                CommentStatusUpdateDTO update = new CommentStatusUpdateDTO(comment.id, "deleted");
+                CommentModel comment = comments.get(pos);
+                CommentStatusUpdateModel update = new CommentStatusUpdateModel(comment.id, "deleted");
                 CommentApiClient.getInstance().deleteComment(update).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {

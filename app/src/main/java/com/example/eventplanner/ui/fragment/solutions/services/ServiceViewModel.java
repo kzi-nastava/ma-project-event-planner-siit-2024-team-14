@@ -27,7 +27,7 @@ public class ServiceViewModel extends ViewModel {
                         if (response.isSuccessful()) {
                             _service.postValue(response.body());
                         } else {
-                            _errorMessage.postValue("Failed to fetch product. Code: " + response.code());
+                            _errorMessage.postValue("Failed to fetch service. Code: " + response.code());
                         }
                     }
 
