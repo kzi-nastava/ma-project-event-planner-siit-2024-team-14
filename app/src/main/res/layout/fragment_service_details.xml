@@ -1,8 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#FFFFFF"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context="ui.fragment.solutions.services.ServiceDetailsFragment">
 
     <LinearLayout
         android:orientation="vertical"
@@ -13,12 +15,12 @@
             android:id="@+id/loading_spinner"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:layout_height="wrap_content" />
 
+        <!-- Service Name -->
         <TextView
             android:id="@+id/service_name"
-            android:text="Service Name"
+            android:text="@string/service_name_sample"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#523D35"
@@ -26,61 +28,148 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <!-- Service Description -->
         <TextView
             android:id="@+id/service_description"
-            android:text="Description"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
+            android:text="@string/service_description_sample"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp" />
 
         <TextView
-            android:id="@+id/service_price"
-            android:text="Price"
-            android:textSize="16sp"
+            android:text="Category:"
+            android:textStyle="bold"
             android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <!-- Category Name -->
+        <TextView
+            android:id="@+id/category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <!-- Applicable Event Types
+        <TextView
+            android:text="Applicable event types:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/applicable_event_types_container"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingBottom="8dp" >
+        </LinearLayout> -->
+
+        <!-- Price -->
+        <TextView
+            android:text="Price:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingBottom="8dp" >
+
+            <TextView
+                android:id="@+id/service_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/service_price_discounted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Reservation Details -->
+        <TextView
+            android:text="Reservation details:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
 
         <TextView
-            android:id="@+id/service_location"
-            android:text="Location"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
+            android:id="@+id/reservation_details"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingBottom="12dp" />
 
+        <!-- Provided by -->
         <TextView
-            android:id="@+id/service_duration"
-            android:text="Duration"
-            android:textSize="16sp"
+            android:text="Provided by:"
+            android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
 
         <TextView
             android:id="@+id/provider_company_name"
-            android:text="Provider Company"
-            android:textSize="16sp"
-            android:textColor="#523D35"
-            android:textStyle="bold"
-            android:layout_marginTop="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true" />
-
-
-        <Button
-            android:id="@+id/book_service_button"
-            android:text="Book Service"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="16dp"
+            android:textColor="?attr/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#523D35"
-            android:textColor="#FFFFFF"
-            android:visibility="gone" />
-    </LinearLayout>
+            android:paddingLeft="16dp" />
 
+        <!-- Footer buttons container -->
+        <LinearLayout
+            android:id="@+id/footer_buttons_container"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="16dp"
+            android:weightSum="3"
+            android:paddingTop="12dp"
+            android:divider="?android:attr/dividerVertical"
+            android:showDividers="middle"
+            android:dividerPadding="8dp">
+
+            <Button
+                android:id="@+id/chat_with_provider_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/chat_with_provider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#523D35"
+                android:textColor="#FFFFFF"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/book_service_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/reserve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#523D35"
+                android:textColor="#FFFFFF"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/edit_service_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="@string/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#523D35"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+    </LinearLayout>
 </ScrollView>
