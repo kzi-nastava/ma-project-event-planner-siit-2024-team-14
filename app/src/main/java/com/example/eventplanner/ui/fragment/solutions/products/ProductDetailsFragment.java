@@ -54,9 +54,7 @@ public class ProductDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            id = getArguments().getInt(ARG_ID);
-        }
+        id = requireArguments().getInt(ARG_ID);
     }
 
 

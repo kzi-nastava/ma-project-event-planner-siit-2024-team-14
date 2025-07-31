@@ -55,9 +55,7 @@ public class ServiceDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            serviceId = getArguments().getInt(ARG_ID);
-        }
+        serviceId = requireArguments().getInt(ARG_ID);
     }
 
     @Nullable

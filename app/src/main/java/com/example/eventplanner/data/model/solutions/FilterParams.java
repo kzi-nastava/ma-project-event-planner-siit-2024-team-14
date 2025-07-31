@@ -1,20 +1,24 @@
 package com.example.eventplanner.data.model.solutions;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FilterParams {
+public class FilterParams implements Serializable {
     Integer provider;
     Set<Integer> category;
     Double price, minPrice, maxPrice;
 
     Integer page, size;
-    String sort;
+    String sort, q;
 
     public Map<String, String> asMap() {
         Map<String, String> params = new HashMap<>();
+
+        if (q != null)
+            params.put("q", q);
 
         if (provider != null)
             params.put("provider", provider.toString());
@@ -112,6 +116,14 @@ public class FilterParams {
 
     public void setSort(String sort) {
         this.sort = sort;
+    }
+
+    public String getQ() {
+        return q;
+    }
+
+    public void setQ(String q) {
+        this.q = q;
     }
 
     //endregion

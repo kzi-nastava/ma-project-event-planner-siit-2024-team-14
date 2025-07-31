@@ -4,14 +4,23 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="service_image_sample">Service Image</string>
     <string name="service_name_sample">Service Name</string>
-    <string name="service_description_sample">Service description...</string>
+    <string name="service_description_sample">Service description…</string>
     <string name="chat_with_provider">Chat With Provider</string>
     <string name="edit">Edit</string>
     <string name="purchase">Purchase</string>
     <string name="reserve">Reserve</string>
+    <string name="search_hint">Enter Search Credentials</string>
 
     <string-array name="privacy_types">
         <item>OPEN</item>
         <item>CLOSED</item>
     </string-array>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_category">Select Category</string>
+    <string name="min_price_hint">Minimum Price</string>
+    <string name="max_price_hint">Maximum Price</string>
+    <string name="provider_solutions">My Solutions</string>
 </resources>
