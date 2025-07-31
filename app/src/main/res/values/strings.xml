@@ -23,4 +23,6 @@
     <string name="min_price_hint">Minimum Price</string>
     <string name="max_price_hint">Maximum Price</string>
     <string name="provider_solutions">My Solutions</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 </resources>

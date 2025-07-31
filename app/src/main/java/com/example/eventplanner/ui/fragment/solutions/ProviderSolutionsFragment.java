@@ -2,6 +2,7 @@ package com.example.eventplanner.ui.fragment.solutions;
 
 import static com.example.eventplanner.data.model.users.UserModel.ROLE_PROVIDER;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.example.eventplanner.databinding.FragmentProviderSolutionsBinding;
 import com.example.eventplanner.ui.adapter.SolutionAdapter;
 import com.example.eventplanner.ui.fragment.FragmentTransition;
 import com.example.eventplanner.ui.fragment.HomeFragment;
+import com.example.eventplanner.ui.fragment.PaginatorFragment;
 
 import java.util.Optional;
 
@@ -115,6 +117,19 @@ public class ProviderSolutionsFragment extends Fragment {
             currentFilters.setQ( query.isBlank() ? null : query );
             viewModel.fetchProviderSolutions(currentFilters);
         });
+
+        FragmentManager fm = getChildFragmentManager();
+        Fragment paginator = fm.findFragmentById(R.id.paginator);
+
+        if (paginator == null) {
+            paginator = PaginatorFragment.newInstance();
+
+            fm.beginTransaction()
+                    .add(R.id.paginator, paginator)
+                    .commit();
+        }
+
+        ((PaginatorFragment) paginator).setOnPageChangeListener(this::onPageChanged);
     }
 
 
@@ -122,6 +137,13 @@ public class ProviderSolutionsFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("current_filters", currentFilters);
+    }
+
+    private void onPageChanged(int newPage) {
+        if (newPage >= 0 && newPage != currentFilters.getPage()) {
+            currentFilters.setPage(newPage);
+            viewModel.fetchProviderSolutions(currentFilters);
+        }
     }
 
 

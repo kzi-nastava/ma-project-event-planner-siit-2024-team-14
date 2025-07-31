@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +66,6 @@ public class SolutionFiltersDialogFragment extends DialogFragment {
 
 
     @Override
-    @SuppressWarnings("nullpointer")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -78,7 +79,7 @@ public class SolutionFiltersDialogFragment extends DialogFragment {
         try {
             filters = (FilterParams) requireArguments().get(ARG_FILTERS);
             return;
-        } catch (NullPointerException | ClassCastException e) {
+        } catch (IllegalStateException | ClassCastException e) {
             // pass
         }
 
@@ -125,6 +126,52 @@ public class SolutionFiltersDialogFragment extends DialogFragment {
 
         Optional.ofNullable(filters.getMinPrice())
                 .ifPresent(min -> binding.inputMinPrice.setText(String.valueOf(min)));
+
+        binding.inputMinPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String input = editable.toString().trim();
+                if (input.isBlank()) {
+                    filters.setMinPrice(null);
+                } else {
+                    try {
+                        filters.setMinPrice(Double.parseDouble(input));
+                    } catch (NumberFormatException e) {
+                        filters.setMinPrice(null);
+                        editable.clear();
+                    }
+                }
+            }
+        });
+
+        binding.inputMaxPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String input = editable.toString().trim();
+                if (input.isBlank()) {
+                    filters.setMaxPrice(null);
+                } else {
+                    try {
+                        filters.setMaxPrice(Double.parseDouble(input));
+                    } catch (NumberFormatException e) {
+                        filters.setMaxPrice(null);
+                        editable.clear();
+                    }
+                }
+            }
+        });
     }
 
     @Override
