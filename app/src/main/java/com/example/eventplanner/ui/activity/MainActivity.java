@@ -22,12 +22,11 @@ import com.example.eventplanner.ui.fragment.AllBookingsFragment;
 import com.example.eventplanner.ui.fragment.AllInvitationsFragment;
 import com.example.eventplanner.ui.fragment.BookingServiceRequestFragment;
 import com.example.eventplanner.ui.fragment.HomeFragment;
-import com.example.eventplanner.ui.fragment.InvitationFragment;
 import com.example.eventplanner.ui.fragment.InvitationRegisterFragment;
 import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
-import com.example.eventplanner.ui.fragment.SettingsFragment;
+import com.example.eventplanner.ui.fragment.JoinedEventsFragment;
 import com.example.eventplanner.ui.fragment.UpgradeAsProviderFragment;
 import com.example.eventplanner.ui.fragment.UpgradeOrganizerFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -35,8 +34,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.Manifest;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
         navigationIcon = findViewById(R.id.navigation_icon);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_view);
+
+        int userId = prefs.getInt("userId", -1);
+        if (userId == -1) {
+            bottomNav.getMenu().removeItem(R.id.settings);
+        }
         bottomNav.setOnNavigationItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.profile) {
                 selectedFragment = new ProfileFragment();
             } else if (item.getItemId() == R.id.settings) {
-                selectedFragment = new SettingsFragment();
+                selectedFragment = new JoinedEventsFragment();
             }
             if (selectedFragment != null) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

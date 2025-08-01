@@ -40,4 +40,7 @@ public interface EventService {
             @Part("dto") RequestBody dto,
             @Part MultipartBody.Part photo
     );
+
+    @GET("events/joined/{id}")
+    Call<List<EventModel>> getJoinedEvents(@Path("id") int id);
 }
