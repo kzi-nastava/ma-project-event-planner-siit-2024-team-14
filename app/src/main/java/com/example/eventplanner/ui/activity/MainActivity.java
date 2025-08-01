@@ -1,18 +1,13 @@
 package com.example.eventplanner.ui.activity;
-
-import static android.app.PendingIntent.getActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -33,6 +28,7 @@ import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
 import com.example.eventplanner.ui.fragment.SettingsFragment;
+import com.example.eventplanner.ui.fragment.UpgradeOrganizerFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -74,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         navigationView = findViewById(R.id.navigation_view);
         navigationIcon = findViewById(R.id.navigation_icon);
 
@@ -131,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
                 logoutUser();
                 return true;
             } else if(id == R.id.nav_become_organizer){
-                return true;
+                String email = prefs.getString("userEmail", "");
+                String password =  prefs.getString("userPassword", "");
+                selectedFragment = new UpgradeOrganizerFragment(email, password);
             } else if(id == R.id.nav_become_provider){
                 return true;
             }else if(id == R.id.nav_my_events){
@@ -232,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void logoutUser() {
+    public void logoutUser() {
         if (prefs != null) {
             prefs.edit().clear().apply();
         }
@@ -242,10 +240,10 @@ public class MainActivity extends AppCompatActivity {
 
         setupNavigationMenuByRole();
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.home_page_fragment, new HomeFragment())
-                .commit();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private void handleDeepLink(Uri data) {
@@ -302,7 +300,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         NotificationWebSocketManager.disconnect();
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.apply();
