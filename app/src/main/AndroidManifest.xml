@@ -64,7 +64,6 @@
         <activity
             android:name=".ui.activity.LoginActivity"
             android:exported="false"/>
-        <activity android:name=".ui.activity.ProductDetailsActivity" />
 
     </application>
 </manifest>

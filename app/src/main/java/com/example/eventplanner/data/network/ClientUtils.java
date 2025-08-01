@@ -2,19 +2,15 @@ package com.example.eventplanner.data.network;
 
 //import com.example.eventplanner.BuildConfig;
 
-import com.example.eventplanner.data.network.auth.AuthInterceptor;
-import com.example.eventplanner.data.network.auth.AuthService;
-import com.example.eventplanner.data.network.auth.TokenStore;
-import com.example.eventplanner.data.network.services.chat.ChatService;
+import com.example.eventplanner.data.network.auth.*;
+import com.example.eventplanner.data.network.services.chat.*;
 import com.example.eventplanner.data.network.services.events.*;
 import com.example.eventplanner.data.network.services.invitations.InvitationService;
 import com.example.eventplanner.data.network.services.notifications.NotificationService;
-import com.example.eventplanner.data.network.services.offerings.categories.*;
-import com.example.eventplanner.data.network.services.profiles.OrganizerService;
-import com.example.eventplanner.data.network.services.profiles.ProviderService;
+import com.example.eventplanner.data.network.services.profiles.*;
 import com.example.eventplanner.data.network.services.reports.ReportUserService;
 import com.example.eventplanner.data.network.services.solutions.*;
-import com.example.eventplanner.data.network.services.user.*;
+import com.example.eventplanner.data.network.services.user.UserService;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -76,8 +72,8 @@ public class ClientUtils {
     public static ProviderService providerService = retrofit.create(ProviderService.class);
     public static NotificationService notificationService = retrofit.create(NotificationService.class);
     public static ProductService productService = retrofit.create(ProductService.class);
-
     public static InvitationService invitationService = retrofit.create(InvitationService.class);
+
     // ...
 
 }

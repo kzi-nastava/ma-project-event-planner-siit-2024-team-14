@@ -1,11 +1,8 @@
 package com.example.eventplanner.data.network.services.events;
 
-import com.example.eventplanner.data.model.Category;
 import com.example.eventplanner.data.model.events.CategoriesEtModel;
 import com.example.eventplanner.data.model.events.CreateEventModel;
-import com.example.eventplanner.data.model.events.CreateEventResponseModel;
 import com.example.eventplanner.data.model.events.EventModel;
-import com.example.eventplanner.data.model.events.GetEtNamesModel;
 
 import java.util.List;
 
