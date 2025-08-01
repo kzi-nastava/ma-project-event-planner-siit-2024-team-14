@@ -28,6 +28,7 @@ import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
 import com.example.eventplanner.ui.fragment.SettingsFragment;
+import com.example.eventplanner.ui.fragment.UpgradeAsProviderFragment;
 import com.example.eventplanner.ui.fragment.UpgradeOrganizerFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -131,7 +132,9 @@ public class MainActivity extends AppCompatActivity {
                 String password =  prefs.getString("userPassword", "");
                 selectedFragment = new UpgradeOrganizerFragment(email, password);
             } else if(id == R.id.nav_become_provider){
-                return true;
+                String email = prefs.getString("userEmail", "");
+                String password =  prefs.getString("userPassword", "");
+                selectedFragment = new UpgradeAsProviderFragment(email, password);
             }else if(id == R.id.nav_my_events){
                 selectedFragment = new MyEventsFragment();
             }else if(id == R.id.nav_calendar){

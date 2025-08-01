@@ -1,15 +1,10 @@
 package com.example.eventplanner.ui.fragment;
-import static android.content.Context.MODE_PRIVATE;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +17,8 @@ import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.users.UpgradeOrganizerModel;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.FileUtils;
-import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.ui.activity.MainActivity;
 import com.google.gson.Gson;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
