@@ -1,14 +1,13 @@
 package com.example.eventplanner.ui.activity;
-
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -16,15 +15,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
+import com.example.eventplanner.ui.fragment.ActivationFragment;
 import com.example.eventplanner.ui.fragment.AdminCommentsFragment;
 import com.example.eventplanner.ui.fragment.AdminReportsFragment;
 import com.example.eventplanner.ui.fragment.AllBookingsFragment;
+import com.example.eventplanner.ui.fragment.AllInvitationsFragment;
 import com.example.eventplanner.ui.fragment.BookingServiceRequestFragment;
 import com.example.eventplanner.ui.fragment.HomeFragment;
+import com.example.eventplanner.ui.fragment.InvitationRegisterFragment;
 import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
-import com.example.eventplanner.ui.fragment.SettingsFragment;
+import com.example.eventplanner.ui.fragment.JoinedEventsFragment;
+import com.example.eventplanner.ui.fragment.UpgradeAsProviderFragment;
+import com.example.eventplanner.ui.fragment.UpgradeOrganizerFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -49,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (getIntent() != null && getIntent().getData() != null) {
+            handleDeepLink(getIntent().getData());
+        }else if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.home_page_fragment, new HomeFragment())
+                    .commit();
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -56,11 +68,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         navigationView = findViewById(R.id.navigation_view);
         navigationIcon = findViewById(R.id.navigation_icon);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_view);
+
+        int userId = prefs.getInt("userId", -1);
+        if (userId == -1) {
+            bottomNav.getMenu().removeItem(R.id.settings);
+        }
         bottomNav.setOnNavigationItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
@@ -69,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.profile) {
                 selectedFragment = new ProfileFragment();
             } else if (item.getItemId() == R.id.settings) {
-                selectedFragment = new SettingsFragment();
+                selectedFragment = new JoinedEventsFragment();
             }
             if (selectedFragment != null) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -113,15 +130,19 @@ public class MainActivity extends AppCompatActivity {
                 logoutUser();
                 return true;
             } else if(id == R.id.nav_become_organizer){
-                return true;
+                String email = prefs.getString("userEmail", "");
+                String password =  prefs.getString("userPassword", "");
+                selectedFragment = new UpgradeOrganizerFragment(email, password);
             } else if(id == R.id.nav_become_provider){
-                return true;
+                String email = prefs.getString("userEmail", "");
+                String password =  prefs.getString("userPassword", "");
+                selectedFragment = new UpgradeAsProviderFragment(email, password);
             }else if(id == R.id.nav_my_events){
                 selectedFragment = new MyEventsFragment();
             }else if(id == R.id.nav_calendar){
                 return true;
             }else if(id == R.id.nav_invitations){
-                return true;
+                selectedFragment = new AllInvitationsFragment();
             }else if(id == R.id.nav_budget_planning){
                 return true;
             }else if(id == R.id.nav_favourites){
@@ -151,11 +172,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.home_page_fragment, new HomeFragment())
-                    .commit();
-        }
+
     }
 
     private void setupNavigationMenuByRole() {
@@ -170,10 +187,6 @@ public class MainActivity extends AppCompatActivity {
             menu.add(Menu.NONE, R.id.nav_login, Menu.NONE, "Log in");
             menu.add(Menu.NONE, R.id.nav_register_organizer, Menu.NONE, "Register as event organizer");
             menu.add(Menu.NONE, R.id.nav_register_provider, Menu.NONE, "Register as event product and service provider");
-
-
-
-
             return;
         }
 
@@ -193,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
             case "user":
                 menu.add(Menu.NONE, R.id.nav_become_organizer, Menu.NONE, "Become an event organizer");
                 menu.add(Menu.NONE, R.id.nav_become_provider, Menu.NONE, "Become a product and service provider");
+                menu.add(Menu.NONE, R.id.nav_logout, Menu.NONE, "Log out").setIcon(R.drawable.logout);
                 break;
 
             case "eventorganizer":
@@ -221,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void logoutUser() {
+    public void logoutUser() {
         if (prefs != null) {
             prefs.edit().clear().apply();
         }
@@ -231,17 +245,66 @@ public class MainActivity extends AppCompatActivity {
 
         setupNavigationMenuByRole();
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.home_page_fragment, new HomeFragment())
-                .commit();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
+
+    private void handleDeepLink(Uri data) {
+        String path = data.getPath(); // npr. "/invitation/login", "/invitation/register", "/activate"
+        String email = data.getQueryParameter("email");
+        String eventIdStr = data.getQueryParameter("eventId");
+        String token = data.getQueryParameter("token");
+        String role = data.getQueryParameter("role");
+
+        long eventId = -1;
+        if (eventIdStr != null) {
+            try {
+                eventId = Long.parseLong(eventIdStr);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (path != null) {
+            switch (path) {
+                case "/invitation/login":
+                    startActivity(new Intent(this, LoginActivity.class));
+                    break;
+
+                case "/invitation/register":
+                    if (email != null && eventId != -1) {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.home_page_fragment, InvitationRegisterFragment.newInstance(email, eventId))
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                    break;
+
+                case "/activate":
+                    if (token != null && role != null) {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.home_page_fragment, ActivationFragment.newInstance(token, role))
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         NotificationWebSocketManager.disconnect();
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.apply();

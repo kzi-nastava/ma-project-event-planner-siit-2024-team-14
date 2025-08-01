@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DFD1C9"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.fragment.JoinedEventsFragment">
+
+    <!-- Header title -->
+    <TextView
+        android:id="@+id/titleJoinedEvents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JOINED EVENTS"
+        android:textColor="#523D35"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/petrona"
+        android:gravity="center"
+        android:paddingBottom="12dp"
+        android:background="#f5f5f5"
+        android:elevation="2dp"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="4dp"
+        android:backgroundTint="#F5F5F5"
+        android:backgroundTintMode="src_in"
+        android:clipToOutline="true"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/textNoJoinedEvents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You haven't joined any events."
+        android:textColor="#523D35"
+        android:textSize="16sp"
+        android:fontFamily="@font/petrona"
+        android:gravity="center"
+        android:visibility="gone"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp" />
+
+
+    <!-- RecyclerView with padding -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMyEvents"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:scrollbars="vertical" />
+</LinearLayout>
