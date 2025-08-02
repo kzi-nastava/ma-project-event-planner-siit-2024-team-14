@@ -14,6 +14,7 @@ import com.example.eventplanner.data.model.users.UserModel;
 
 import java.time.Instant;
 import java.util.Optional;
+import java.util.Set;
 
 import com.auth0.jwt.JWT;
 import com.example.eventplanner.data.network.services.user.UserService;
@@ -52,6 +53,24 @@ public class AuthService {
                     return user;
                 })
                 .orElse(null);
+    }
+
+    @Nullable
+    public String getUserRole() {
+        return Optional.ofNullable(getUser())
+                .map(UserModel::getRole)
+                .orElse(null);
+    }
+
+
+    public boolean hasRole(String role) {
+        String userRole = getUserRole();
+        return userRole != null && userRole.equalsIgnoreCase(role);
+    }
+
+    public boolean hasAnyRole(String... roles) {
+        String userRole = getUserRole();
+        return userRole != null && (roles.length == 0 || Set.of(roles).stream().anyMatch(userRole::equalsIgnoreCase));
     }
 
 

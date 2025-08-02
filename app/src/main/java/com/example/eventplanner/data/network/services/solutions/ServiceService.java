@@ -26,6 +26,7 @@ public interface ServiceService {
     Call<Page<ServiceModel>> getAll(@QueryMap Map<String, String> params);
 
     @GET("services/{id}")
+    @Deprecated()
     Call<ServiceModel> getServiceById(@Path("id") int id);
 
     @GET(BASE_URL + "/{id}")

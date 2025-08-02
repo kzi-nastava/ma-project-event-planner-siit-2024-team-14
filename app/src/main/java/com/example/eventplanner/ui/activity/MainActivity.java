@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.eventplanner.R;
+import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.notifications.NotificationWebSocketManager;
 import com.example.eventplanner.ui.fragment.AdminCommentsFragment;
 import com.example.eventplanner.ui.fragment.AdminReportsFragment;
@@ -25,6 +26,7 @@ import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
 import com.example.eventplanner.ui.fragment.SettingsFragment;
+import com.example.eventplanner.ui.fragment.solutions.ProviderSolutionsFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             }else if(id == R.id.nav_messages){
                 return true;
             }else if(id == R.id.nav_my_services){
-                return true;
+                selectedFragment = ProviderSolutionsFragment.newInstance();
             }else if(id == R.id.nav_all_bookings){
                 selectedFragment = new AllBookingsFragment();
             }else if(id == R.id.nav_booking_requests){
@@ -222,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logoutUser() {
+        ClientUtils.authService.logout();
         if (prefs != null) {
             prefs.edit().clear().apply();
         }

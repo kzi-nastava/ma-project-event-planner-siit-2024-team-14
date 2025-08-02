@@ -16,10 +16,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.eventplanner.data.model.solutions.services.*;
 import com.example.eventplanner.R;
+import com.example.eventplanner.data.model.users.UserModel;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.auth.AuthService;
 import com.example.eventplanner.databinding.FragmentServiceDetailsBinding;
 import com.example.eventplanner.ui.fragment.FragmentTransition;
+import com.example.eventplanner.ui.fragment.HomeFragment;
 import com.example.eventplanner.ui.fragment.ServiceReservationFragment;
 import com.example.eventplanner.ui.fragment.ViewProviderProfileFragment;
 
@@ -71,20 +73,33 @@ public class ServiceDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(ServiceViewModel.class);
+
+        final String key = ServiceViewModelFactory.getKey(serviceId);
+        viewModel = new ViewModelProvider(requireActivity(), new ServiceViewModelFactory(serviceId))
+                .get(key, ServiceViewModel.class);
 
         viewModel.service().observe(getViewLifecycleOwner(), s -> binding.loadingSpinner.setVisibility(View.GONE));
-        viewModel.service().observe(getViewLifecycleOwner(), this::showServiceDetails);
-        viewModel.service().observe(getViewLifecycleOwner(), this::adjustActions);
+        viewModel.service().observe(getViewLifecycleOwner(), s -> {
+            if (s == null) {
+                Toast.makeText(requireContext(), "Service deleted", Toast.LENGTH_SHORT).show();
+                FragmentTransition.to(new HomeFragment(), requireActivity(), R.id.home_page_fragment);
+                return;
+            }
 
-        viewModel.errorMessage().observe(getViewLifecycleOwner(), msg -> {
+            showServiceDetails(s);
+            adjustActions(s);
+        });
+
+        viewModel.error().observe(getViewLifecycleOwner(), msg -> {
             if (msg != null)
                 Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show();
         });
 
-        viewModel.fetchService(serviceId);
+        viewModel.fetchService();
     }
 
+
+    @SuppressWarnings("OptionalOfNullableMisuse")
     private void showServiceDetails(ServiceModel service) {
         binding.serviceName.setText(service.getName());
         binding.serviceDescription.setText(service.getDescription());
@@ -149,7 +164,7 @@ public class ServiceDetailsFragment extends Fragment {
 
     private void adjustActions() {
         Optional.ofNullable(auth.getUser())
-                .map(u -> u.getRole())
+                .map(UserModel::getRole)
                 .ifPresent(
                         role -> {
                             if (ROLE_ORGANIZER.equalsIgnoreCase(role)) {

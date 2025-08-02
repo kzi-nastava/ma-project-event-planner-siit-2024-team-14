@@ -102,6 +102,7 @@ public class PaginatorFragment extends Fragment {
 
     private void updatePageInfo() {
         binding.pageInfo.setText(String.format(Locale.getDefault(), "Page %d", page));
+        binding.previousButton.setEnabled(page > 0);
     }
 
     @FunctionalInterface

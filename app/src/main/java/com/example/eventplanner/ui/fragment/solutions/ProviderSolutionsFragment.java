@@ -18,13 +18,13 @@ import android.widget.Toast;
 
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.solutions.FilterParams;
-import com.example.eventplanner.data.model.users.UserModel;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.databinding.FragmentProviderSolutionsBinding;
 import com.example.eventplanner.ui.adapter.SolutionAdapter;
 import com.example.eventplanner.ui.fragment.FragmentTransition;
 import com.example.eventplanner.ui.fragment.HomeFragment;
 import com.example.eventplanner.ui.fragment.PaginatorFragment;
+import com.example.eventplanner.ui.fragment.solutions.services.AddServiceFragment;
 
 import java.util.Optional;
 
@@ -69,11 +69,7 @@ public class ProviderSolutionsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String role = Optional.ofNullable(ClientUtils.authService.getUser())
-                .map(UserModel::getRole)
-                .orElse(null);
-
-        if (!ROLE_PROVIDER.equalsIgnoreCase(role)) {
+        if (!ClientUtils.authService.hasRole(ROLE_PROVIDER)) {
             view.post(() ->
                 FragmentTransition.to(new HomeFragment(), requireActivity(), R.id.home_page_fragment)
             );
@@ -130,6 +126,19 @@ public class ProviderSolutionsFragment extends Fragment {
         }
 
         ((PaginatorFragment) paginator).setOnPageChangeListener(this::onPageChanged);
+
+        binding.addServiceButton.setOnClickListener(v ->
+            FragmentTransition.to(
+                    AddServiceFragment.newInstance(),
+                    requireActivity(),
+                    R.id.home_page_fragment,
+                    true
+            )
+        );
+
+        binding.addProductButton.setOnClickListener(v -> {}); // TODO: Navigate to add product
+
+        viewModel.fetchSolutions(currentFilters);
     }
 
 
