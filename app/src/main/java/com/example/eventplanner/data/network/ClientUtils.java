@@ -11,6 +11,7 @@ import com.example.eventplanner.data.network.services.profiles.*;
 import com.example.eventplanner.data.network.services.reports.ReportUserService;
 import com.example.eventplanner.data.network.services.solutions.*;
 import com.example.eventplanner.data.network.services.user.UserService;
+import com.example.eventplanner.data.network.stomp.StompService;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -61,6 +62,7 @@ public class ClientUtils {
 
     public static UserService userService = retrofit.create(UserService.class);
     public static AuthService authService = new AuthService(tokenStore, userService);
+    public static StompService stompService = new StompService();
     public static EventService eventService = retrofit.create(EventService.class);
     public static CategoryService categoryService = retrofit.create(CategoryService.class);
     public static BookingServiceService bookingServiceService = retrofit.create(BookingServiceService.class);

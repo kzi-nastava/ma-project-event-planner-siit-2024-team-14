@@ -1,16 +1,24 @@
 package com.example.eventplanner.data.model.chat;
 
+import java.time.LocalDateTime;
+
 public class MessageModel {
-    private int senderId;
-    private int receiverId;
-    private String text;
+    private int chatId, senderId;
+    private String content;
+    private LocalDateTime timestamp;
+
 
     public MessageModel() {}
 
-    public MessageModel(int senderId, int receiverId, String text) {
-        this.senderId = senderId;
-        this.receiverId = receiverId;
-        this.text = text;
+
+    //region Getters and Setters
+
+    public int getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(int chatId) {
+        this.chatId = chatId;
     }
 
     public int getSenderId() {
@@ -21,19 +29,22 @@ public class MessageModel {
         this.senderId = senderId;
     }
 
-    public int getReceiverId() {
-        return receiverId;
+    public String getContent() {
+        return content;
     }
 
-    public void setReceiverId(int receiverId) {
-        this.receiverId = receiverId;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getText() {
-        return text;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
+
+    //endregion
+
 }

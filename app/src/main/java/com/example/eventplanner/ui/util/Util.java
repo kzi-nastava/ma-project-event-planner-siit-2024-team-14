@@ -1,5 +1,11 @@
 package com.example.eventplanner.ui.util;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import androidx.lifecycle.Observer;
+
+
 public abstract class Util {
 
     public static int parseInt(String text) {
@@ -24,6 +30,15 @@ public abstract class Util {
         } catch (NumberFormatException | NullPointerException ignored) {
             return defaultValue;
         }
+    }
+
+    /// Returns an {@link Observer} that shows a short {@link Toast} message when the observed value changes.
+    /// Toast is showed in the given {@link Context} with message obtained by calling {@link Object#toString} from the value.
+    public static <T> Observer<T> toastError(final Context context) {
+        return err -> {
+            if (err != null)
+                Toast.makeText(context, err.toString(), Toast.LENGTH_SHORT).show();
+        };
     }
 
 }

@@ -175,7 +175,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.home_page_fragment, new HomeFragment())
+                    .commit();
+        }
 
+        ClientUtils.stompService.connect();
     }
 
     private void setupNavigationMenuByRole() {
@@ -247,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Logged out!", Toast.LENGTH_SHORT).show();
 
         NotificationWebSocketManager.disconnect();
+        ClientUtils.stompService.disconnect();
 
         setupNavigationMenuByRole();
 
@@ -310,6 +317,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         NotificationWebSocketManager.disconnect();
+        ClientUtils.stompService.disconnect();
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.apply();

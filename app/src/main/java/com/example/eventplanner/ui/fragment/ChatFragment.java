@@ -1,9 +1,11 @@
 package com.example.eventplanner.ui.fragment;
 
-import android.content.SharedPreferences;
+import static com.example.eventplanner.data.model.users.UserModel.ROLE_ORGANIZER;
+import static com.example.eventplanner.data.model.users.UserModel.ROLE_PROVIDER;
+import static com.example.eventplanner.ui.util.Util.toastError;
+
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +17,20 @@ import com.example.eventplanner.R;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplanner.data.model.chat.MessageModel;
+import com.example.eventplanner.data.model.users.UserModel;
 import com.example.eventplanner.data.network.ClientUtils;
+import com.example.eventplanner.data.network.auth.AuthService;
 import com.example.eventplanner.data.network.services.chat.ChatService;
+import com.example.eventplanner.databinding.FragmentChatBinding;
 import com.example.eventplanner.ui.adapter.MessageAdapter;
 
-import java.util.List;
+import java.util.Optional;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -32,13 +39,18 @@ import retrofit2.Response;
 
 public class ChatFragment extends Fragment {
 
+    private ChatViewModel viewModel;
+    private FragmentChatBinding binding;
+    private final AuthService authService = ClientUtils.authService;
+    private MessageObserver messageObserver; // in order to sub to incoming messages only after we load the inbox
+
     private RecyclerView recyclerView;
     private EditText messageInput;
     private ImageButton sendButton;
     private MessageAdapter messageAdapter;
-    private ChatService chatService;
+    private final ChatService chatService = ClientUtils.chatService;
 
-    private int currentUserId;
+    private Integer currentUserId;
     private int receiverId;
 
     public ChatFragment() {}
@@ -55,14 +67,7 @@ public class ChatFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences prefs = requireContext().getSharedPreferences("MyAppPrefs", 0);
-        currentUserId = prefs.getInt("userId", -1);
-
-        if (getArguments() != null) {
-            receiverId = getArguments().getInt("receiverId", -1);
-        }
-
-        chatService = ClientUtils.chatService;
+        receiverId = requireArguments().getInt("receiverId", -1);
     }
 
     @Nullable
@@ -72,72 +77,68 @@ public class ChatFragment extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState
     ) {
-        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        binding = FragmentChatBinding.inflate(inflater, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerViewMessages);
-        messageInput = view.findViewById(R.id.editTextMessage);
-        sendButton = view.findViewById(R.id.buttonSend);
+        recyclerView = binding.recyclerViewMessages;
+        messageInput = binding.editTextMessage;
+        sendButton = binding.buttonSend;
+
+        return binding.getRoot();
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        currentUserId = Optional.ofNullable(authService.getUser()).map(UserModel::getId).orElse(null);
+        if (currentUserId == null) {
+            view.post(() ->
+                    FragmentTransition.to(new HomeFragment(), requireActivity(), R.id.home_page_fragment)
+            );
+
+            return;
+        }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         messageAdapter = new MessageAdapter(getContext(), currentUserId);
         recyclerView.setAdapter(messageAdapter);
 
-        loadMessages();
-
         sendButton.setOnClickListener(v -> sendMessage());
 
-        ImageButton optionsButton = view.findViewById(R.id.buttonOptions);
+        ImageButton optionsButton = binding.buttonOptions;
         optionsButton.setOnClickListener(this::showOptionsMenu);
 
-        return view;
-    }
+        ChatViewModelFactory factory = new ChatViewModelFactory(currentUserId, receiverId);
+        viewModel = new ViewModelProvider(this, factory)
+                .get(factory.getKey(), ChatViewModel.class);
 
-    private void loadMessages() {
-        chatService.getMessagesBetweenUsers(currentUserId, receiverId)
-                .enqueue(new Callback<List<MessageModel>>() {
-                    @Override
-                    public void onResponse(Call<List<MessageModel>> call, Response<List<MessageModel>> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            messageAdapter.setMessages(response.body());
-                            recyclerView.scrollToPosition(messageAdapter.getItemCount() - 1);
-                        } else {
-                            Toast.makeText(getContext(), "Failed to load messages", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+        viewModel.chat.observe(getViewLifecycleOwner(), chat -> {
+            messageAdapter.setMessages(chat.getMessages());
+            recyclerView.scrollToPosition(messageAdapter.getItemCount() - 1);
 
-                    @Override
-                    public void onFailure(Call<List<MessageModel>> call, Throwable t) {
-                        Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+            Optional.ofNullable(viewModel.getChatter())
+                    .ifPresent(chatter -> {
+                        binding.textName.setText("");
+                        binding.textEmail.setText(chatter.getEmail());
+                        binding.textRole.setText(chatter.getRole());
+                    });
+
+            if (messageObserver == null)
+                viewModel.message.observeForever(messageObserver = new MessageObserver());
+        });
+
+        viewModel.error.observe(getViewLifecycleOwner(), toastError(requireContext()));
+        viewModel.error.observe(getViewLifecycleOwner(), err -> sendButton.setEnabled(true)); // in case we failed to send a message, allow retries
+        viewModel.fetchMessages(); // ahh, to avoid missing some messages (should probably add them to chat in the vm, and just observe chat)
     }
 
     private void sendMessage() {
         String text = messageInput.getText().toString().trim();
         if (TextUtils.isEmpty(text)) return;
 
-        MessageModel message = new MessageModel(currentUserId, receiverId, text);
         sendButton.setEnabled(false);
-
-        chatService.sendMessage(message).enqueue(new Callback<MessageModel>() {
-            @Override
-            public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
-                sendButton.setEnabled(true);
-                if (response.isSuccessful() && response.body() != null) {
-                    messageAdapter.addMessage(response.body());
-                    recyclerView.scrollToPosition(messageAdapter.getItemCount() - 1);
-                    messageInput.setText("");
-                } else {
-                    Toast.makeText(getContext(), "Sending message failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MessageModel> call, Throwable t) {
-                sendButton.setEnabled(true);
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        viewModel.sendMessage(text);
     }
 
     private void showOptionsMenu(View anchor) {
@@ -201,12 +202,62 @@ public class ChatFragment extends Fragment {
 
 
     private void viewProfile() {
-        Toast.makeText(getContext(), "Clicked: View profile", Toast.LENGTH_SHORT).show();
-        // TODO: add profile page
+        // if chatter is a Provider or Organizer navigate to their profile
+        Optional.ofNullable(viewModel.getChatter())
+                .ifPresent(chatter -> {
+                    Fragment profileFragment;
+                    Bundle args = new Bundle();
+
+                    switch (chatter.getRole()) {
+                        case ROLE_PROVIDER:
+                        {
+                            profileFragment = new ViewProviderProfileFragment();
+                            args.putInt("providerId", chatter.getId());
+                            break;
+                        }
+                        case ROLE_ORGANIZER:
+                        {
+                            profileFragment = new ViewOrganizerProfileFragment();
+                            args.putInt("organizerId", chatter.getId());
+                            break;
+                        }
+                        default:
+                            return;
+                    }
+
+                    profileFragment.setArguments(args);
+                    FragmentTransition.to(
+                            profileFragment,
+                            requireActivity(),
+                            R.id.home_page_fragment,
+                            true
+                    );
+                });
     }
 
     private void deleteMessages() {
         messageAdapter.clearMessages();
         Toast.makeText(getContext(), "Messages have been removed (only from the view)", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Optional.ofNullable(messageObserver)
+                .ifPresent(viewModel.message::removeObserver);
+    }
+
+
+    private class MessageObserver implements Observer<MessageModel> {
+        @Override
+        public void onChanged(MessageModel messageModel) {
+            messageAdapter.addMessage(messageModel);
+            recyclerView.scrollToPosition(messageAdapter.getItemCount() - 1);
+
+            binding.editTextMessage.setText("");
+            sendButton.setEnabled(true);
+        }
+    }
+
 }
