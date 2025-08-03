@@ -73,6 +73,7 @@ public class ClientUtils {
     public static NotificationService notificationService = retrofit.create(NotificationService.class);
     public static ProductService productService = retrofit.create(ProductService.class);
     public static InvitationService invitationService = retrofit.create(InvitationService.class);
+    public static BudgetService budgetService = retrofit.create(BudgetService.class);
 
     // ...
 
