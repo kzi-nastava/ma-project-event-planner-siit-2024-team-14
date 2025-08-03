@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:context="ui.fragment.category.NewCategoryFragment">
+
+    <!-- Top green circle -->
+    <ImageView
+        android:id="@+id/circle1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/green_circle"
+        android:alpha="0.7"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="10dp"/>
+
+    <!-- Bottom green circle -->
+    <ImageView
+        android:id="@+id/circle2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/green_circle"
+        android:alpha="0.7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="190dp"
+        android:layout_marginStart="10dp"/>
+
+    <!-- Top beige circle -->
+    <ImageView
+        android:id="@+id/circle3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/beige_circle"
+        android:alpha="0.7"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="290dp"
+        android:layout_marginEnd="10dp"/>
+
+    <!-- Bottom beige circle -->
+    <ImageView
+        android:id="@+id/circle4"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/beige_circle"
+        android:alpha="0.7"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="440dp"
+        android:layout_marginStart="10dp"/>
+
+    <!-- Top Line with two colors -->
+    <View
+        android:id="@+id/topLine1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#D9D9D9"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/topLine2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#959D90"
+        android:alpha="0.6"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="15dp"/>
+
+    <!-- Bottom Line with two colors -->
+    <View
+        android:id="@+id/bottomLine1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#D9D9D9"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <View
+        android:id="@+id/bottomLine2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#959D90"
+        android:alpha="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="15dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tw_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/project_brown"
+            android:text="@string/title_create_category"
+            android:textSize="36sp"
+            android:fontFamily="@font/petrona"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_background"
+            android:padding="20dp">
+
+            <!-- Name input -->
+            <EditText
+                android:id="@+id/et_category_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:autofillHints=""
+                android:background="@drawable/border"
+                android:hint="@string/hint_category_name"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textColor="@color/project_brown"
+                android:textColorHint="@color/project_brown"/>
+
+            <!-- Description input -->
+            <EditText
+                android:id="@+id/et_category_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:autofillHints=""
+                android:background="@drawable/border"
+                android:hint="@string/hint_category_description"
+                android:inputType="textMultiLine"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textColor="@color/project_brown"
+                android:textColorHint="@color/project_brown"/>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm"
+                android:backgroundTint="@color/project_brown"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@ import com.example.eventplanner.ui.fragment.InvitationRegisterFragment;
 import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
+import com.example.eventplanner.ui.fragment.category.CategoryManagementFragment;
 import com.example.eventplanner.ui.fragment.solutions.ProviderSolutionsFragment;
 import com.example.eventplanner.ui.fragment.JoinedEventsFragment;
 import com.example.eventplanner.ui.fragment.UpgradeAsProviderFragment;
@@ -149,7 +150,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }else if(id == R.id.nav_favourites){
                 return true;
-            }else if(id == R.id.nav_messages){
+            } else if (id == R.id.nav_categories) {
+                selectedFragment = CategoryManagementFragment.newInstance();
+            } else if(id == R.id.nav_messages){
                 return true;
             }else if(id == R.id.nav_my_services){
                 selectedFragment = ProviderSolutionsFragment.newInstance();

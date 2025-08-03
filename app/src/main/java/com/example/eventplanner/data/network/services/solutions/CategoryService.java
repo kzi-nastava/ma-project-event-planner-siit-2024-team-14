@@ -40,4 +40,7 @@ public interface CategoryService {
     @DELETE(BASE_URL + "/{id}")
     Call<Void> deleteById(@Path("id") int id);
 
+    @POST(BASE_URL)
+    Call<Category> add(@Body Category category);
+
 }
