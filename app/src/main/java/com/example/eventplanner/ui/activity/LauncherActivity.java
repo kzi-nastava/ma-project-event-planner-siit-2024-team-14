@@ -11,9 +11,19 @@ public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.launcher_activity); // Replace with your launcher layout
+        setContentView(R.layout.launcher_activity);
 
-        // Use a handler to delay the transition to the MainActivity
+        getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+                .edit()
+                .clear()
+                .apply();
+
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(LauncherActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }, 3000);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

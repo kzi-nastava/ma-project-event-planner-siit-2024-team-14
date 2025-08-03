@@ -1,12 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nav_home" android:title="Home" android:icon="@drawable/home" />
-    <item android:id="@+id/nav_services" android:title="My Services/Products" android:icon="@drawable/categories" />
-    <item android:id="@+id/nav_bookings" android:title="Bookings" android:icon="@drawable/booking" />
-    <item android:id="@+id/nav_categories" android:title="Categories" android:icon="@drawable/categories" />
-    <item android:id="@+id/nav_reviews" android:title="Reviews and Ratings" android:icon="@drawable/review" />
-    <item android:id="@+id/nav_messages" android:title="Messages" android:icon="@drawable/message" />
-    <item android:id="@+id/nav_notifications" android:title="Notifications" android:icon="@drawable/notification" />
-    <item android:id="@+id/nav_profile" android:title="Profile" android:icon="@drawable/person" />
-    <item android:id="@+id/nav_logout" android:title="Log out" android:icon="@drawable/logout" />
 </menu>

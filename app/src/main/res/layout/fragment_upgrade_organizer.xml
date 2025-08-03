@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#F8F8F8"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:text="Complete Organizer Registration"
+            android:textColor="#523D35"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="Please complete the form to upgrade your role."
+            android:textColor="#6E6E6E"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Email (readonly) -->
+        <EditText
+            android:id="@+id/emailEditText"
+            android:hint="Email"
+            android:enabled="false"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Password (readonly) -->
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:hint="Password"
+            android:enabled="false"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Confirm Password -->
+        <EditText
+            android:id="@+id/confirmPasswordEditText"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Name -->
+        <EditText
+            android:id="@+id/nameEditText"
+            android:hint="Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Surname -->
+        <EditText
+            android:id="@+id/surnameEditText"
+            android:hint="Surname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Address -->
+        <EditText
+            android:id="@+id/addressEditText"
+            android:hint="Address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- City (just plain input) -->
+        <EditText
+            android:id="@+id/cityEditText"
+            android:hint="City"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Phone -->
+        <EditText
+            android:id="@+id/phoneEditText"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Upload photo -->
+        <Button
+            android:id="@+id/selectPhotoButton"
+            android:text="Select Photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/selectedPhotoTextView"
+            android:text="No file selected"
+            android:layout_marginBottom="12dp"
+            android:textColor="#777777"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Confirm -->
+        <Button
+            android:id="@+id/confirmButton"
+            android:text="Confirm"
+            android:backgroundTint="#523D35"
+            android:textColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>

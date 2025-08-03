@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_report_dialog"
+    android:elevation="4dp">
+
+    <TextView
+        android:id="@+id/report_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Report User"
+        android:textStyle="bold"
+        android:textColor="#523D35"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:id="@+id/reporting_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reporting: User Name"
+        android:textColor="#333"
+        android:layout_marginBottom="10dp" />
+
+    <EditText
+        android:id="@+id/report_reason"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="Enter reason for report..."
+        android:background="@drawable/bg_textarea"
+        android:gravity="top|start"
+        android:padding="10dp"
+        android:inputType="textMultiLine"
+        android:textColor="#000"
+        android:textColorHint="#999" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/submit_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#523D35" />
+
+        <Button
+            android:id="@+id/cancel_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="#DDDDDD"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+</LinearLayout>
