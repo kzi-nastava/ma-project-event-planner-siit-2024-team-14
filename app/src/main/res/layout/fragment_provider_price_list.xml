@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/price_list_container"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.solutions.pricelist.ProviderPriceListFragment">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="My Pricelist"
+            android:textColor="@color/project_brown"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Button -->
+        <ImageButton
+            android:id="@+id/export_pdf_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_save"
+            android:contentDescription="Export to PDF"
+            app:tint="@color/project_brown"/>
+    </LinearLayout>
+
+
+    <!-- List of Items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pricelist_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/item_pricelist_row" />
+
+</LinearLayout>

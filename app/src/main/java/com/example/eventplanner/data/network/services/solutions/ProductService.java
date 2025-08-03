@@ -32,4 +32,7 @@ public interface ProductService {
     @DELETE(BASE_URL + "/{id}")
     Call<Void> deleteById(@Path("id") int id);
 
+    @PUT(BASE_URL + "/{id}")
+    Call<ProductModel> update(@Path("id") int id, @Body ProductModel product);
+
 }
