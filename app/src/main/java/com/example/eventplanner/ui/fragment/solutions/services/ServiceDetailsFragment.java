@@ -139,9 +139,14 @@ public class ServiceDetailsFragment extends Fragment {
                         p -> {
                             binding.editServiceButton.setClickable(true);
                             binding.editServiceButton.setVisibility(View.VISIBLE);
-                            binding.editServiceButton.setOnClickListener(view -> {
-                                Log.w(TAG, "TODO: Implement Edit Service");
-                            });
+                            binding.editServiceButton.setOnClickListener(view ->
+                                    FragmentTransition.to(
+                                            UpdateServiceFragment.newInstance(serviceId),
+                                            requireActivity(),
+                                            R.id.home_page_fragment,
+                                            true
+                                    )
+                            );
                         },
                         // Otherwise
                         () -> {

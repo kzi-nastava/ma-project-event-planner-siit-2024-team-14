@@ -116,6 +116,10 @@ public class AddServiceFragment extends Fragment {
                 .map(String::valueOf)
                 .ifPresent(form.cancellationPeriodInput::setText);
 
+        Optional.ofNullable(service.getReservationType())
+                .map(ReservationType.AUTOMATIC::equals)
+                .ifPresent(form.autoAcceptCbx::setChecked);
+
         Category category = service.getCategory();
         if (category == null)
             return;
