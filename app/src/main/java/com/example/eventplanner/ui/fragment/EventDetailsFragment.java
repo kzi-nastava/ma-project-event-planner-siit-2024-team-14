@@ -53,6 +53,11 @@ public class EventDetailsFragment extends Fragment {
 
         if (eventId != -1) {
             fetchEventDetails(eventId);
+
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.budget_layout, EventBudgetFragment.newInstance(eventId))
+                    .commit();
         }
     }
 

@@ -1,5 +1,7 @@
 package com.example.eventplanner.data.model.solutions;
 
+import androidx.annotation.NonNull;
+
 import com.example.eventplanner.data.model.BaseEntityModel;
 
 public class Category extends BaseEntityModel {
@@ -38,5 +40,11 @@ public class Category extends BaseEntityModel {
     }
 
     //endregion
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name;
+    }
 
 }
