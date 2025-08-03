@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class CreateEventModel {
+    private int id;
     private String name;
     private String description;
     private List<String> categories;
@@ -21,6 +22,14 @@ public class CreateEventModel {
     }
 
     // Getteri i setteri
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

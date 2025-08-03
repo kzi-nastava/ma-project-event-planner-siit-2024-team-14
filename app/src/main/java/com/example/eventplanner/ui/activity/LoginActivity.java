@@ -127,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("token", loginResponse.getToken());
         editor.putString("user", new Gson().toJson(loginResponse.getUser()));
         editor.putString("userCity", loginResponse.getUser().getCity());
+        editor.putString("userEmail", loginResponse.getUser().getEmail());
         editor.putInt("userId", loginResponse.getUser().getId());
         editor.putString("userPassword", loginResponse.getUser().getPassword());
         editor.putString("role", loginResponse.getUser().getRole());

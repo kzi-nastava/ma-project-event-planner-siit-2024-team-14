@@ -16,10 +16,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.eventplanner.data.model.solutions.services.*;
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.users.UserModel;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.auth.AuthService;
 import com.example.eventplanner.databinding.FragmentServiceDetailsBinding;
+import com.example.eventplanner.ui.fragment.ChatFragment;
 import com.example.eventplanner.ui.fragment.FragmentTransition;
 import com.example.eventplanner.ui.fragment.HomeFragment;
 import com.example.eventplanner.ui.fragment.ServiceReservationFragment;
@@ -131,56 +131,59 @@ public class ServiceDetailsFragment extends Fragment {
 
 
     private void adjustActions(ServiceModel service) {
-        Optional.ofNullable(auth.getUser())
-                .filter(user -> ROLE_PROVIDER.equalsIgnoreCase(user.getRole()))
-                .filter(provider -> Objects.equals(provider.getId(), service.getProvider().getId()))
-                .ifPresentOrElse(
-                        // User is provider that provides this service
-                        p -> {
-                            binding.editServiceButton.setClickable(true);
-                            binding.editServiceButton.setVisibility(View.VISIBLE);
-                            binding.editServiceButton.setOnClickListener(view -> {
-                                Log.w(TAG, "TODO: Implement Edit Service");
-                            });
-                        },
-                        // Otherwise
-                        () -> {
-                            binding.providerCompanyName.setClickable(true);
-                            binding.providerCompanyName.setOnClickListener(view -> {
-                                Bundle args = new Bundle();
-                                args.putInt("providerId", service.getProvider().getId());
 
-                                Fragment providerProfileFragment = new ViewProviderProfileFragment();
-                                providerProfileFragment.setArguments(args);
-                                FragmentTransition.to(providerProfileFragment, requireActivity(), R.layout.fragment_home, true);
-                            });
+        // is provider looking at his own service
+        if (auth.hasRole(ROLE_PROVIDER) && Objects.equals(auth.getUser().getId(), service.getProvider().getId())) {
+            binding.editServiceButton.setClickable(true);
+            binding.editServiceButton.setVisibility(View.VISIBLE);
+            binding.editServiceButton.setOnClickListener(view ->
+                    FragmentTransition.to(
+                            UpdateServiceFragment.newInstance(serviceId),
+                            requireActivity(),
+                            R.id.home_page_fragment,
+                            true
+                    )
+            );
+            return;
+        }
 
-                            SpannableString companyName = new SpannableString(binding.providerCompanyName.getText());
-                            companyName.setSpan(new UnderlineSpan(), 0, companyName.length(), 0);
-                            binding.providerCompanyName.setText(companyName);
-                        }
-                );
+        // allow organizers to contact provider
+        if (auth.hasRole(ROLE_ORGANIZER)) {
+            binding.chatWithProviderButton.setVisibility(View.VISIBLE);
+            binding.chatWithProviderButton.setOnClickListener(view ->
+                    FragmentTransition.to(
+                            ChatFragment.newInstance(service.getProvider().getId()),
+                            requireActivity(),
+                            R.id.home_page_fragment,
+                            true
+                    )
+            );
+        }
+
+        // link to provider profile
+        binding.providerCompanyName.setClickable(true);
+        binding.providerCompanyName.setOnClickListener(view -> {
+            Bundle args = new Bundle();
+            args.putInt("providerId", service.getProvider().getId());
+
+            Fragment providerProfileFragment = new ViewProviderProfileFragment();
+            providerProfileFragment.setArguments(args);
+            FragmentTransition.to(providerProfileFragment, requireActivity(), R.layout.fragment_home, true);
+        });
+
+        SpannableString companyName = new SpannableString(binding.providerCompanyName.getText());
+        companyName.setSpan(new UnderlineSpan(), 0, companyName.length(), 0);
+        binding.providerCompanyName.setText(companyName);
     }
 
     private void adjustActions() {
-        Optional.ofNullable(auth.getUser())
-                .map(UserModel::getRole)
-                .ifPresent(
-                        role -> {
-                            if (ROLE_ORGANIZER.equalsIgnoreCase(role)) {
-                                binding.bookServiceButton.setVisibility(View.VISIBLE);
-                                binding.bookServiceButton.setOnClickListener(v -> {
-                                    Fragment reservationFragment = ServiceReservationFragment.newInstance(serviceId);
-                                    FragmentTransition.to(reservationFragment, requireActivity(), R.id.home_page_fragment, true);
-                                });
-
-                                binding.chatWithProviderButton.setVisibility(View.VISIBLE);
-                                binding.chatWithProviderButton.setOnClickListener(view -> {
-                                    Log.w(TAG, "TODO: Implement Chat With Provider");
-                                });
-                            }
-                        }
-                );
+        if (auth.hasRole(ROLE_ORGANIZER)) {
+            binding.bookServiceButton.setVisibility(View.VISIBLE);
+            binding.bookServiceButton.setOnClickListener(v -> {
+                Fragment reservationFragment = ServiceReservationFragment.newInstance(serviceId);
+                FragmentTransition.to(reservationFragment, requireActivity(), R.id.home_page_fragment, true);
+            });
+        }
     }
 
 }
