@@ -27,7 +27,6 @@ import com.example.eventplanner.ui.fragment.InvitationRegisterFragment;
 import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
-import com.example.eventplanner.ui.fragment.SettingsFragment;
 import com.example.eventplanner.ui.fragment.solutions.ProviderSolutionsFragment;
 import com.example.eventplanner.ui.fragment.JoinedEventsFragment;
 import com.example.eventplanner.ui.fragment.UpgradeAsProviderFragment;
@@ -245,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void logoutUser() {
+    public void logoutUser() {
         ClientUtils.authService.logout();
         if (prefs != null) {
             prefs.edit().clear().apply();
