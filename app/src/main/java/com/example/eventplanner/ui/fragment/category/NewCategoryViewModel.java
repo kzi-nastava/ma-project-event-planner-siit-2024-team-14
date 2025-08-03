@@ -32,7 +32,7 @@ public class NewCategoryViewModel extends ViewModel {
     public LiveData<Boolean> getSuccess() { return success; }
 
     public void setCategory(Category category) {
-        this.category.setValue(category);
+        this.category.postValue(category);
     }
 
     public void setCategoryName(String newName) {

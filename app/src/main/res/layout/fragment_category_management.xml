@@ -6,10 +6,19 @@
     tools:context=".ui.fragment.CategoryManagementFragment"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TODO: Add actions"/>
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"
+        android:layout_gravity="end">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_category"
+            android:id="@+id/action_add_category"/>
+    </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"

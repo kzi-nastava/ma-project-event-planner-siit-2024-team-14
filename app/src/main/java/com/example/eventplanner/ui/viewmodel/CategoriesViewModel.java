@@ -18,6 +18,7 @@ import retrofit2.Response;
 public class CategoriesViewModel extends ViewModel {
 
     private final MutableLiveData<Collection<Category>> categories = new MutableLiveData<>(List.of());
+    private final MutableLiveData<Integer> deleted = new MutableLiveData<>();
     private final MutableLiveData<String> errorMessage = new MutableLiveData<>("");
 
 
@@ -28,6 +29,10 @@ public class CategoriesViewModel extends ViewModel {
 
     public LiveData<String> getErrorMessage() {
         return errorMessage;
+    }
+
+    public LiveData<Integer> getDeleted() {
+        return deleted;
     }
 
 
@@ -45,6 +50,20 @@ public class CategoriesViewModel extends ViewModel {
             @Override
             public void onFailure(@NonNull Call<Collection<Category>> call, @NonNull Throwable t) {
                 errorMessage.postValue(t.getMessage());
+            }
+        });
+    }
+
+    public void deleteCategory(Category category) {
+        ClientUtils.categoryService.deleteCategory(category.getId()).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+
             }
         });
     }

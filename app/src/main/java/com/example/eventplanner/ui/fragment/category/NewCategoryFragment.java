@@ -1,6 +1,5 @@
 package com.example.eventplanner.ui.fragment.category;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -11,8 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
-import android.text.NoCopySpan;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +20,6 @@ import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.Category;
 import com.example.eventplanner.databinding.FragmentNewCategoryBinding;
 
-import org.w3c.dom.Text;
-
-import java.util.Objects;
-import java.util.Optional;
 
 public class NewCategoryFragment extends Fragment {
 
@@ -66,8 +59,6 @@ public class NewCategoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(this).get(NewCategoryViewModel.class);
-
         Bundle args = getArguments();
         Category category = new Category();
         // different form title and btn text when updating/creating
@@ -86,6 +77,8 @@ public class NewCategoryFragment extends Fragment {
             category.setName(args.getString(ARG_NAME, ""));
             category.setDescription(args.getString(ARG_DESCRIPTION, ""));
         }
+
+        viewModel = new ViewModelProvider(args == null ? requireActivity() : this).get(NewCategoryViewModel.class);
 
         binding.twTitle.setText(titleResId);
         binding.btnSubmit.setText(submitTextResId);

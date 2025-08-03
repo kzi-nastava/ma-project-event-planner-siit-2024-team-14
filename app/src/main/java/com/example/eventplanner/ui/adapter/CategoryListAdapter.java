@@ -1,40 +1,41 @@
 package com.example.eventplanner.ui.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.Category;
-import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.databinding.CategoryCardBinding;
 
-//import java.util.Arrays;
-//import java.util.Collection;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 
 public class CategoryListAdapter extends ArrayAdapter<Category> {
+
+    public interface OnCategoryClickedListener {
+        void onCategoryDelete(Category category);
+        void onCategoryUpdate(Category category);
+    }
+
+    private OnCategoryClickedListener listener;
+
+    public void setOnCategoryClickedListener(OnCategoryClickedListener listener) {
+        this.listener = listener;
+    }
 
     //private List<Category> categories;
     //private Context context;
 
 
-    public CategoryListAdapter(Context context, List<Category> categories) {
-        super(context, R.layout.category_card, categories);
+    public CategoryListAdapter(Context context, Category... categories) {
+        super(context, R.layout.category_card, Arrays.stream(categories).collect(Collectors.toList()));
         //this.categories = categories;
         //this.context = context;
     }
@@ -56,37 +57,13 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
             cardViewBinding.twCategoryDescription.setText(category.getDescription());
 
             cardViewBinding.actionDelete.setOnClickListener(v -> {
-                Log.i("EventPlanner", String.format("Delete category [%d].", category.getId()));
-                new AlertDialog.Builder(parent.getContext())
-                        .setMessage(String.format("Are you sure you want to delete category '%s'?", category.getName()))
-                        .setPositiveButton(
-                                "Yes",
-                                (dialogInterface, i) -> ClientUtils.categoryService.deleteCategory(category.getId())
-                                        .enqueue(new Callback<Void>() {
-                                            @Override
-                                            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                                                if (response.isSuccessful()) {
-                                                    remove(category);
-                                                    Toast.makeText(parent.getContext(), "Successfully deleted category.", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(parent.getContext(), "Failed to delete category. Code: " + response.code(), Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                                                Toast.makeText(parent.getContext(), "Failed to delete category: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        })
-                        )
-                        .setNegativeButton("No", (dialogInterface, i) -> {
-
-                        })
-                        .show();
+                if (listener != null)
+                    listener.onCategoryDelete(category);
             });
 
             cardViewBinding.actionEdit.setOnClickListener(v -> {
-                Log.i("EventPlanner", String.format("Edit category [%d].", category.getId()));
+                if (listener != null)
+                    listener.onCategoryUpdate(category);
             });
         }
 
