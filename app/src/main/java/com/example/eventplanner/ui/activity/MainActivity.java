@@ -31,6 +31,7 @@ import com.example.eventplanner.ui.fragment.solutions.ProviderSolutionsFragment;
 import com.example.eventplanner.ui.fragment.JoinedEventsFragment;
 import com.example.eventplanner.ui.fragment.UpgradeAsProviderFragment;
 import com.example.eventplanner.ui.fragment.UpgradeOrganizerFragment;
+import com.example.eventplanner.ui.fragment.solutions.pricelist.ProviderPriceListFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             }else if(id == R.id.nav_booking_requests){
                 selectedFragment = new BookingServiceRequestFragment();
             }else if(id == R.id.nav_price_list){
-                return true;
+                selectedFragment = ProviderPriceListFragment.newInstance();
             }
 
             if (selectedFragment != null) {
@@ -220,9 +221,7 @@ public class MainActivity extends AppCompatActivity {
             case "eventorganizer":
                 menu.add(Menu.NONE, R.id.nav_my_events, Menu.NONE, "My events");
                 menu.add(Menu.NONE, R.id.nav_calendar, Menu.NONE, "Calendar");
-                menu.add(Menu.NONE, R.id.nav_categories, Menu.NONE, "Categories");
                 menu.add(Menu.NONE, R.id.nav_invitations, Menu.NONE, "Invitations");
-                menu.add(Menu.NONE, R.id.nav_budget_planning, Menu.NONE, "Budget planning");
                 menu.add(Menu.NONE, R.id.nav_favourites, Menu.NONE, "Favourite services/products");
                 menu.add(Menu.NONE, R.id.nav_messages, Menu.NONE, "Messages");
                 menu.add(Menu.NONE, R.id.nav_notifications, Menu.NONE, "Notifications");
@@ -234,7 +233,6 @@ public class MainActivity extends AppCompatActivity {
                 menu.add(Menu.NONE, R.id.nav_all_bookings, Menu.NONE, "All Bookings");
                 menu.add(Menu.NONE, R.id.nav_booking_requests, Menu.NONE, "Booking service requests");
                 menu.add(Menu.NONE, R.id.nav_reviews, Menu.NONE, "Reviews and ratings");
-                menu.add(Menu.NONE, R.id.nav_categories, Menu.NONE, "Categories");
                 menu.add(Menu.NONE, R.id.nav_price_list, Menu.NONE, "Price list");
                 menu.add(Menu.NONE, R.id.nav_notifications, Menu.NONE, "Notifications");
                 menu.add(Menu.NONE, R.id.nav_messages, Menu.NONE, "Messages");
