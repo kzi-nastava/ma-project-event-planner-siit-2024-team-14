@@ -1,8 +1,12 @@
 package com.example.eventplanner.data.model.solutions.services;
 
+import com.example.eventplanner.data.model.BaseEntityModel;
 import com.example.eventplanner.data.model.solutions.Visibility;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UpdateService {
     transient Integer id;
@@ -24,6 +28,40 @@ public class UpdateService {
     //region Constructors
 
     public UpdateService() {}
+
+    public UpdateService(ServiceModel service) {
+        if (service == null)
+            return;
+
+        id = service.getId();
+        name = service.getName();
+        description = service.getDescription();
+        price = service.getPrice();
+        discount = service.getDiscount();
+
+        Optional.ofNullable(service.getApplicableEventTypes())
+                .map(types -> types.stream().map(BaseEntityModel::getId))
+                .map(types -> types.collect(Collectors.toList()))
+                .ifPresent(this::setApplicableEventTypeIds);
+
+        this.durationMinutes = (long) service.getDurationMinutes();
+        this.minDurationMinutes = (long) service.getMinDurationMinutes();
+        this.maxDurationMinutes = (long) service.getMaxDurationMinutes();
+        this.reservationPeriodDays = (long) service.getReservationPeriodDays();
+        this.cancellationPeriodDays = (long) service.getCancellationPeriodDays();
+
+        try {
+            reservationType = ReservationType.valueOf(service.getReservationType());
+        } catch (IllegalArgumentException e) {
+            // pass
+        }
+        try {
+            visibility = Visibility.valueOf(service.getVisibility());
+        } catch (IllegalArgumentException e) {
+            // pass
+        }
+        available = service.isAvailable();
+    }
 
     //endregion
 

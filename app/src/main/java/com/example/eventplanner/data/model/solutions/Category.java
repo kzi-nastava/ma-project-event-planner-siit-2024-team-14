@@ -9,7 +9,9 @@ public class Category extends BaseEntityModel {
 
     public Category() { super(); }
 
-    public Category(int id, String name, String description) {
+    public Category(Integer id) { super(id); }
+
+    public Category(Integer id, String name, String description) {
         super(id);
         this.name = name;
         this.description = description;

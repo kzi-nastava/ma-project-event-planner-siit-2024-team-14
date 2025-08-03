@@ -8,7 +8,7 @@ public abstract class BaseEntityModel {
 
     protected BaseEntityModel() {}
 
-    protected BaseEntityModel(int id) {
+    protected BaseEntityModel(Integer id) {
         this.id = id;
     }
 

@@ -103,8 +103,16 @@ public class OfferingModel {
     }
 
     public String getSolutionType() {
-        if (solutionType == null)
-            solutionType = getClass().getSimpleName();
+        if (solutionType == null) {
+            String className = getClass().getSimpleName().toLowerCase();
+
+            if (className.contains("service"))
+                solutionType = "service";
+            else if (className.contains("product"))
+                solutionType = "product";
+            else
+                solutionType = className;
+        }
 
         return solutionType;
     }

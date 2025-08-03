@@ -2,11 +2,10 @@ package com.example.eventplanner.data.model.solutions.services;
 
 import com.example.eventplanner.data.model.solutions.OfferingModel;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ServiceModel extends OfferingModel {
-
-
+public class ServiceModel extends OfferingModel implements Serializable {
     private List<String> imageURLs;
 
     private String visibility;

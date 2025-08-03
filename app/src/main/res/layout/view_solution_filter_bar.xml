@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/project_green_bottom_navbar"
+    android:padding="8dp"
+    android:layout_marginTop="16dp"
+    android:gravity="center_vertical">
+
+    <EditText
+        android:id="@+id/search_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/search_hint"
+        android:background="@android:color/transparent"
+        android:inputType="textFilter"
+        android:textColor="#5E4631"
+        android:padding="8dp"
+        android:textSize="10sp"
+        tools:ignore="SmallSp"
+        android:importantForAutofill="no" />
+
+    <ImageView
+        android:id="@+id/search_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="Search Icon"
+        android:src="@android:drawable/ic_menu_search"
+        app:tint="#523D35"
+        android:layout_marginEnd="12dp"/>
+
+
+    <ImageButton
+        android:id="@+id/toggle_filters_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Filter Icon"
+        android:src="@drawable/ic_filter_list"
+        app:tint="#523D35" />
+
+</LinearLayout>
