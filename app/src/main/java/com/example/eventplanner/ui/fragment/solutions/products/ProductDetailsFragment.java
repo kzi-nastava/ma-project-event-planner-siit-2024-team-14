@@ -22,7 +22,9 @@ import com.example.eventplanner.data.model.solutions.products.*;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.auth.AuthService;
 import com.example.eventplanner.databinding.FragmentProductDetailsBinding;
+import com.example.eventplanner.ui.fragment.ChatFragment;
 import com.example.eventplanner.ui.fragment.FragmentTransition;
+import com.example.eventplanner.ui.fragment.ServiceReservationFragment;
 import com.example.eventplanner.ui.fragment.ViewProviderProfileFragment;
 
 import java.text.NumberFormat;
@@ -109,53 +111,53 @@ public class ProductDetailsFragment extends Fragment {
     }
 
 
-    private void adjustActions() {
-        Optional.ofNullable(auth.getUser())
-                .map(u -> u.getRole())
-                .ifPresent(
-                        role -> {
-                            if (ROLE_ORGANIZER.equalsIgnoreCase(role)) {
-                                binding.purchaseProductButton.setVisibility(View.VISIBLE);
-                                binding.purchaseProductButton.setOnClickListener(v -> Log.w(TAG, "TODO: Implement Product Purchasing"));
+    private void adjustActions(ProductModel product) {
 
-                                binding.chatWithProviderButton.setVisibility(View.VISIBLE);
-                                binding.chatWithProviderButton.setOnClickListener(view -> {
-                                    Log.w(TAG, "TODO: Implement Chat With Provider");
-                                });
-                            }
-                        }
-                );
+        // is provider looking at his own product
+        if (auth.hasRole(ROLE_PROVIDER) && Objects.equals(auth.getUser().getId(), product.getProvider().getId())) {
+            binding.editProductButton.setClickable(true);
+            binding.editProductButton.setVisibility(View.VISIBLE);
+            binding.editProductButton.setOnClickListener(view -> Log.w(TAG, "TODO: Navigate to edit product"));
+            return;
+        }
+
+        // allow organizers to contact provider
+        if (auth.hasRole(ROLE_ORGANIZER)) {
+            binding.chatWithProviderButton.setVisibility(View.VISIBLE);
+            binding.chatWithProviderButton.setOnClickListener(view ->
+                    FragmentTransition.to(
+                            ChatFragment.newInstance(product.getProvider().getId()),
+                            requireActivity(),
+                            R.id.home_page_fragment,
+                            true
+                    )
+            );
+        }
+
+        // link to provider profile
+        binding.providerCompanyName.setClickable(true);
+        binding.providerCompanyName.setOnClickListener(view -> {
+            Bundle args = new Bundle();
+            args.putInt("providerId", product.getProvider().getId());
+
+            Fragment providerProfileFragment = new ViewProviderProfileFragment();
+            providerProfileFragment.setArguments(args);
+            FragmentTransition.to(providerProfileFragment, requireActivity(), R.layout.fragment_home, true);
+        });
+
+        SpannableString companyName = new SpannableString(binding.providerCompanyName.getText());
+        companyName.setSpan(new UnderlineSpan(), 0, companyName.length(), 0);
+        binding.providerCompanyName.setText(companyName);
     }
 
-
-    private void adjustActions(ProductModel product) {
-        Optional.ofNullable(auth.getUser())
-                .filter(user -> ROLE_PROVIDER.equalsIgnoreCase(user.getRole()))
-                .filter(provider -> Objects.equals(provider.getId(), product.getProviderId()))
-                .ifPresentOrElse(
-                        provider -> {
-                            binding.editProductButton.setClickable(true);
-                            binding.editProductButton.setVisibility(View.VISIBLE);
-                            binding.editProductButton.setOnClickListener(view -> {
-                                Log.w(TAG, "TODO: Implement Edit Product");
-                            });
-                        },
-                        () -> {
-                            binding.providerCompanyName.setClickable(true);
-                            binding.providerCompanyName.setOnClickListener(view -> {
-                                Bundle args = new Bundle();
-                                args.putInt("providerId", product.getProviderId());
-
-                                Fragment providerProfileFragment = new ViewProviderProfileFragment();
-                                providerProfileFragment.setArguments(args);
-                                FragmentTransition.to(providerProfileFragment, requireActivity(), R.layout.fragment_home, true);
-                            });
-
-                            SpannableString companyName = new SpannableString(binding.providerCompanyName.getText());
-                            companyName.setSpan(new UnderlineSpan(), 0, companyName.length(), 0);
-                            binding.providerCompanyName.setText(companyName);
-                        }
-                );
+    private void adjustActions() {
+        if (auth.hasRole(ROLE_ORGANIZER)) {
+            binding.purchaseProductButton.setVisibility(View.VISIBLE);
+            binding.purchaseProductButton.setOnClickListener(v -> {
+                Fragment reservationFragment = ServiceReservationFragment.newInstance(id);
+                FragmentTransition.to(reservationFragment, requireActivity(), R.id.home_page_fragment, true);
+            });
+        }
     }
 
 }
