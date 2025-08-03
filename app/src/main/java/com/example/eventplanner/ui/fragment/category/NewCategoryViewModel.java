@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.eventplanner.data.model.Category;
+import com.example.eventplanner.data.model.solutions.Category;
 import com.example.eventplanner.data.network.ClientUtils;
-import com.example.eventplanner.data.network.services.offerings.categories.CategoryService;
+import com.example.eventplanner.data.network.services.solutions.CategoryService;
 
 import androidx.annotation.NonNull;
 
@@ -61,7 +61,7 @@ public class NewCategoryViewModel extends ViewModel {
 
 
     public void addNewCategory(Category category) {
-        categories.addCategory(Objects.requireNonNull(category))
+        categories.add(Objects.requireNonNull(category))
                 .enqueue(new Callback<Category>() {
                     @Override
                     public void onResponse(@NonNull Call<Category> call, @NonNull Response<Category> response) {
@@ -81,7 +81,7 @@ public class NewCategoryViewModel extends ViewModel {
 
 
     public void updateCategory(Category category) {
-        categories.updateCategory(Objects.requireNonNull(category))
+        categories.update(category.getId(), Objects.requireNonNull(category))
                 .enqueue(new Callback<Category>() {
                     @Override
                     public void onResponse(@NonNull Call<Category> call, @NonNull Response<Category> response) {

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.eventplanner.data.model.Category;
+import com.example.eventplanner.data.model.solutions.Category;
 import com.example.eventplanner.data.network.ClientUtils;
 
 import java.util.Collection;
@@ -37,9 +37,9 @@ public class CategoriesViewModel extends ViewModel {
 
 
     public void loadCategories() {
-        ClientUtils.categoryService.getAllCategories().enqueue(new Callback<Collection<Category>>() {
+        ClientUtils.categoryService.getAll().enqueue(new Callback<List<Category>>() {
             @Override
-            public void onResponse(@NonNull Call<Collection<Category>> call, @NonNull Response<Collection<Category>> response) {
+            public void onResponse(@NonNull Call<List<Category>> call, @NonNull Response<List<Category>> response) {
                 if (response.isSuccessful()) {
                     categories.postValue(response.body());
                 } else {
@@ -48,22 +48,25 @@ public class CategoriesViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(@NonNull Call<Collection<Category>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<Category>> call, @NonNull Throwable t) {
                 errorMessage.postValue(t.getMessage());
             }
         });
     }
 
     public void deleteCategory(Category category) {
-        ClientUtils.categoryService.deleteCategory(category.getId()).enqueue(new Callback<Void>() {
+        ClientUtils.categoryService.deleteById(category.getId()).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-
+                if (response.isSuccessful())
+                    deleted.postValue(category.getId());
+                else
+                    errorMessage.postValue("Failed to delete category " + category.getId() + ". Code: " + response.code());
             }
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-
+                errorMessage.postValue(t.getMessage());
             }
         });
     }

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.Category;
+import com.example.eventplanner.data.model.solutions.Category;
 import com.example.eventplanner.databinding.CategoryCardBinding;
 
 import java.util.Arrays;

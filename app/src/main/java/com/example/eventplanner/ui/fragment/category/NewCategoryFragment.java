@@ -9,16 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.Category;
+import com.example.eventplanner.data.model.solutions.Category;
 import com.example.eventplanner.databinding.FragmentNewCategoryBinding;
+import com.example.eventplanner.ui.util.SimpleTextWatcher;
 
 
 public class NewCategoryFragment extends Fragment {
@@ -88,11 +87,11 @@ public class NewCategoryFragment extends Fragment {
         binding.etCategoryDescription.setText(category.getDescription());
 
         binding.etCategoryName.addTextChangedListener(
-                (SimpleTextWatcher) (charSequence, i, i1, i2) -> viewModel.setCategoryName(charSequence.toString())
+                SimpleTextWatcher.AfterTextChanged(editable -> viewModel.setCategoryName(editable.toString()))
         );
 
         binding.etCategoryDescription.addTextChangedListener(
-                (SimpleTextWatcher) (charSequence, i, i1, i2) -> viewModel.setCategoryDescription(charSequence.toString())
+                SimpleTextWatcher.AfterTextChanged(editable -> viewModel.setCategoryDescription(editable.toString()))
         );
 
         binding.btnSubmit.setOnClickListener(v -> onSubmit());
@@ -134,14 +133,4 @@ public class NewCategoryFragment extends Fragment {
         binding = null;
     }
 
-
-    // TODO: Figure out the appropriate place for this interface?
-
-    interface SimpleTextWatcher extends TextWatcher {
-        @Override
-        default void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-        @Override
-        default void afterTextChanged(Editable editable) {}
-    }
 }

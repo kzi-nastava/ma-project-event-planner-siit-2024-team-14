@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.category;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,10 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.eventplanner.R;
-import com.example.eventplanner.data.model.Category;
+import com.example.eventplanner.data.model.solutions.Category;
 import com.example.eventplanner.databinding.FragmentCategoryManagementBinding;
 import com.example.eventplanner.ui.adapter.CategoryListAdapter;
-import com.example.eventplanner.ui.fragment.category.NewCategoryFragment;
 import com.example.eventplanner.ui.viewmodel.CategoriesViewModel;
 
 public class CategoryManagementFragment extends Fragment {
