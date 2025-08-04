@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.chat;
 
 import static com.example.eventplanner.data.model.users.UserModel.ROLE_ORGANIZER;
 import static com.example.eventplanner.data.model.users.UserModel.ROLE_PROVIDER;
@@ -29,6 +29,10 @@ import com.example.eventplanner.data.network.auth.AuthService;
 import com.example.eventplanner.data.network.services.chat.ChatService;
 import com.example.eventplanner.databinding.FragmentChatBinding;
 import com.example.eventplanner.ui.adapter.MessageAdapter;
+import com.example.eventplanner.ui.fragment.FragmentTransition;
+import com.example.eventplanner.ui.fragment.HomeFragment;
+import com.example.eventplanner.ui.fragment.profiles.ViewOrganizerProfileFragment;
+import com.example.eventplanner.ui.fragment.profiles.ViewProviderProfileFragment;
 
 import java.util.Optional;
 

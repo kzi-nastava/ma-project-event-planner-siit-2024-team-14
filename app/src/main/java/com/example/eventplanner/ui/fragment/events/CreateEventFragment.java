@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.events;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import com.example.eventplanner.data.model.events.CategoriesEtModel;
 import com.example.eventplanner.data.model.events.CreateEventModel;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.events.EventService;
+import com.example.eventplanner.ui.fragment.invitations.InvitationFragment;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;

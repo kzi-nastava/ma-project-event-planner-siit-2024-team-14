@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.budget;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;

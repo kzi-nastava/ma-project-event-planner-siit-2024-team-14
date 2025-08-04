@@ -1,5 +1,4 @@
 package com.example.eventplanner.ui.adapter;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.events.EventModel;
-import com.example.eventplanner.ui.fragment.EventDetailsFragment;
+import com.example.eventplanner.ui.fragment.events.EventDetailsFragment;
 import java.util.List;
 import android.content.Context;
 

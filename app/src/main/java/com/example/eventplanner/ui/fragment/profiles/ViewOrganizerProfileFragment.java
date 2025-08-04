@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.profiles;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
@@ -18,6 +18,7 @@ import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.users.OrganizerModel;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.profiles.OrganizerService;
+import com.example.eventplanner.ui.fragment.chat.ChatFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;

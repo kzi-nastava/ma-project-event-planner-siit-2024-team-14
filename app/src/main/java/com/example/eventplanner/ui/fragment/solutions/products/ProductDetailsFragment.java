@@ -22,10 +22,10 @@ import com.example.eventplanner.data.model.solutions.products.*;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.auth.AuthService;
 import com.example.eventplanner.databinding.FragmentProductDetailsBinding;
-import com.example.eventplanner.ui.fragment.ChatFragment;
+import com.example.eventplanner.ui.fragment.chat.ChatFragment;
 import com.example.eventplanner.ui.fragment.FragmentTransition;
-import com.example.eventplanner.ui.fragment.ServiceReservationFragment;
-import com.example.eventplanner.ui.fragment.ViewProviderProfileFragment;
+import com.example.eventplanner.ui.fragment.solutions.services.ServiceReservationFragment;
+import com.example.eventplanner.ui.fragment.profiles.ViewProviderProfileFragment;
 
 import java.text.NumberFormat;
 import java.util.Objects;

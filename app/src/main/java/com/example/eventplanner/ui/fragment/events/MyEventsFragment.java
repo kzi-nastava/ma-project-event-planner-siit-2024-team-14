@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.events;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;

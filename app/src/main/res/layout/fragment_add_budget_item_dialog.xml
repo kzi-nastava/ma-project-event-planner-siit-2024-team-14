@@ -7,7 +7,7 @@
     android:padding="16dp"
     android:layout_margin="3dp"
     android:background="@drawable/card_background"
-    tools:context=".ui.fragment.AddBudgetItemDialogFragment">
+    tools:context=".ui.fragment.budget.AddBudgetItemDialogFragment">
 
     <TextView
         android:layout_width="wrap_content"

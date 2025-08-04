@@ -2,7 +2,6 @@ package com.example.eventplanner.ui.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.invitations.GroupedInvitationModel;
 import com.example.eventplanner.data.model.invitations.InvitationModel;
-import com.example.eventplanner.ui.fragment.InvitationFragment;
+import com.example.eventplanner.ui.fragment.invitations.InvitationFragment;
 
 import java.util.ArrayList;
 import java.util.List;

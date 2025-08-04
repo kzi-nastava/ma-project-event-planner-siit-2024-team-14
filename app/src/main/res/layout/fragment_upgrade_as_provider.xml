@@ -1,93 +1,133 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#F8F8F8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    android:background="#F8F8F8">
+    android:padding="24dp">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
 
-        <!-- Email (read-only) -->
+        <TextView
+            android:text="Complete Provider Registration"
+            android:textColor="#523D35"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:text="Please complete the form to upgrade your role."
+            android:textColor="#6E6E6E"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Email -->
         <EditText
             android:id="@+id/emailEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:hint="Email"
             android:enabled="false"
-            android:background="@drawable/edittext_background" />
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
-        <!-- Password (read-only) -->
+        <!-- Password -->
         <EditText
             android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:hint="Password"
-            android:inputType="textPassword"
             android:enabled="false"
-            android:background="@drawable/edittext_background" />
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
         <!-- Confirm Password -->
         <EditText
             android:id="@+id/confirmPasswordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:hint="Confirm Password"
             android:inputType="textPassword"
-            android:background="@drawable/edittext_background" />
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
         <!-- Company Name -->
         <EditText
             android:id="@+id/companyNameEditText"
+            android:hint="Company Name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Company Name" />
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
-        <!-- Description -->
+        <!-- Company Description -->
         <EditText
             android:id="@+id/companyDescriptionEditText"
+            android:hint="Company Description"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Company Description" />
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
         <!-- Address -->
         <EditText
             android:id="@+id/addressEditText"
+            android:hint="Address"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Address" />
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
         <!-- City -->
         <EditText
             android:id="@+id/cityEditText"
+            android:hint="City"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="City" />
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
         <!-- Phone Number -->
         <EditText
             android:id="@+id/phoneEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:hint="Phone Number"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="16dp" />
 
         <!-- Select Photos -->
         <Button
             android:id="@+id/selectPhotosButton"
+            android:text="Select Photos (max 3)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select Photos (max 3)" />
+            android:layout_marginBottom="12dp" />
 
         <!-- Confirm -->
         <Button
             android:id="@+id/submitButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="Confirm Upgrade"
-            android:background="#523D35"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#523D35"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </ScrollView>

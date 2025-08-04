@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.au;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -99,7 +99,11 @@ public class InvitationRegisterFragment extends Fragment {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(getContext(), "Registration successful! Check your email.", Toast.LENGTH_LONG).show();
-                    // Optionally navigate away or close fragment
+                    if (getActivity() != null) {
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
                 } else {
                     Toast.makeText(getContext(), "Registration failed: " + response.message(), Toast.LENGTH_LONG).show();
                 }

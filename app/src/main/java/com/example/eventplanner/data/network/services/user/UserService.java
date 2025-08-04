@@ -2,7 +2,7 @@ package com.example.eventplanner.data.network.services.user;
 
 import com.example.eventplanner.data.model.login.LoginModel;
 import com.example.eventplanner.data.model.login.LoginResponseModel;
-import com.example.eventplanner.ui.fragment.InvitationRegisterFragment;
+import com.example.eventplanner.ui.fragment.au.InvitationRegisterFragment;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

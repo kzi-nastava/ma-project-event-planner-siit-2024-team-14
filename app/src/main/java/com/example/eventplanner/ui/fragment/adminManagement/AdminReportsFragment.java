@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.adminManagement;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

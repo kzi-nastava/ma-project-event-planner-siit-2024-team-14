@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.events;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,6 +18,8 @@ import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.events.EventModel;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.services.events.EventService;
+import com.example.eventplanner.ui.fragment.profiles.ViewOrganizerProfileFragment;
+import com.example.eventplanner.ui.fragment.budget.EventBudgetFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;

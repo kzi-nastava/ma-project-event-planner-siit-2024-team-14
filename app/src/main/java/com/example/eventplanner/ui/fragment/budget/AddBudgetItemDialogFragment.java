@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.budget;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.eventplanner.data.model.solutions.Category;
 import com.example.eventplanner.databinding.FragmentAddBudgetItemDialogBinding;
-
 
 
 public class AddBudgetItemDialogFragment extends DialogFragment {

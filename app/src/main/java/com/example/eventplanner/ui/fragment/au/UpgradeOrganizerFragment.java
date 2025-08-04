@@ -1,4 +1,4 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.au;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

@@ -1,7 +1,6 @@
-package com.example.eventplanner.ui.fragment;
+package com.example.eventplanner.ui.fragment.invitations;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +19,7 @@ import com.example.eventplanner.data.model.invitations.InvitationRequestModel;
 import com.example.eventplanner.data.network.ClientUtils;
 import com.example.eventplanner.data.network.SimpleTextWatcher;
 import com.example.eventplanner.data.network.services.invitations.InvitationService;
+import com.example.eventplanner.ui.fragment.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;

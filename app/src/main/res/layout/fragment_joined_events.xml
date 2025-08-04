@@ -5,7 +5,7 @@
     android:background="#DFD1C9"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".ui.fragment.JoinedEventsFragment">
+    tools:context=".ui.fragment.events.JoinedEventsFragment">
 
     <!-- Header title -->
     <TextView

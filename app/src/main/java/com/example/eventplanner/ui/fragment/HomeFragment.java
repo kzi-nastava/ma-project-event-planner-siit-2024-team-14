@@ -34,6 +34,7 @@ import com.bumptech.glide.Glide;
 import com.example.eventplanner.R;
 import com.example.eventplanner.ui.adapter.OurEventsAdapter;
 import com.example.eventplanner.ui.adapter.OurSolutionAdapter;
+import com.example.eventplanner.ui.fragment.events.EventDetailsFragment;
 import com.example.eventplanner.ui.fragment.solutions.SolutionDetailsFragment;
 
 import org.json.JSONArray;
