@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment {
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                fetchFilteredEvents();
+                fetchFilteredEventsLocally();
             }
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void afterTextChanged(Editable s) {}
@@ -702,6 +702,39 @@ public class HomeFragment extends Fragment {
 
         itemsToShow = 4;
         displayOurSolutions();
+    }
+
+    private void fetchFilteredEventsLocally() {
+        String query = etSearch.getText().toString().trim().toLowerCase(Locale.ROOT);
+        filteredEvents.clear();
+
+        if (query.isEmpty()) {
+            filteredEvents.addAll(originalEvents);
+        } else {
+            for (JSONObject obj : originalEvents) {
+                String name = obj.optString("name", "").toLowerCase(Locale.ROOT);
+                String desc = obj.optString("description", "").toLowerCase(Locale.ROOT);
+                String organizerFirst = obj.optString("organizerFirstName", "").toLowerCase(Locale.ROOT);
+                String organizerLast = obj.optString("organizerLastName", "").toLowerCase(Locale.ROOT);
+                String location = obj.optString("location", "").toLowerCase(Locale.ROOT);
+                String type = obj.optString("eventType", "").toLowerCase(Locale.ROOT);
+
+                if (
+                        name.contains(query) ||
+                                desc.contains(query) ||
+                                organizerFirst.contains(query) ||
+                                organizerLast.contains(query) ||
+                                (organizerFirst + " " + organizerLast).contains(query) ||
+                                location.contains(query) ||
+                                type.contains(query)
+                ) {
+                    filteredEvents.add(obj);
+                }
+            }
+        }
+
+        itemsToShow = 4;
+        displayOurEvents();
     }
 
 }
