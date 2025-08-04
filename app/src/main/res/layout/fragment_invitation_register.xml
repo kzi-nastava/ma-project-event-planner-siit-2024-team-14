@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
-    android:padding="0dp">
+    android:background="#F5F5F5">
 
     <!-- Gornje linije -->
     <View
@@ -35,116 +34,109 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp" />
 
-    <!-- Glavni sadržaj u centru -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+    <!-- Glavni sadržaj fiksiran na sredini -->
+    <LinearLayout
+        android:id="@+id/formContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
+        <!-- Naslov -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:textColor="#523D35"
+            android:textSize="36sp"
+            android:fontFamily="@font/petrona"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Formular -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:paddingTop="80dp"
-            android:paddingBottom="40dp">
+            android:background="@drawable/rounded_background"
+            android:padding="24dp">
 
-            <!-- Naslov -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Register"
+            <!-- E-mail -->
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="E-mail address"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/border"
                 android:textColor="#523D35"
-                android:textSize="36sp"
-                android:fontFamily="@font/petrona"
-                android:textStyle="bold"
-                android:layout_marginBottom="24dp" />
-
-            <!-- Formular -->
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_background"
-                android:padding="24dp">
-
-                <!-- E-mail -->
-                <EditText
-                    android:id="@+id/emailEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:hint="E-mail address"
-                    android:inputType="textEmailAddress"
-                    android:background="@drawable/border"
-                    android:textColor="#523D35"
-                    android:textColorHint="#523D35"
-                    android:textSize="16sp"
-                    android:enabled="false"
-                    android:layout_marginBottom="12dp" />
-
-                <!-- Lozinka -->
-                <EditText
-                    android:id="@+id/passwordEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:background="@drawable/border"
-                    android:textColor="#523D35"
-                    android:textColorHint="#523D35"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="12dp" />
-
-                <!-- Potvrdi lozinku -->
-                <EditText
-                    android:id="@+id/confirmPasswordEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:hint="Confirm password"
-                    android:inputType="textPassword"
-                    android:background="@drawable/border"
-                    android:textColor="#523D35"
-                    android:textColorHint="#523D35"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="12dp" />
-
-                <!-- Puno ime -->
-                <EditText
-                    android:id="@+id/fullNameEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:hint="Full name"
-                    android:background="@drawable/border"
-                    android:textColor="#523D35"
-                    android:textColorHint="#523D35"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="20dp" />
-
-                <!-- Dugme za registraciju -->
-                <Button
-                    android:id="@+id/registerButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Register and Follow Event"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#523D35"
-                    android:textSize="18sp"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp" />
-            </LinearLayout>
-
-            <!-- Link za login -->
-            <TextView
-                android:id="@+id/loginRedirectText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Already have an account? Login here"
-                android:textColor="#523D35"
+                android:textColorHint="#523D35"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="24dp" />
-        </LinearLayout>
-    </ScrollView>
+                android:enabled="false"
+                android:layout_marginBottom="12dp" />
 
+            <!-- Lozinka -->
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:background="@drawable/border"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Potvrdi lozinku -->
+            <EditText
+                android:id="@+id/confirmPasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Confirm password"
+                android:inputType="textPassword"
+                android:background="@drawable/border"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Puno ime -->
+            <EditText
+                android:id="@+id/fullNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Full name"
+                android:background="@drawable/border"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Dugme za registraciju -->
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register and Follow Event"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#523D35"
+                android:textSize="18sp"
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp" />
+        </LinearLayout>
+
+        <!-- Link za login -->
+        <TextView
+            android:id="@+id/loginRedirectText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Login here"
+            android:textColor="#523D35"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp" />
+    </LinearLayout>
 </RelativeLayout>
