@@ -27,11 +27,11 @@ import com.example.eventplanner.ui.fragment.InvitationRegisterFragment;
 import com.example.eventplanner.ui.fragment.MyEventsFragment;
 import com.example.eventplanner.ui.fragment.NotificationFragment;
 import com.example.eventplanner.ui.fragment.ProfileFragment;
-import com.example.eventplanner.ui.fragment.category.CategoryManagementFragment;
-import com.example.eventplanner.ui.fragment.solutions.ProviderSolutionsFragment;
 import com.example.eventplanner.ui.fragment.JoinedEventsFragment;
 import com.example.eventplanner.ui.fragment.UpgradeAsProviderFragment;
 import com.example.eventplanner.ui.fragment.UpgradeOrganizerFragment;
+import com.example.eventplanner.ui.fragment.category.CategoryManagementFragment;
+import com.example.eventplanner.ui.fragment.solutions.ProviderSolutionsFragment;
 import com.example.eventplanner.ui.fragment.solutions.pricelist.ProviderPriceListFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener;
 
     private static final String KEY_ROLE = "role";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,14 +150,14 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = new AllInvitationsFragment();
             }else if(id == R.id.nav_budget_planning){
                 return true;
-            }else if(id == R.id.nav_favourites){
-                return true;
             } else if (id == R.id.nav_categories) {
-                selectedFragment = CategoryManagementFragment.newInstance();
-            } else if(id == R.id.nav_messages){
-                return true;
+                    selectedFragment = CategoryManagementFragment.newInstance();
             }else if(id == R.id.nav_my_services){
                 selectedFragment = ProviderSolutionsFragment.newInstance();
+            }else if(id == R.id.nav_favourites){
+                return true;
+            }else if(id == R.id.nav_messages){
+                return true;
             }else if(id == R.id.nav_all_bookings){
                 selectedFragment = new AllBookingsFragment();
             }else if(id == R.id.nav_booking_requests){
@@ -178,13 +179,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.home_page_fragment, new HomeFragment())
-                    .commit();
-        }
 
-        ClientUtils.stompService.connect();
     }
 
     private void setupNavigationMenuByRole() {
@@ -224,7 +219,9 @@ public class MainActivity extends AppCompatActivity {
             case "eventorganizer":
                 menu.add(Menu.NONE, R.id.nav_my_events, Menu.NONE, "My events");
                 menu.add(Menu.NONE, R.id.nav_calendar, Menu.NONE, "Calendar");
+                menu.add(Menu.NONE, R.id.nav_categories, Menu.NONE, "Categories");
                 menu.add(Menu.NONE, R.id.nav_invitations, Menu.NONE, "Invitations");
+                menu.add(Menu.NONE, R.id.nav_budget_planning, Menu.NONE, "Budget planning");
                 menu.add(Menu.NONE, R.id.nav_favourites, Menu.NONE, "Favourite services/products");
                 menu.add(Menu.NONE, R.id.nav_messages, Menu.NONE, "Messages");
                 menu.add(Menu.NONE, R.id.nav_notifications, Menu.NONE, "Notifications");
@@ -236,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 menu.add(Menu.NONE, R.id.nav_all_bookings, Menu.NONE, "All Bookings");
                 menu.add(Menu.NONE, R.id.nav_booking_requests, Menu.NONE, "Booking service requests");
                 menu.add(Menu.NONE, R.id.nav_reviews, Menu.NONE, "Reviews and ratings");
+                menu.add(Menu.NONE, R.id.nav_categories, Menu.NONE, "Categories");
                 menu.add(Menu.NONE, R.id.nav_price_list, Menu.NONE, "Price list");
                 menu.add(Menu.NONE, R.id.nav_notifications, Menu.NONE, "Notifications");
                 menu.add(Menu.NONE, R.id.nav_messages, Menu.NONE, "Messages");
@@ -244,9 +242,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void logoutUser() {
-        ClientUtils.authService.logout();
         if (prefs != null) {
             prefs.edit().clear().apply();
         }
@@ -254,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
 
         NotificationWebSocketManager.disconnect();
         ClientUtils.stompService.disconnect();
+
 
         setupNavigationMenuByRole();
 
@@ -318,7 +315,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         NotificationWebSocketManager.disconnect();
         ClientUtils.stompService.disconnect();
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.apply();
