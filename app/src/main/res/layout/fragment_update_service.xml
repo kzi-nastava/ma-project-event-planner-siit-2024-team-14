@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="16dp"
+    android:fontFamily="@font/petrona"
+    android:textColor="#523D35"
+    android:fillViewport="true"
+    tools:context=".ui.fragment.solutions.services.UpdateServiceFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:text="@string/update_service"
+            android:textSize="24sp" />
+
+        <include
+            layout="@layout/view_service_form"
+            android:id="@+id/form" />
+    </LinearLayout>
+
+</ScrollView>

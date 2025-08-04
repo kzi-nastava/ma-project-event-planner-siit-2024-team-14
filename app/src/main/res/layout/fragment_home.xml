@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".HomeFragment">
+    tools:context=".ui.fragment.HomeFragment">
 
 <LinearLayout
 android:layout_width="match_parent"
@@ -19,7 +19,7 @@ android:orientation="vertical">
     android:id="@+id/hottest_events_label"
     android:layout_width="wrap_content"
     android:layout_height="30dp"
-    android:text="Hottest events"
+    android:text="Hottest events in your town"
     android:textSize="20sp"
     android:textColor="#523D35"
     android:fontFamily="@font/petrona"
@@ -33,514 +33,21 @@ android:orientation="vertical">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="8dp"
-    app:layout_constraintTop_toBottomOf="@id/hottest_events_label"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/card_container"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingStart="8dp"
-        android:paddingEnd="8dp">
-
-        <!-- Kartica 1 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Profilna Slika i Ime Prezime Organizatora -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <!-- Profilna Slika -->
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/profilep2"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                    <!-- Ime i Prezime Organizatora -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="John Doe"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="8dp"/>
-                </LinearLayout>
-
-                <!-- Text: Event Organizer -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Event Organizer"
-                    android:textSize="12sp"
-                    android:textColor="#8A8A8A"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Separator Line -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#DDDDDD" />
-
-                <!-- Slika Događaja -->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/card1" />
-
-                <!-- Naziv Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Birthday Party"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingTop="8dp" />
-
-                <!-- Opis Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Entry with presents and good attitude"
-                    android:textSize="14sp"
-                    android:paddingTop="4dp" />
-
-                <!-- Dugme: View More -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#523D35"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/petrona" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Kartica 2 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Profilna Slika i Ime Prezime Organizatora -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <!-- Profilna Slika -->
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/profilep1"
-                        android:layout_gravity="center_vertical" />
-
-                    <!-- Ime i Prezime Organizatora -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Jane Smith"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="8dp"/>
-                </LinearLayout>
-
-                <!-- Text: Event Organizer -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Event Organizer"
-                    android:textSize="12sp"
-                    android:textColor="#8A8A8A"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Separator Line -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#DDDDDD" />
-
-                <!-- Slika Događaja -->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/card2" />
-
-                <!-- Naziv Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Horse Riding"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingTop="8dp" />
-
-                <!-- Opis Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="For horse lovers, free entry"
-                    android:textSize="14sp"
-                    android:paddingTop="4dp" />
-
-                <!-- Dugme: View More -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#523D35"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/petrona" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Kartica 3 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Profilna Slika i Ime Prezime Organizatora -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <!-- Profilna Slika -->
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/profilep3"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                    <!-- Ime i Prezime Organizatora -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Michael Brown"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="8dp"/>
-                </LinearLayout>
-
-                <!-- Text: Event Organizer -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Event Organizer"
-                    android:textSize="12sp"
-                    android:textColor="#8A8A8A"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Separator Line -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#DDDDDD" />
-
-                <!-- Slika Događaja -->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/card3" />
-
-                <!-- Naziv Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rooftop Theatre"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingTop="8dp" />
-
-                <!-- Opis Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Free entry, bring popcorn and drinks"
-                    android:textSize="14sp"
-                    android:paddingTop="4dp" />
-
-                <!-- Dugme: View More -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#523D35"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/petrona" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <!-- Kartica 4 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Profilna Slika i Ime Prezime Organizatora -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <!-- Profilna Slika -->
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/profilep4"
-                        android:layout_gravity="center_vertical" />
-
-                    <!-- Ime i Prezime Organizatora -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sarah Miller"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="8dp"/>
-                </LinearLayout>
-
-                <!-- Text: Event Organizer -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Event Organizer"
-                    android:textSize="12sp"
-                    android:textColor="#8A8A8A"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Separator Line -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#DDDDDD" />
-
-                <!-- Slika Događaja -->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/card4" />
-
-                <!-- Naziv Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Music Festival"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingTop="8dp" />
-
-                <!-- Opis Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Enjoy the music and atmosphere"
-                    android:textSize="14sp"
-                    android:paddingTop="4dp" />
-
-                <!-- Dugme: View More -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#523D35"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/petrona" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Kartica 5 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Profilna Slika i Ime Prezime Organizatora -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <!-- Profilna Slika -->
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/profilep5"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/circle_photo_border" />
-
-                    <!-- Ime i Prezime Organizatora -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Anna Lee"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="8dp"/>
-                </LinearLayout>
-
-                <!-- Text: Event Organizer -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Event Organizer"
-                    android:textSize="12sp"
-                    android:textColor="#8A8A8A"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Separator Line -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#DDDDDD" />
-
-                <!-- Slika Događaja -->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/card5" />
-
-                <!-- Naziv Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Black and White Party"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingTop="8dp" />
-
-                <!-- Opis Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Wear black or white"
-                    android:textSize="14sp"
-                    android:paddingTop="4dp" />
-
-
-                <!-- Dugme: View More -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#523D35"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/petrona" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
+        android:paddingEnd="8dp" />
 </HorizontalScrollView>
 
+
+<!-- Our Events Section -->
 <LinearLayout
     android:id="@+id/title"
     android:layout_width="match_parent"
@@ -557,7 +64,7 @@ android:orientation="vertical">
         android:id="@+id/our_events"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Our events"
+        android:text="All events"
         android:textSize="20sp"
         android:textColor="#523D35"
         android:fontFamily="@font/petrona"
@@ -567,6 +74,7 @@ android:orientation="vertical">
 
     <!-- LinearLayout za pretragu -->
     <LinearLayout
+        android:id="@+id/search_bar_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -588,442 +96,147 @@ android:orientation="vertical">
             android:textSize="10sp"
             tools:ignore="SmallSp" />
 
-        <!-- Ikona pretrage -->
+        <!-- Ikonica pretrage -->
         <ImageView
             android:id="@+id/iv_search_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@android:drawable/ic_menu_search"
             android:contentDescription="Search Icon"
+            app:tint="#523D35"
+            android:layout_marginEnd="12dp"/>
+
+        <!-- Ikonica za filter -->
+        <ImageButton
+            android:id="@+id/btn_toggle_filters"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_filter_list"
+            android:contentDescription="Filter Icon"
             app:tint="#523D35" />
+
     </LinearLayout>
 </LinearLayout>
 
-<LinearLayout
-    android:id="@+id/events_cards1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    android:layout_marginTop="8dp"
-    android:gravity="center_vertical"
-    app:layout_constraintTop_toBottomOf="@id/title"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
-
-    <!-- Kartica 1 -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/filter_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
+        android:orientation="vertical"
+        android:background="#F5F5F5"
+        android:padding="16dp"
+        android:layout_marginTop="12dp"
+        android:visibility="gone">
 
-        <LinearLayout
+        <!-- START DATE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Date"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/et_start_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:focusable="false"
+            android:clickable="true"
+            android:hint="yyyy-MM-dd"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textColor="#523D35"
+            android:fontFamily="@font/petrona"
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp" />
 
-            <!-- Profilna Slika i Ime Prezime Organizatora -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+        <!-- END DATE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Date"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp"/>
 
-                <!-- Profilna Slika -->
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/profilep6"
-                    android:layout_gravity="center_vertical"
-                    />
-
-                <!-- Ime i Prezime Organizatora -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="John Smith"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:paddingStart="8dp"/>
-            </LinearLayout>
-
-            <!-- Text: Event Organizer -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Event Organizer"
-                android:textSize="12sp"
-                android:textColor="#8A8A8A"
-                android:layout_marginTop="4dp" />
-
-            <!-- Separator Line -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#DDDDDD" />
-
-            <!-- Slika Događaja -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/card8" />
-
-            <!-- Naziv Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="EXIT festival"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="8dp" />
-
-            <!-- Opis Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Together, always! Enjoy the music!"
-                android:textSize="14sp"
-                android:paddingTop="4dp" />
-
-            <!-- Dugme: View More -->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View More"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#523D35"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:fontFamily="@font/petrona" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Kartica 2 -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/et_end_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:focusable="false"
+            android:clickable="true"
+            android:hint="yyyy-MM-dd"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textColor="#523D35"
+            android:fontFamily="@font/petrona"
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp" />
 
-            <!-- Profilna Slika i Ime Prezime Organizatora -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+        <!-- LOCATION SPINNER -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp"/>
 
-                <!-- Profilna Slika -->
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/profilep1"
-                    android:layout_gravity="center_vertical"
-                    />
-
-                <!-- Ime i Prezime Organizatora -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jane Smith"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:paddingStart="8dp"/>
-            </LinearLayout>
-
-            <!-- Text: Event Organizer -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Event Organizer"
-                android:textSize="12sp"
-                android:textColor="#8A8A8A"
-                android:layout_marginTop="4dp" />
-
-            <!-- Separator Line -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#DDDDDD" />
-
-            <!-- Slika Događaja -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/card7" />
-
-            <!-- Naziv Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bakery opening"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="8dp" />
-
-            <!-- Opis Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Come with an empty stomach!"
-                android:textSize="14sp"
-                android:paddingTop="4dp" />
-
-            <!-- Dugme: View More -->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View More"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#523D35"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:fontFamily="@font/petrona" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
-
-
-<LinearLayout
-    android:id="@+id/events_cards2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    android:layout_marginTop="12dp"
-    android:layout_marginBottom="12dp"
-    android:gravity="center_vertical"
-    app:layout_constraintTop_toBottomOf="@id/events_cards1"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
-
-    <!-- Kartica 1 -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
-
-        <LinearLayout
+        <Spinner
+            android:id="@+id/spinner_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
-            <!-- Profilna Slika i Ime Prezime Organizatora -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+        <!-- CATEGORY SPINNER -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp"/>
 
-                <!-- Profilna Slika -->
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/profilep2"
-                    android:layout_gravity="center_vertical"
-                    />
-
-                <!-- Ime i Prezime Organizatora -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="John Doe"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:paddingStart="8dp"/>
-            </LinearLayout>
-
-            <!-- Text: Event Organizer -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Event Organizer"
-                android:textSize="12sp"
-                android:textColor="#8A8A8A"
-                android:layout_marginTop="4dp" />
-
-            <!-- Separator Line -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#DDDDDD" />
-
-            <!-- Slika Događaja -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/card6" />
-
-            <!-- Naziv Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Graduation party"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="8dp" />
-
-            <!-- Opis Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="All college gradueates wellcome ;)"
-                android:textSize="14sp"
-                android:paddingTop="4dp" />
-
-            <!-- Dugme: View More -->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View More"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#523D35"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:fontFamily="@font/petrona" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Kartica 2 -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
-
-        <LinearLayout
+        <Spinner
+            android:id="@+id/spinner_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
-            <!-- Profilna Slika i Ime Prezime Organizatora -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+        <!-- APPLY FILTERS BUTTON -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_apply_filters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apply Filters"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="@drawable/btn_rounded" />
+    </LinearLayout>
 
-                <!-- Profilna Slika -->
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/profilep7"
-                    android:layout_gravity="center_vertical"
-                    />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_our_events"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        tools:listitem="@layout/item_event_card" />
 
-                <!-- Ime i Prezime Organizatora -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lucas Reed"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:paddingStart="8dp"/>
-            </LinearLayout>
-
-            <!-- Text: Event Organizer -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Event Organizer"
-                android:textSize="12sp"
-                android:textColor="#8A8A8A"
-                android:layout_marginTop="4dp" />
-
-            <!-- Separator Line -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#DDDDDD" />
-
-            <!-- Slika Događaja -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/card9" />
-
-            <!-- Naziv Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Garden party"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="8dp" />
-
-            <!-- Opis Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Open air party for all!"
-                android:textSize="14sp"
-                android:paddingTop="4dp" />
-
-            <!-- Dugme: View More -->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View More"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#523D35"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:fontFamily="@font/petrona" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
-
-<LinearLayout
+    <LinearLayout
     android:id="@+id/button1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -1033,25 +246,28 @@ android:orientation="vertical">
     android:layout_marginTop="12dp"
     android:layout_marginBottom="12dp"
     android:gravity="center"
-    app:layout_constraintTop_toBottomOf="@id/events_cards2"
+    app:layout_constraintTop_toBottomOf="@id/our_events"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Load More"
-        android:backgroundTint="#523D35"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:fontFamily="@font/petrona"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        <Button
+            android:id="@+id/load_more_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Load More"
+            android:backgroundTint="#523D35"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center_horizontal" />
 
-<!-- SERVICES AND PRODUCTS -->
+    </LinearLayout>
+
+
+<!-- HOTTEST SERVICES AND PRODUCTS -->
 <TextView
     android:id="@+id/hottest_services_label"
     android:layout_width="wrap_content"
@@ -1064,514 +280,24 @@ android:orientation="vertical">
     android:gravity="center"
     android:layout_marginTop="5dp" />
 
-<!-- Horizontal ScrollView for Hottest services and products -->
-<HorizontalScrollView
-    android:id="@+id/top5_services"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="8dp"
-    app:layout_constraintTop_toBottomOf="@id/hottest_services_label"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginTop="8dp">
-
-    <LinearLayout
+    <HorizontalScrollView
+        android:id="@+id/top5_services"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp">
+        android:paddingTop="8dp"
+        android:layout_marginTop="8dp"
+        android:fillViewport="true">
 
-        <!-- Kartica 1 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
+        <LinearLayout
+            android:id="@+id/card_container_services"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_weight="1">
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
+    </HorizontalScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Profilna Slika i Ime Prezime -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <!-- Profilna Slika -->
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/profilep8"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                    <!-- Ime i Prezime -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Noah Harrison"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="8dp"/>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Service and product provider"
-                    android:textSize="12sp"
-                    android:textColor="#8A8A8A"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Separator Line -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#DDDDDD" />
-
-                <!-- Slika Događaja -->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/service1" />
-
-                <!-- Naziv Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Champagne"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingTop="8dp" />
-
-                <!-- Opis Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sparkling wine for every occasion to cheer you up"
-                    android:textSize="14sp"
-                    android:paddingTop="4dp" />
-
-                <!-- Dugme: View More -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#523D35"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/petrona" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Kartica 2 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Profilna Slika i Ime Prezime -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <!-- Profilna Slika -->
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/profilep1"
-                        android:layout_gravity="center_vertical" />
-
-                    <!-- Ime i Prezime -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Jane Smith"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="8dp"/>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Service and product provider"
-                    android:textSize="12sp"
-                    android:textColor="#8A8A8A"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Separator Line -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#DDDDDD" />
-
-                <!-- Slika Događaja -->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/service2" />
-
-                <!-- Naziv Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Horse riding lessons"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingTop="8dp" />
-
-                <!-- Opis Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="For horse lovers, learn easy with us"
-                    android:textSize="14sp"
-                    android:paddingTop="4dp" />
-
-                <!-- Dugme: View More -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#523D35"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/petrona" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Kartica 3 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Profilna Slika i Ime Prezime -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <!-- Profilna Slika -->
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/profilep9"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                    <!-- Ime i Prezime -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Emma Caldwell"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="8dp"/>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Service and product provider"
-                    android:textSize="12sp"
-                    android:textColor="#8A8A8A"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Separator Line -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#DDDDDD" />
-
-                <!-- Slika Događaja -->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/service3" />
-
-                <!-- Naziv Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rooftop theatre equipment"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingTop="8dp" />
-
-                <!-- Opis Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="For the best movie night"
-                    android:textSize="14sp"
-                    android:paddingTop="4dp" />
-
-                <!-- Dugme: View More -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#523D35"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/petrona" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <!-- Kartica 4 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Profilna Slika i Ime Prezime -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <!-- Profilna Slika -->
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/profilep10"
-                        android:layout_gravity="center_vertical" />
-
-                    <!-- Ime i Prezime -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Emily Price"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="8dp"/>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Service and product provider"
-                    android:textSize="12sp"
-                    android:textColor="#8A8A8A"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Separator Line -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#DDDDDD" />
-
-                <!-- Slika Događaja -->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/service4" />
-
-                <!-- Naziv -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Catering service"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingTop="8dp" />
-
-                <!-- Opis-->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="The best food service in your town! :)"
-                    android:textSize="14sp"
-                    android:paddingTop="4dp" />
-
-                <!-- Dugme: View More -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#523D35"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/petrona" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Kartica 5 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Profilna Slika i Ime Prezime -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <!-- Profilna Slika -->
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/profilep11"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/circle_photo_border" />
-
-                    <!-- Ime i Prezime -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Alexander Monroe"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="8dp"/>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Service and product provider"
-                    android:textSize="12sp"
-                    android:textColor="#8A8A8A"
-                    android:layout_marginTop="4dp" />
-
-                <!-- Separator Line -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#DDDDDD" />
-
-                <!-- Slika Događaja -->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/service5" />
-
-                <!-- Naziv Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Band"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingTop="8dp" />
-
-                <!-- Opis Događaja -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="High-energy band playing modern favorites."
-                    android:textSize="14sp"
-                    android:paddingTop="4dp" />
-
-                <!-- Dugme: View More -->
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#523D35"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/petrona" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-</HorizontalScrollView>
-
+<!-- ALL SERVICES AND PRODUCTS -->
 <LinearLayout
     android:id="@+id/title2"
     android:layout_width="match_parent"
@@ -1583,12 +309,11 @@ android:orientation="vertical">
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- TextView za naslov OUR EVENTS -->
     <TextView
         android:id="@+id/our_services"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Our services and products"
+        android:text="All services and products"
         android:textSize="20sp"
         android:textColor="#523D35"
         android:fontFamily="@font/petrona"
@@ -1598,6 +323,7 @@ android:orientation="vertical">
 
     <!-- LinearLayout za pretragu -->
     <LinearLayout
+        android:id="@+id/search_bar_container2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -1626,455 +352,232 @@ android:orientation="vertical">
             android:layout_height="24dp"
             android:src="@android:drawable/ic_menu_search"
             android:contentDescription="Search Icon"
+            app:tint="#523D35"
+            android:layout_marginEnd="12dp"/>
+
+
+        <ImageButton
+            android:id="@+id/btn_toggle_filters2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_filter_list"
+            android:contentDescription="Filter Icon"
             app:tint="#523D35" />
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 
-<LinearLayout
-    android:id="@+id/events_cards3"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    android:layout_marginTop="8dp"
-    android:gravity="center_vertical"
-    app:layout_constraintTop_toBottomOf="@id/our_services"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
-
-    <!-- Kartica 1 -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/filter_container2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
+        android:orientation="vertical"
+        android:background="#F5F5F5"
+        android:padding="16dp"
+        android:layout_marginTop="12dp"
+        android:visibility="gone">
 
-        <LinearLayout
+        <!-- START DATE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Date"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/service_start_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:focusable="false"
+            android:clickable="true"
+            android:hint="yyyy-MM-dd"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textColor="#523D35"
+            android:fontFamily="@font/petrona"
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp" />
 
-            <!-- Profilna Slika i Ime Prezime -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+        <!-- END DATE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Date"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp" />
 
-                <!-- Profilna Slika -->
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/profilep12"
-                    android:layout_gravity="center_vertical" />
-
-                <!-- Ime i Prezime-->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Grace Turner"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:paddingStart="8dp"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Service and product provider"
-                android:textSize="12sp"
-                android:textColor="#8A8A8A"
-                android:layout_marginTop="4dp" />
-
-            <!-- Separator Line -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#DDDDDD" />
-
-            <!-- Slika Događaja -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/service6" />
-
-            <!-- Naziv Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Singer"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="8dp" />
-
-            <!-- Opis -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Music lover"
-                android:textSize="14sp"
-                android:paddingTop="4dp" />
-
-            <!-- Dugme: View More -->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View More"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#523D35"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:fontFamily="@font/petrona" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Kartica 2 -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/service_end_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:focusable="false"
+            android:clickable="true"
+            android:hint="yyyy-MM-dd"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textColor="#523D35"
+            android:fontFamily="@font/petrona"
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp" />
 
-            <!-- Profilna Slika i Ime Prezime -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+        <!-- LOCATION SPINNER -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp" />
 
-                <!-- Profilna Slika -->
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/profilep1"
-                    android:layout_gravity="center_vertical"
-                    />
-
-                <!-- Ime i Prezime -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jane Smith"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:paddingStart="8dp"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Service and product provider"
-                android:textSize="12sp"
-                android:textColor="#8A8A8A"
-                android:layout_marginTop="4dp" />
-
-            <!-- Separator Line -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#DDDDDD" />
-
-            <!-- Slika Događaja -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/service7" />
-
-            <!-- Naziv Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Marketing team"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="8dp" />
-
-            <!-- Opis -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Burn your social medias"
-                android:textSize="14sp"
-                android:paddingTop="4dp" />
-
-            <!-- Dugme: View More -->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View More"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#523D35"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:fontFamily="@font/petrona" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
-
-
-<LinearLayout
-    android:id="@+id/events_cards4"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    android:layout_marginTop="12dp"
-    android:layout_marginBottom="12dp"
-    android:gravity="center_vertical"
-    app:layout_constraintTop_toBottomOf="@id/events_cards1"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
-
-    <!-- Kartica 1 -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
-
-        <LinearLayout
+        <Spinner
+            android:id="@+id/spinner_solution_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
-            <!-- Profilna Slika i Ime Prezime -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+        <!-- CATEGORY SPINNER -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp" />
 
-                <!-- Profilna Slika -->
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/profilep13"
-                    android:layout_gravity="center_vertical"
-                    />
-
-                <!-- Ime i Prezime -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lily Anderson"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:paddingStart="8dp"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Service and product provider"
-                android:textSize="12sp"
-                android:textColor="#8A8A8A"
-                android:layout_marginTop="4dp" />
-
-            <!-- Separator Line -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#DDDDDD" />
-
-            <!-- Slika Događaja -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/service8" />
-
-            <!-- Naziv Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Photobooth Rentals"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="8dp" />
-
-            <!-- Opis Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Interactive photo booths with custom backdrops and props."
-                android:textSize="14sp"
-                android:paddingTop="4dp" />
-
-            <!-- Dugme: View More -->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View More"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#523D35"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:fontFamily="@font/petrona" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Kartica 2 -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
-
-        <LinearLayout
+        <Spinner
+            android:id="@+id/spinner_solution_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
-            <!-- Profilna Slika i Ime Prezime -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+        <!-- TYPE SPINNER -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp" />
 
-                <!-- Profilna Slika -->
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/profilep7"
-                    android:layout_gravity="center_vertical"
-                    />
+        <Spinner
+            android:id="@+id/spinner_solution_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
 
-                <!-- Ime i Prezime -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lucas Reed"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:paddingStart="8dp"/>
-            </LinearLayout>
+        <!-- MIN PRICE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min Price"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Service and product provider"
-                android:textSize="12sp"
-                android:textColor="#8A8A8A"
-                android:layout_marginTop="4dp" />
+        <EditText
+            android:id="@+id/min_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g. 100"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textColor="#523D35"
+            android:fontFamily="@font/petrona"
+            android:textSize="14sp"
+            android:inputType="number"
+            android:layout_marginBottom="12dp" />
 
-            <!-- Separator Line -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#DDDDDD" />
+        <!-- MAX PRICE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Max Price"
+            android:textColor="#523D35"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginBottom="4dp" />
 
-            <!-- Slika Događaja -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/service9" />
+        <EditText
+            android:id="@+id/max_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g. 500"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textColor="#523D35"
+            android:fontFamily="@font/petrona"
+            android:textSize="14sp"
+            android:inputType="number"
+            android:layout_marginBottom="16dp" />
 
-            <!-- Naziv Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Event Decor and Styling"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="8dp" />
+        <!-- APPLY FILTERS BUTTON -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_apply_filters2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apply Filters"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="@drawable/btn_rounded" />
 
-            <!-- Opis Događaja -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Elegant decor packages to create the perfect ambiance."
-                android:textSize="14sp"
-                android:paddingTop="4dp" />
+    </LinearLayout>
 
-            <!-- Dugme: View More -->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View More"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#523D35"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:fontFamily="@font/petrona" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-</LinearLayout>
-
-<LinearLayout
-    android:id="@+id/button2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:layout_marginTop="12dp"
-    android:layout_marginBottom="12dp"
-    android:gravity="center"
-    app:layout_constraintTop_toBottomOf="@id/events_cards4"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
-
-    <Button
-        android:layout_width="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_our_solutions"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Load More"
-        android:backgroundTint="#523D35"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:fontFamily="@font/petrona"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        tools:listitem="@layout/item_solution_card" />
+
+    <LinearLayout
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/our_events"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/load_more_button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Load More"
+            android:backgroundTint="#523D35"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:fontFamily="@font/petrona"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,0 +1,27 @@
+<resources>
+    <item name="home" type="id" />
+    <item name="profile" type="id" />
+    <item name="nav_logout" type="id" />
+    <item name="nav_login" type="id" />
+    <item name="nav_register_organizer" type="id" />
+    <item name="nav_register_provider" type="id" />
+    <item name="nav_user_management" type="id" />
+    <item name="nav_event_types" type="id" />
+    <item name="nav_categories" type="id" />
+    <item name="nav_comments" type="id" />
+    <item name="nav_reports" type="id" />
+    <item name="nav_notifications" type="id" />
+    <item name="nav_become_organizer" type="id" />
+    <item name="nav_become_provider" type="id" />
+    <item name="nav_my_events" type="id" />
+    <item name="nav_calendar" type="id" />
+    <item name="nav_invitations" type="id" />
+    <item name="nav_budget_planning" type="id" />
+    <item name="nav_favourites" type="id" />
+    <item name="nav_messages" type="id" />
+    <item name="nav_my_services" type="id" />
+    <item name="nav_all_bookings" type="id" />
+    <item name="nav_booking_requests" type="id" />
+    <item name="nav_reviews" type="id" />
+    <item name="nav_price_list" type="id" />
+</resources>

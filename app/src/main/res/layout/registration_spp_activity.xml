@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationSppActivity"
+    tools:context=".ui.activity.RegistrationSppActivity"
     android:id="@+id/registration_spp">
 
     <!-- Top Line with two colors -->

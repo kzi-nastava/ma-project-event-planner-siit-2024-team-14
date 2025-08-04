@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:weightSum="4"
+    android:background="@color/white"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/category_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Category"
+        android:padding="4dp"/>
+
+    <TextView
+        android:id="@+id/planned_amount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="$0.00"
+        android:padding="4dp"/>
+
+    <EditText
+        android:id="@+id/edit_amount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:visibility="gone"
+        android:padding="4dp"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/spent_amount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="$0.00" />
+
+    <ImageButton
+        android:id="@+id/edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Edit"
+        android:src="@drawable/ic_edit"
+        android:layout_gravity="end"
+        android:minHeight="48dp"/>
+
+    <ImageButton
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Delete"
+        android:src="@drawable/ic_delete"
+        android:layout_gravity="end"
+        android:layout_marginStart="8dp"
+        android:minHeight="48dp"/>
+
+</LinearLayout>
