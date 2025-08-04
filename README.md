@@ -52,7 +52,7 @@ Welcome to the official mobile application of **Event Planner**, your all-in-one
 
 1. **Clone repo**:
    ```bash
-   git clone https://github.com/your-username/event-planner-android.git
+   git clone https://github.com/kzi-nastava/ma-project-event-planner-siit-2024-team-14.git
 
 2. **Open in Android Studio**
 
