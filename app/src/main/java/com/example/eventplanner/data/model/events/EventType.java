@@ -1,40 +1,27 @@
 package com.example.eventplanner.data.model.events;
 
-import com.example.eventplanner.data.model.BaseEntityModel;
+import java.util.List;
 
-public class EventType extends BaseEntityModel {
-    String name, description;
+public class EventType {
+    private Long id;
+    private String name;
+    private String description;
+    private boolean isActive;
+    private List<CategoriesEtModel> categories;
 
-    //region Constructors
-
-    public EventType() { super(); }
-
-    public EventType(int id, String name, String description) {
-        super(id);
+    public EventType(Long id, String name, String description, boolean isActive, List<CategoriesEtModel> categories) {
+        this.id = id;
         this.name = name;
         this.description = description;
+        this.isActive = isActive;
+        this.categories = categories;
     }
 
-    //endregion
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public boolean isActive() { return isActive; }
+    public List<CategoriesEtModel> getCategories() { return categories; }
 
-    //region Getters and Setters
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    //endregion
-
+    public void setActive(boolean active) { isActive = active; }
 }

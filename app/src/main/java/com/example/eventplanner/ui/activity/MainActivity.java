@@ -19,6 +19,7 @@ import com.example.eventplanner.data.network.services.notifications.Notification
 import com.example.eventplanner.ui.fragment.au.ActivationFragment;
 import com.example.eventplanner.ui.fragment.adminManagement.AdminCommentsFragment;
 import com.example.eventplanner.ui.fragment.adminManagement.AdminReportsFragment;
+import com.example.eventplanner.ui.fragment.events.event_type_menagement.EventTypeFragment;
 import com.example.eventplanner.ui.fragment.solutions.services.AllBookingsFragment;
 import com.example.eventplanner.ui.fragment.invitations.AllInvitationsFragment;
 import com.example.eventplanner.ui.fragment.solutions.services.BookingServiceRequestFragment;
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.nav_user_management) {
                 // TODO: Otvori UserManagement fragment/activity
             } else if (id == R.id.nav_event_types) {
-                // TODO: Otvori EventTypes fragment/activity
+                selectedFragment = new EventTypeFragment();
             } else if (id == R.id.nav_reports) {
                 selectedFragment = new AdminReportsFragment();
             } else if (id == R.id.nav_logout) {
