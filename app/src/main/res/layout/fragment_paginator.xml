@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="8dp"
+    android:background="@color/project_green_bottom_navbar"
+    android:layout_marginTop="8dp"
+    tools:context=".ui.fragment.PaginatorFragment">
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/previous_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/previous"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:fontFamily="@font/petrona"
+        android:background="@drawable/btn_rounded"
+        android:layout_marginEnd="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"/>
+
+    <TextView
+        android:id="@+id/page_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginEnd="16dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:fontFamily="@font/petrona"
+        android:background="@drawable/btn_rounded"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"/>
+
+</LinearLayout>

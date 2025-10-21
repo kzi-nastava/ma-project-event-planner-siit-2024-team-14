@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New event"
+            android:textSize="24sp"
+            android:textColor="#523D35"
+            android:fontFamily="@font/petrona"
+            android:layout_gravity="center"/>
+
+        <!-- Name -->
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:textColor="#523D35"
+            android:background="@drawable/edit_text_bg"
+            android:inputType="textMultiLine"
+            android:minLines="1"
+            android:padding="8dp"
+            android:layout_marginTop="12dp"/>
+
+        <!-- Description -->
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:textColor="#523D35"
+            android:background="@drawable/edit_text_bg"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:padding="8dp"
+            android:layout_marginTop="12dp"/>
+
+        <!-- Event Type Spinner -->
+        <Spinner
+            android:id="@+id/spinnerEventType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/spinner_bg"/>
+
+        <!-- Categories (checkboxes container) -->
+        <LinearLayout
+            android:id="@+id/layoutCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/fieldset_bg"
+            android:padding="10dp"
+            android:layout_marginTop="12dp" />
+
+        <!-- Guest Number -->
+        <EditText
+            android:id="@+id/etGuestNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Maximal number of guests"
+            android:inputType="number"
+            android:textColor="#523D35"
+            android:background="@drawable/edit_text_bg"
+            android:padding="8dp"
+            android:layout_marginTop="12dp"/>
+
+
+        <Spinner
+            android:id="@+id/privacySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/spinner_bg"
+            android:entries="@array/privacy_types" />
+
+        <!-- Location input -->
+        <EditText
+            android:id="@+id/etLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter city"
+            android:textColor="#523D35"
+            android:background="@drawable/edit_text_bg"
+            android:padding="8dp"
+            android:layout_marginTop="12dp"
+            android:inputType="text" />
+
+        <!-- Start Date -->
+        <TextView
+            android:id="@+id/tvStartDateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Date"
+            android:textColor="#523D35"
+            android:fontFamily="@font/petrona"
+            android:textSize="14sp"
+            android:layout_marginTop="12dp" />
+
+        <EditText
+            android:id="@+id/etStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="true"
+            android:hint="Select start date"
+            android:textColor="#523D35"
+            android:background="@drawable/edit_text_bg"
+            android:padding="8dp" />
+
+        <!-- End Date -->
+        <TextView
+            android:id="@+id/tvEndDateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Date"
+            android:textColor="#523D35"
+            android:fontFamily="@font/petrona"
+            android:textSize="14sp"
+            android:layout_marginTop="12dp" />
+
+        <EditText
+            android:id="@+id/etEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="true"
+            android:hint="Select end date"
+            android:textColor="#523D35"
+            android:background="@drawable/edit_text_bg"
+            android:padding="8dp" />
+
+        <!-- Photo Upload -->
+        <Button
+            android:id="@+id/btnUploadPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload photo"
+            android:textColor="#523D35"
+            android:background="@drawable/custom_button_bg"
+            android:layout_marginTop="12dp" />
+
+        <!-- Error message -->
+        <TextView
+            android:id="@+id/tvErrorMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FF0000"
+            android:visibility="gone"
+            android:padding="8dp"
+            android:layout_marginTop="12dp"
+            android:textAlignment="center"/>
+
+        <!-- Create button -->
+        <Button
+            android:id="@+id/btnCreate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/custom_button_bg"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/petrona"/>
+
+    </LinearLayout>
+
+</ScrollView>
