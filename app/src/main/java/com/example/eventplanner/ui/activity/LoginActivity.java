@@ -35,11 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        EditText emailEt = findViewById(R.id.emailEditText);
-        String prefill = getIntent().getStringExtra("prefill_email");
-        if (prefill != null && emailEt != null) {
-            emailEt.setText(prefill);
-        }
+        emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         confirmButton = findViewById(R.id.confirmButton);
         registerLink = findViewById(R.id.registerLink);
