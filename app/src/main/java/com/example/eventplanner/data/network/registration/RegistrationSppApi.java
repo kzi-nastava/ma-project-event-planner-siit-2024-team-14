@@ -1,5 +1,7 @@
 package com.example.eventplanner.data.network.registration;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -12,6 +14,6 @@ public interface RegistrationSppApi {
     @POST("api/providers/register") //
     Call<ResponseBody> register(
             @Part MultipartBody.Part dto,
-            @Part MultipartBody.Part[] photos // or List<MultipartBody.Part>
+            @Part List<MultipartBody.Part> photos
     );
 }
