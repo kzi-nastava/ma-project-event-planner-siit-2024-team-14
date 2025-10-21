@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.example.eventplanner.R;
 import com.example.eventplanner.data.model.events.EventType;
 
@@ -49,17 +48,36 @@ public class EventTypeAdapter extends RecyclerView.Adapter<EventTypeAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         EventType event = eventList.get(position);
+
         holder.name.setText(event.getName());
         holder.description.setText(event.getDescription());
-        holder.btnActivate.setText(event.isActive() ? "Deactivate" : "Activate");
+
+        // Postavi dugme prema trenutnom stanju modela
+        updateButtonText(holder.btnActivate, event.isActive());
 
         holder.btnEdit.setOnClickListener(v -> listener.onEdit(event));
-        holder.btnActivate.setOnClickListener(v -> listener.onToggle(event));
+
+        holder.btnActivate.setOnClickListener(v -> {
+            // Promeni stanje u modelu
+            event.setActive(!event.isActive());
+            // Odmah osveži tekst dugmeta
+            updateButtonText(holder.btnActivate, event.isActive());
+            // Pozovi listener za API update
+            listener.onToggle(event);
+        });
     }
 
     @Override
     public int getItemCount() {
         return eventList.size();
+    }
+
+    private void updateButtonText(Button btn, boolean isActive) {
+        if (isActive) {
+            btn.setText("Activate");
+        } else{
+            btn.setText("Deactivate");
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

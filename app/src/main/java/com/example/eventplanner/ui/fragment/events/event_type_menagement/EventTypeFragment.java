@@ -37,17 +37,36 @@ public class EventTypeFragment extends Fragment {
         adapter = new EventTypeAdapter(new EventTypeAdapter.OnItemActionListener() {
             @Override
             public void onEdit(EventType event) {
-                Toast.makeText(getContext(), "Edit: " + event.getName(), Toast.LENGTH_SHORT).show();
+                EditEventTypeDialog dialog = new EditEventTypeDialog(getContext(), event, new EditEventTypeDialog.OnEventEditedListener() {
+                    @Override
+                    public void onEdited(EventType updatedEvent) {
+                        List<EventType> events = adapter.getEvents();
+                        for (int i = 0; i < events.size(); i++) {
+                            if (events.get(i).getId().equals(updatedEvent.getId())) {
+                                events.set(i, updatedEvent);
+                                break;
+                            }
+                        }
+                        adapter.setEvents(events);
+                    }
+
+                    @Override
+                    public void onDeleted(EventType deletedEvent) {
+                        List<EventType> events = adapter.getEvents();
+                        events.removeIf(e -> e.getId().equals(deletedEvent.getId()));
+                        adapter.setEvents(events);
+                    }
+                });
+                dialog.show();
             }
 
             @Override
             public void onToggle(EventType event) {
-                event.setActive(!event.isActive());
+                // Pozovi API za promenu statusa
                 ClientUtils.eventTypeService.toggleEventStatus(event.getId()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
-                            loadEventTypes();
                             Toast.makeText(getContext(), "Status updated", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getContext(), "Failed to update", Toast.LENGTH_SHORT).show();
@@ -69,10 +88,9 @@ public class EventTypeFragment extends Fragment {
         btnAdd = view.findViewById(R.id.btnAddEventType);
         btnAdd.setOnClickListener(v -> {
             AddEventTypeDialog dialog = new AddEventTypeDialog(getContext(), newEvent -> {
-                // Dodaj novi event u adapter listu i osveži prikaz
                 List<EventType> currentList = adapter.getEvents();
-                currentList.add(newEvent); // newEvent sada dolazi iz response.body()
-                adapter.setEvents(currentList); // adapter sada ima kompletan objekat
+                currentList.add(newEvent);
+                adapter.setEvents(currentList);
                 loadEventTypes();
             });
             dialog.show();
