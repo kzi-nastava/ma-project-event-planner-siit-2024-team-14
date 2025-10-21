@@ -2,29 +2,35 @@ package com.example.eventplanner.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eventplanner.R;
+import com.example.eventplanner.ui.fragment.registration.RegistrationEoFragment;
 
 public class RegistrationEoActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration_eo_activity);
 
-        TextView loginLink = findViewById(R.id.loginLink);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.registration_eo, new RegistrationEoFragment())
+                    .commit();
+        }
 
-        loginLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the LoginActivity when the link is clicked
+        TextView loginLink = findViewById(R.id.loginLink);
+        if (loginLink != null) {
+            loginLink.setOnClickListener(v -> {
                 Intent intent = new Intent(RegistrationEoActivity.this, LoginActivity.class);
                 startActivity(intent);
-                finish(); // Optionally, finish the current activity to prevent the user from returning to the registration screen
-            }
-        });
+                finish();
+            });
+        }
     }
 }
