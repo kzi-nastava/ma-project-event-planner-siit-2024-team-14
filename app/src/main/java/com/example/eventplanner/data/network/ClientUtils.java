@@ -1,9 +1,9 @@
 package com.example.eventplanner.data.network;
 
-//import com.example.eventplanner.BuildConfig;
 
 import com.example.eventplanner.data.network.auth.*;
 import com.example.eventplanner.data.network.services.chat.*;
+import com.example.eventplanner.data.network.services.event_type.EventTypeService;
 import com.example.eventplanner.data.network.services.events.*;
 import com.example.eventplanner.data.network.services.invitations.InvitationService;
 import com.example.eventplanner.data.network.services.notifications.NotificationService;
@@ -12,6 +12,7 @@ import com.example.eventplanner.data.network.services.reports.ReportUserService;
 import com.example.eventplanner.data.network.services.solutions.*;
 import com.example.eventplanner.data.network.services.user.UserService;
 import com.example.eventplanner.data.network.stomp.StompService;
+import com.example.eventplanner.ui.adapter.FavoriteSolutionAdapter;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -61,9 +62,12 @@ public class ClientUtils {
             .build();
 
     public static UserService userService = retrofit.create(UserService.class);
+
     public static AuthService authService = new AuthService(tokenStore, userService);
     public static StompService stompService = new StompService();
     public static EventService eventService = retrofit.create(EventService.class);
+    public static EventTypeService eventTypeService = retrofit.create(EventTypeService.class);
+
     public static CategoryService categoryService = retrofit.create(CategoryService.class);
     public static BookingServiceService bookingServiceService = retrofit.create(BookingServiceService.class);
     public static BookingServiceRequestService bookingServiceRequestService = retrofit.create(BookingServiceRequestService.class);
@@ -77,7 +81,5 @@ public class ClientUtils {
     public static InvitationService invitationService = retrofit.create(InvitationService.class);
     public static PriceListService priceListService = retrofit.create(PriceListService.class);
     public static BudgetService budgetService = retrofit.create(BudgetService.class);
-
     // ...
-
 }

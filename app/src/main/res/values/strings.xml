@@ -69,4 +69,8 @@
     <string name="created_service_message">Successfully created a service</string>
     <string name="add_service">New Service</string>
     <string name="add_product">New Product</string>
+    <string name="event_image">Event image</string>
+    <string name="toggle_favorite">Toggle favorite</string>
+    <string name="chat_with_organizer">Chat with event organizer</string>
+
 </resources>

@@ -201,6 +201,21 @@
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp" />
 
+            <!-- City Input Field -->
+            <EditText
+                android:id="@+id/cityEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="City"
+                android:background="@drawable/border"
+                android:padding="8dp"
+                android:inputType="textCapWords"
+                android:textColor="#523D35"
+                android:textColorHint="#523D35"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp" />
+
+
             <!-- Phone Number Input Field -->
             <EditText
                 android:id="@+id/phoneNumberEditText"
