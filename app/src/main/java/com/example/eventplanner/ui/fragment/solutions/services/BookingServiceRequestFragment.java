@@ -50,8 +50,12 @@ public class BookingServiceRequestFragment extends Fragment {
                 api.approveRequest(body).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        Toast.makeText(getContext(), "Approved!", Toast.LENGTH_SHORT).show();
-                        loadRequests();
+                        if (response.isSuccessful()) {
+                            Toast.makeText(getContext(), "Request approved successfully", Toast.LENGTH_SHORT).show();
+                            loadRequests();
+                        } else {
+                            Toast.makeText(getContext(), "Failed to approve request: " + response.code(), Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -70,8 +74,12 @@ public class BookingServiceRequestFragment extends Fragment {
                 api.deleteRequest(body).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        Toast.makeText(getContext(), "Rejected!", Toast.LENGTH_SHORT).show();
-                        loadRequests();
+                        if (response.isSuccessful()) {
+                            Toast.makeText(getContext(), "Request rejected successfully", Toast.LENGTH_SHORT).show();
+                            loadRequests();
+                        } else {
+                            Toast.makeText(getContext(), "Failed to reject request: " + response.code(), Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
