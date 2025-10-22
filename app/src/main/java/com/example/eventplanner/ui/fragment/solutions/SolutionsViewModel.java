@@ -44,24 +44,26 @@ public class SolutionsViewModel extends ViewModel {
 
     @SuppressWarnings("unchecked")
     public void fetchSolutions(FilterParams params) {
-        // NOTE: Using only services because solutions don't support filter by provider // TODO fetch all solutions
-        solutionService.getAll(params.asMap()).enqueue(new Callback<Page<ServiceModel>>() {
-            @Override
-            public void onResponse(@NonNull Call<Page<ServiceModel>> call, @NonNull Response<Page<ServiceModel>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    solutions.postValue((Page<OfferingModel>) response.body().getContent());
-                } else {
-                    error.postValue(String.format(Locale.getDefault(),"Failed to fetch solutions. Code: %d. Request URL: <%s>", response.code(), call.request().url()));
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Page<ServiceModel>> call, @NonNull Throwable t) {
-                error.postValue(t.getMessage());
-            }
-        });
+        solutionService.getAll(params.asMap())
+                .enqueue(new Callback<Page<ServiceModel>>() {
+                    @Override public void onResponse(@NonNull Call<Page<ServiceModel>> call,
+                                                     @NonNull Response<Page<ServiceModel>> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            // Post the whole Page; unsafe cast is OK due to type erasure and because ServiceModel extends OfferingModel
+                            @SuppressWarnings("unchecked")
+                            Page<OfferingModel> page = (Page<OfferingModel>)(Page<?>) response.body();
+                            solutions.postValue(page);
+                        } else {
+                            error.postValue(String.format(Locale.getDefault(),
+                                    "Failed to fetch solutions. Code: %d. Request URL: <%s>",
+                                    response.code(), call.request().url()));
+                        }
+                    }
+                    @Override public void onFailure(@NonNull Call<Page<ServiceModel>> call, @NonNull Throwable t) {
+                        error.postValue(t.getMessage());
+                    }
+                });
     }
-
 
     public void fetchProviderSolutions(FilterParams params) {
         UserModel user = auth.getUser();
