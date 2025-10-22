@@ -2,6 +2,7 @@ package com.example.eventplanner.data.network.services.user;
 
 import com.example.eventplanner.data.model.login.LoginModel;
 import com.example.eventplanner.data.model.login.LoginResponseModel;
+import com.example.eventplanner.data.model.profiles.ChangePasswordRequest;
 import com.example.eventplanner.ui.fragment.au.InvitationRegisterFragment;
 
 import okhttp3.ResponseBody;
@@ -9,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Url;
 
 public interface UserService {
@@ -20,5 +22,8 @@ public interface UserService {
 
     @GET
     Call<ResponseBody> activateAccount(@Url String url);
+
+    @PUT("users/changePassword")
+    Call<Void> changePassword(@Body ChangePasswordRequest changePasswordBody);
 
 }

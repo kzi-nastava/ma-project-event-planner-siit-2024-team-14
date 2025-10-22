@@ -1,74 +1,265 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eo_profile_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp"
-    android:background="@android:color/white">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <!-- Loading -->
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Error -->
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        android:text="Failed to load."
+        android:textSize="16sp"
+        android:textColor="#B00020"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/profile_placeholder"
-            android:contentDescription="Profile photo" />
+    <!-- Content -->
+    <ScrollView
+        android:id="@+id/contentScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:background="@android:color/white"
+        android:visibility="gone">
 
-        <TextView
-            android:id="@+id/full_name"
-            android:text="User Name"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Event Organizer"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
-
-        <TextView android:id="@+id/email" android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView android:id="@+id/address" android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView android:id="@+id/city" android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView android:id="@+id/phone_number" android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
+        <!-- Parent vertical container so we can place favorites below the two-column row -->
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:id="@+id/profile_root_column"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/report_button"
-                android:text="Report User"
-                android:layout_marginEnd="8dp"
-                android:layout_width="wrap_content"
+            <!-- Two-column layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#523D35"/>
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-            <Button
-                android:id="@+id/chat_button"
-                android:text="Chat"
-                android:layout_width="wrap_content"
+                <!-- RIGHT: All actions stacked -->
+                <LinearLayout
+                    android:id="@+id/actions_column"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="top|end">
+
+                    <Button
+                        android:id="@+id/report_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Report User"
+                        android:backgroundTint="#523D35"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginBottom="12dp" />
+
+                    <Button
+                        android:id="@+id/chat_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Chat"
+                        android:backgroundTint="#523D35"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginBottom="24dp" />
+
+                    <!-- Profile actions -->
+                    <Button
+                        android:id="@+id/edit_info_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Edit profile"
+                        android:textColor="#523D35"
+                        android:background="@drawable/border"
+                        android:layout_marginBottom="12dp" />
+
+                    <Button
+                        android:id="@+id/change_password_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Change password"
+                        android:backgroundTint="#523D35"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginBottom="12dp" />
+
+                    <Button
+                        android:id="@+id/deactivate_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Deactivate"
+                        android:backgroundTint="#523D35"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <!-- Spacer -->
+                <Space
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent" />
+
+                <!-- LEFT: Photo + Edit photo + info -->
+                <LinearLayout
+                    android:id="@+id/info_column"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:gravity="top|end">
+
+                    <ImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        android:scaleType="centerCrop"
+                        android:layout_marginBottom="12dp"
+                        android:background="@drawable/profile_placeholder"
+                        android:contentDescription="Profile photo" />
+
+                    <!-- Edit profile photo -->
+                    <Button
+                        android:id="@+id/edit_photo_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit profile photo"
+                        android:textColor="#523D35"
+                        android:background="@drawable/border"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="8dp"
+                        android:layout_marginBottom="20dp" />
+
+                    <TextView
+                        android:id="@+id/full_name"
+                        android:text="User Name"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:text="Event Organizer"
+                        android:textSize="16sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" />
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/city"
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/phone_number"
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Favorite Events Section -->
+            <LinearLayout
+                android:id="@+id/favorite_events_section"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#523D35"/>
+                android:orientation="vertical"
+                android:layout_marginTop="24dp">
+
+                <TextView
+                    android:id="@+id/fav_events_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Favorite Events"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#523D35"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Empty state -->
+                <TextView
+                    android:id="@+id/fav_events_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No favorite events yet."
+                    android:textSize="14sp"
+                    android:textColor="#888888"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- List/Grid of favorite events -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fav_events_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp" />
+            </LinearLayout>
+
+            <!-- Favorite Solutions Section -->
+            <LinearLayout
+                android:id="@+id/favorite_solutions_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp">
+
+                <TextView
+                    android:id="@+id/fav_solutions_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Favorite Solutions"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#523D35"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Empty state -->
+                <TextView
+                    android:id="@+id/fav_solutions_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No favorite solutions yet."
+                    android:textSize="14sp"
+                    android:textColor="#888888"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- List/Grid of favorite solutions -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fav_solutions_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp" />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</FrameLayout>
+
