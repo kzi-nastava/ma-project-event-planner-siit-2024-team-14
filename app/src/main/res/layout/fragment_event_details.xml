@@ -94,12 +94,83 @@
             android:backgroundTint="#523D35"
             android:textColor="@android:color/white" />
 
+        <!-- Download Event PDF -->
+        <Button
+            android:id="@+id/event_pdf_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Download Event PDF"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#523D35"
+            android:textColor="@android:color/white" />
+
+
         <!-- Budget child fragment container -->
         <FrameLayout
             android:id="@+id/budget_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp" />
+
+
+        <!-- ===== Event Agenda ===== -->
+        <TextView
+            android:id="@+id/agenda_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event Agenda"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#5a3e3e"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:id="@+id/agenda_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/add_activity_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Activity"
+                android:backgroundTint="#523D35"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="12dp"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/export_pdf_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Download PDF"
+                android:backgroundTint="#523D35"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/agenda_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No activities yet."
+            android:textColor="#555"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/agenda_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:paddingTop="4dp"
+            android:paddingBottom="16dp"/>
+
 
     </LinearLayout>
 </ScrollView>
