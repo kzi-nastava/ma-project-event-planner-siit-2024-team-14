@@ -27,4 +27,7 @@ public interface EventTypeService {
 
     @PUT("event-types/de-activate/{id}")
     Call<Void> toggleEventStatus(@Path("id") Long id);
+
+    @GET("/api/event-types/get-all-categories")
+    Call<List<EventType>> getAll();
 }
