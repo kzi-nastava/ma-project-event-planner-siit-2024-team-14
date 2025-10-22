@@ -29,7 +29,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Create a Product"
+                    android:text="@string/create_product"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:textColor="@color/project_brown" />
@@ -72,13 +72,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
-                android:gap="12dp">
+                android:weightSum="2">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginEnd="12dp"
                     android:hint="@string/price">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -116,11 +116,10 @@
                 android:text="@string/available"
                 android:checked="true" />
 
-            <!-- Status (if you want to keep 'PENDING' default) -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Status">
+                android:hint="@string/status">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etStatus"
@@ -134,13 +133,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Category"
+                android:text="@string/category"
                 android:paddingTop="8dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Choose Category">
+                android:hint="@string/choose_category">
 
                 <AutoCompleteTextView
                     android:id="@+id/actvCategory"
@@ -153,7 +152,7 @@
                 android:id="@+id/cbNewCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Propose New Category" />
+                android:text="@string/propose_new_category" />
 
             <LinearLayout
                 android:id="@+id/newCategoryGroup"
@@ -165,7 +164,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="New Category Name">
+                    android:hint="@string/new_category_name">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etNewCategoryName"
                         android:layout_width="match_parent"
@@ -175,7 +174,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="New Category Description">
+                    android:hint="@string/new_category_description">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etNewCategoryDesc"
                         android:layout_width="match_parent"
@@ -184,12 +183,12 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-            <!-- EVENT TYPES (multi-select chips) -->
+            <!-- EVENT TYPES -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Event Types"
+                android:text="@string/event_types"
                 android:paddingTop="8dp" />
 
             <com.google.android.material.chip.ChipGroup
@@ -220,7 +219,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="Create"
+                    android:text="@string/create"
                     app:backgroundTint="@color/white"
                     app:strokeColor="@color/project_brown"
                     app:strokeWidth="1dp"

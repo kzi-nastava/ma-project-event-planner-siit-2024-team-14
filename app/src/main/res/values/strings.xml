@@ -73,4 +73,16 @@
     <string name="toggle_favorite">Toggle favorite</string>
     <string name="chat_with_organizer">Chat with event organizer</string>
 
+
+    <string name="create_product">Create a Product</string>
+    <string name="discount_percent">Discount (%)</string>
+    <string name="visible">Visible</string>
+    <string name="available">Available</string>
+    <string name="status">Status</string>
+    <string name="choose_category">Choose Category</string>
+    <string name="propose_new_category">Propose New Category</string>
+    <string name="new_category_name">New Category Name</string>
+    <string name="new_category_description">New Category Description</string>
+    <string name="event_types">Event Types</string>
+
 </resources>
