@@ -1,78 +1,161 @@
-# 📱 Event Planner – Android App User Guide
+# Event Planner — Android Application
 
-Welcome to the official mobile application of **Event Planner**, your all-in-one solution for organizing, discovering, and managing events. This Android app is designed for three types of users:
+**Java | Android SDK | Team Project**
 
-* 🎉 Event Attendees (AK)
-* 🧑‍💼 Event Organizers (OD)
-* 🛠️ Service Providers (PUP)
+Event Planner is a multi-platform event management system designed to simplify the organization, discovery, and management of events.
 
----
+This repository contains the **native Android application**, developed as part of a collaborative university project for Mobile Applications course at the Faculty of Technical Sciences, University of Novi Sad.
 
-## 📦 Features Overview
+The Android application connects to the shared Spring Boot backend and provides mobile access to event management, service bookings, user communication, and notifications.
 
-### 🔍 Event Discovery
+## Key Features
 
-* Search and explore public events by date, category, or location.
-* View event details including date, venue, organizer, and related services.
+### Event Discovery
+- Browse and search public events
+- Filter events by date, category, and location
+- View event details and organizer information
+- Explore available services and products
 
-### 📆 Event Management (Organizers)
+### Event Management
+- Create, update, and manage events
+- Manage event-related information
+- Invite attendees and track invitations
+- Access role-specific event management features
 
-* Create, update, or delete your own events.
-* Invite attendees via email and track invitation status.
-* Receive real-time updates about bookings and guest changes.
+### Service and Product Management
+- Browse services and products
+- Filter available offerings
+- View offering details and pricing
+- Submit service booking requests
+- Manage booking requests as a provider
 
-### 🧾 Service Booking (Attendees & Organizers)
+### User Accounts and Profiles
+- User registration and login
+- Role-based functionality
+- Event organizer profiles
+- Service provider profiles
+- Account management
 
-* Browse available services or products.
-* Filter services by city, category, availability, and price.
-* Book services directly for your events by selecting date, time, and duration.
-* Receive notifications and booking confirmations.
+### Communication and Notifications
+- Direct messaging between users
+- Real-time communication using WebSockets
+- In-app notifications
+- Invitation and booking updates
+- User blocking and reporting features
 
-### 🧑‍🔧 Service Provider Portal
+## User Roles
 
-* List services/products and set availability, pricing, and duration.
-* Accept or reject booking requests.
-* See analytics on reservations and visibility.
+The application supports multiple user roles:
 
-### 🔔 Notifications
+| Role | Responsibilities |
+|---|---|
+| Event Attendee | Discover events and manage participation |
+| Event Organizer | Create events, manage invitations, and organize bookings |
+| Service and Product Provider | Manage offerings and respond to booking requests |
 
-* Real-time in-app notifications for invitations, bookings, chat messages, and event updates.
-* Unread notifications are highlighted.
-* Notifications can be muted or marked as read.
+Available functionality depends on the authenticated user's role.
 
-### 💬 Messaging
+## Technology Stack
 
-* Built-in chat between users (based on booking or event relationship).
-* Respectful communication encouraged.
-* Block/unblock users if necessary.
+| Category | Technologies |
+|---|---|
+| Language | Java |
+| Platform | Android SDK |
+| Build System | Gradle |
+| UI | Android XML, Material Design |
+| Networking | Retrofit, OkHttp, Gson, Volley |
+| Real-time Communication | STOMP WebSocket, RxJava |
+| Image Loading | Glide |
+| Architecture Components | ViewModel, LiveData, View Binding |
+| Authentication | JWT integration |
+| Testing Dependencies | JUnit 4, AndroidX Test, Espresso |
 
----
+**Android configuration**
+- Minimum SDK: API 30 (Android 11)
+- Target SDK: API 34
+- Compile SDK: API 34
 
-## 🚀 Getting Started
+## Project Structure
 
-1. **Clone repo**:
-   ```bash
-   git clone https://github.com/kzi-nastava/ma-project-event-planner-siit-2024-team-14.git
+The application separates data handling from user interface components.
 
-2. **Open in Android Studio**
+```text id="3kk8kq"
+app/
+└── src/
+    └── main/
+        ├── java/
+        │   └── com/example/eventplanner/
+        │       ├── data/
+        │       │   ├── model/
+        │       │   └── network/
+        │       └── ui/
+        ├── res/
+        └── AndroidManifest.xml
+```
 
-3. **Connect physical device or turn on the emulator**
-   
-4. **Start the application**
+**Main components:**
 
-5. **Create an Account**
-   Choose your role during registration (AK, OD, or PUP).
-   Certain features depend on your role.
+- **Data models:** Represent application entities and API data.
+- **Network layer:** Handles communication with backend services.
+- **UI layer:** Contains Android screens and interface components.
+- **Resources:** Store layouts, images, strings, and other Android resources.
 
-6. **Log in and Navigate**
-   Use the bottom navigation bar or side drawer to access features
+## Getting Started
 
----
+### Prerequisites
 
-## 🛠️ Technologies Used
+- Android Studio
+- Android SDK 34
+- Android emulator or physical device running Android 11 or newer
+- Java and Gradle environment compatible with the project
+- Event Planner backend for server-dependent features
 
-* **Frontend:** Android SDK (Java)
-* **Networking:** Retrofit2
-* **Real-time:** WebSocket (STOMP over SockJS)
-* **Design:** Material Design, Custom XML styles
-* **Backend API:** Spring Boot (shared with web app)
+### Installation
+
+1. Clone the repository:
+
+```bash id="wkn16c"
+git clone https://github.com/kzi-nastava/ma-project-event-planner-siit-2024-team-14.git
+```
+
+2. Open the project in Android Studio.
+
+3. Allow Gradle to synchronize the project dependencies.
+
+4. Configure the backend server address in the project's local configuration.
+
+The Gradle build reads the `ip_addr` property from `local.properties`. Add the appropriate address for your development environment.
+
+5. Start the Spring Boot backend.
+
+6. Connect an Android device or start an emulator.
+
+7. Build and run the application from Android Studio.
+
+**Note:** Backend-dependent features require network connectivity between the Android device and the backend server.
+
+## Testing
+
+The project declares dependencies for:
+
+- JUnit 4
+- AndroidX Test
+- Espresso UI testing
+
+These provide support for local unit tests and Android instrumentation tests.
+
+To run configured tests, use the testing tools in Android Studio or the corresponding Gradle tasks. The presence of testing dependencies does not indicate that all test categories have implemented test cases.
+
+## System Architecture
+
+Event Planner consists of three connected applications:
+
+| Component | Technology | Repository |
+|---|---|---|
+| Android Application | Java, Android SDK | [Android](https://github.com/kzi-nastava/ma-project-event-planner-siit-2024-team-14) |
+| Web Application | Angular, TypeScript | [Frontend](https://github.com/kzi-nastava/iks-project-event-planner-siit-2024-team-14) |
+| Backend | Spring Boot, PostgreSQL | [Backend](https://github.com/kzi-nastava/iss-project-event-planner-siit-2024-team-14) |
+
+The Android and web applications share the same backend services and database.
+
+The Android client uses HTTP networking libraries to communicate with the backend and WebSocket technologies for supported real-time functionality.
